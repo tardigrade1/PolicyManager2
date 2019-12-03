@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "881178951468",
+    "firebase_url": "https://policy-manager-377ee.firebaseio.com",
+    "project_id": "policy-manager-377ee",
+    "storage_bucket": "policy-manager-377ee.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:881178951468:android:c9b534564aa785c0d63689",
+        "android_client_info": {
+          "package_name": "in.gen2.policymanager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "881178951468-9rqeodk1epj9dub8fsdqrspogqh67n20.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRYzP3KmjfC8P6pItiKImffu-DGHE-aYk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "881178951468-9rqeodk1epj9dub8fsdqrspogqh67n20.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
