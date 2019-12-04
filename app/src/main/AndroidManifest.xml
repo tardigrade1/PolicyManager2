@@ -13,7 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".authActivities.VerifyPhoneActivity"></activity>
+        <activity android:name=".authActivities.VerifyPhoneActivity"/>
         <activity android:name=".authActivities.PhoneAuthActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,7 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ImportEmployeesActivity"></activity>
+        <activity android:name=".ImportEmployeesActivity"/>
         <activity android:name=".MainActivity">
 
             <!-- <intent-filter> -->

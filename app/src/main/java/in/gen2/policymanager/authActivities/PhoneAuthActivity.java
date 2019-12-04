@@ -21,15 +21,19 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
+import in.gen2.policymanager.ImportEmployeesActivity;
 import in.gen2.policymanager.R;
 
 public class PhoneAuthActivity extends AppCompatActivity {
-
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
     //    firestore
     FirebaseFirestore docRef;
     private EditText etSrNo;
@@ -38,6 +42,14 @@ public class PhoneAuthActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phone_auth);
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser firebaseUser=mAuth.getCurrentUser();
+        if (firebaseUser != null) {
+            Intent i = new Intent(PhoneAuthActivity.this, ImportEmployeesActivity.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(i);
+            finish();
+        }
         etSrNo = findViewById(R.id.etSrNo);
         final Button btnContinue = findViewById(R.id.btnContinue);
         docRef = FirebaseFirestore.getInstance();
@@ -63,6 +75,19 @@ public class PhoneAuthActivity extends AppCompatActivity {
                 }
             }
         });
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    Intent i = new Intent(PhoneAuthActivity.this, ImportEmployeesActivity.class);
+                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(i);
+                    finish();
+                }
+            }
+        };
+
         btnContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,11 +142,13 @@ public class PhoneAuthActivity extends AppCompatActivity {
                             intentSignUp.putExtra("srNo", srNo);
                             intentSignUp.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intentSignUp);
-                            Toast.makeText(PhoneAuthActivity.this, "OTP sent", Toast.LENGTH_SHORT).show();
+
                             Log.d("TAG", ContactNo); //Print the name
                             Dialog.dismiss();
                         } else {
                             Log.d("TAG", "No such Employee Exist");
+                            etSrNo.setError("Please enter valid Sr No");
+                            etSrNo.requestFocus();
                             Dialog.dismiss();
                         }
                     } else {
@@ -129,32 +156,20 @@ public class PhoneAuthActivity extends AppCompatActivity {
                     }
                 }
             });
-//            myDataRef.orderByChild("mobile").equalTo(phonenumber).addListenerForSingleValueEvent(new ValueEventListener() {
-//                @Override
-//                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                    if (dataSnapshot.exists()) {
-//                        Intent intentSignUp = new Intent(PhoneNumberAuthActivity.this, VerifyPhoneActivity.class);
-//                        intentSignUp.putExtra("mobile", phonenumber);
-//                        intentSignUp.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                        startActivity(intentSignUp);
-//                        Toast.makeText(PhoneNumberAuthActivity.this, "OTP sent", Toast.LENGTH_SHORT).show();
-//
-//                    }
-//                    else {
-//                        Intent intentSignUp = new Intent(PhoneNumberAuthActivity.this, SignUpActivity.class);
-//                        intentSignUp.putExtra("mobile", phonenumber);
-//                        intentSignUp.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                        startActivity(intentSignUp);
-//                        Dialog.dismiss();
-//                    }
-//                }
-//
-//                @Override
-//                public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//                }
-//            });
             return 0;
+        }
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
         }
     }
 }

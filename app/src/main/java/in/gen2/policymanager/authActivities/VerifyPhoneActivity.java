@@ -35,6 +35,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
     //These are the objects needed
     //It is the verification id that will be sent to the user
     private String mVerificationId;
+    private PhoneAuthProvider.ForceResendingToken mVerificationToken;
 
     //The edittext to input the code
     private EditText editTextCode;
@@ -60,12 +61,12 @@ private FirebaseFirestore docRef;
         srNo = getIntent().getStringExtra("srNo");
         sendVerificationCode(mobile);
         btnSignIn = findViewById(R.id.buttonSignIn);
-        btnSignIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                verifyVerificationCode(editTextCode.getText().toString().trim());
-            }
-        });
+//        btnSignIn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                verifyVerificationCode(editTextCode.getText().toString().trim());
+//            }
+//        });
     }
     //the method is sending verification code
     //the country id is concatenated
@@ -77,25 +78,41 @@ private FirebaseFirestore docRef;
                 TimeUnit.SECONDS,
                 TaskExecutors.MAIN_THREAD,
                 mCallbacks);
+        Toast.makeText(VerifyPhoneActivity.this, "OTP sent", Toast.LENGTH_SHORT).show();
     }
+    // [START resend_verification]
 
+    private void resendVerificationCode(String phoneNumber,
+
+                                        PhoneAuthProvider.ForceResendingToken token) {
+
+        PhoneAuthProvider.getInstance().verifyPhoneNumber(
+                phoneNumber,        // Phone number to verify
+                60,                 // Timeout duration
+                TimeUnit.SECONDS,   // Unit of timeout
+                this,               // Activity (for callback binding)
+                mCallbacks,         // OnVerificationStateChangedCallbacks
+                token);             // ForceResendingToken from callbacks
+
+    }
 
     //the callback to detect the verification status
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
         @Override
         public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
 
-            //Getting the code sent by SMS
-            String code = phoneAuthCredential.getSmsCode();
-
-            //sometime the code is not detected automatically
-            //in this case the code will be null
-            //so user has to manually enter the code
-            if (code != null) {
-                editTextCode.setText(code);
-                //verifying the code
-                verifyVerificationCode(code);
-            }
+//            //Getting the code sent by SMS
+//            String code = phoneAuthCredential.getSmsCode();
+//
+//            //sometime the code is not detected automatically
+//            //in this case the code will be null
+//            //so user has to manually enter the code
+//            if (code != null) {
+//                editTextCode.setText(code);
+//                //verifying the code
+////                verifyVerificationCode(code);
+//            }
+            signInWithPhoneAuthCredential(phoneAuthCredential);
         }
 
         @Override
@@ -103,13 +120,16 @@ private FirebaseFirestore docRef;
             Toast.makeText(VerifyPhoneActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
         }
 
-        @Override
-        public void onCodeSent(String s, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
-            super.onCodeSent(s, forceResendingToken);
-
-            //storing the verification id that is sent to the user
-            mVerificationId = s;
-        }
+//        @Override
+//        public void onCodeSent(String s, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+//            super.onCodeSent(s, forceResendingToken);
+//
+//            //storing the verification id that is sent to the user
+//            mVerificationId = s;
+//            mVerificationToken = forceResendingToken;
+//            Log.e(TAG, "onCodeSent: s - " + mVerificationId + " : t - " + forceResendingToken);
+//
+//        }
     };
 
 
@@ -120,6 +140,7 @@ private FirebaseFirestore docRef;
         //signing the user
         signInWithPhoneAuthCredential(credential);
     }
+
     private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
 //        mAuth.getCurrentUser().linkWithCredential(credential)
         mAuth.signInWithCredential(credential)

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.auth.User;
@@ -31,6 +33,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import in.gen2.policymanager.authActivities.PhoneAuthActivity;
 import in.gen2.policymanager.models.EmpData;
 
 import static android.Manifest.permission.CAMERA;
@@ -200,5 +203,13 @@ public class ImportEmployeesActivity extends AppCompatActivity {
         } else {
             Toast.makeText(ImportEmployeesActivity.this, "No user list found", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void logoutUser(View view) {
+        FirebaseAuth.getInstance().signOut();
+        Intent i = new Intent(ImportEmployeesActivity.this, PhoneAuthActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(i);
+        finish();
     }
 }
