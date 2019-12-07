@@ -28,7 +28,8 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
-import in.gen2.policymanager.ImportEmployeesActivity;
+import in.gen2.policymanager.MainActivity;
+import in.gen2.policymanager.MyCreatedPolicyActivity;
 import in.gen2.policymanager.R;
 
 public class PhoneAuthActivity extends AppCompatActivity {
@@ -45,7 +46,7 @@ public class PhoneAuthActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser firebaseUser=mAuth.getCurrentUser();
         if (firebaseUser != null) {
-            Intent i = new Intent(PhoneAuthActivity.this, ImportEmployeesActivity.class);
+            Intent i = new Intent(PhoneAuthActivity.this, MainActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
             finish();
@@ -80,7 +81,7 @@ public class PhoneAuthActivity extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    Intent i = new Intent(PhoneAuthActivity.this, ImportEmployeesActivity.class);
+                    Intent i = new Intent(PhoneAuthActivity.this, MainActivity.class);
                     i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(i);
                     finish();

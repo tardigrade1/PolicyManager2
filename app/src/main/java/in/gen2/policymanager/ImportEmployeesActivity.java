@@ -34,6 +34,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import in.gen2.policymanager.authActivities.PhoneAuthActivity;
+import in.gen2.policymanager.models.ApplicationFormData;
+import in.gen2.policymanager.models.ApproveDeclineData;
 import in.gen2.policymanager.models.EmpData;
 
 import static android.Manifest.permission.CAMERA;
@@ -44,6 +46,8 @@ import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 public class ImportEmployeesActivity extends AppCompatActivity {
     String TAG = "main";
     private ArrayList<EmpData> list_show_users = new ArrayList();
+    private ArrayList<ApplicationFormData> list_application_form = new ArrayList();
+    private ArrayList<ApproveDeclineData> list_application_approve= new ArrayList();
     CsvParserSettings parserSettings;
     int id = 0;
     public static final int RequestPermissionCode = 7;
@@ -58,7 +62,8 @@ public class ImportEmployeesActivity extends AppCompatActivity {
         if (!CheckingPermissionIsEnabledOrNot()) {
             RequestMultiplePermission();
         }
-        ReadUsersList();
+//        ReadUsersList();
+        ReadApplicationForm();
         FileControl();
     }
 
@@ -66,6 +71,7 @@ public class ImportEmployeesActivity extends AppCompatActivity {
 
 
         docRef = FirebaseFirestore.getInstance();
+
     }
 
     //    reading data from exiting CSV file
@@ -98,6 +104,75 @@ public class ImportEmployeesActivity extends AppCompatActivity {
                     return;
                 }
                 Toast.makeText(this, "No users found. Please register user", Toast.LENGTH_SHORT).show();
+//                this.lvUsers.setAdapter(null);
+                return;
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                return;
+            }
+        }
+        this.id = 0;
+    }
+    //    reading data from Application forms CSV file
+    private void ReadApplicationForm() {
+        list_application_form.clear();
+//        dataUsersAdapter = null;
+        String path = Environment.getExternalStorageDirectory()
+                + File.separator + "ReadQrData/ApplictionFormsList.csv";
+        if (new File(path).exists()) {
+            parserSettings = new CsvParserSettings();
+            parserSettings.getFormat().setLineSeparator(CSVWriter.DEFAULT_LINE_END);
+            parserSettings.selectFields("Application No","Name","Mobile No","PAN No","SR No","Date");
+            try {
+                for (String[] strArr : parseWithSettings(this.parserSettings, "ReadQrData/ApplictionFormsList.csv")) {
+
+                    this.list_application_form.add(new ApplicationFormData(strArr[0], strArr[1], strArr[2], strArr[3], strArr[4], strArr[5]));
+                    try {
+                    } catch (Exception unused) {
+                        this.list_application_form.add(new ApplicationFormData(strArr[0], strArr[1], strArr[2], strArr[3], strArr[4], strArr[5]));
+                    }
+
+                }
+
+                if (this.list_application_form.size() > 0) {
+                    for (int i = 0; i < list_application_form.size(); i++) {
+                        ApplicationFormData formData = list_application_form.get(i);
+                        Log.d(TAG, "ApplictionFormsList: " + formData.getApplicantName() + "," + formData.getApplicationNo());
+
+                    }
+                    return;
+                }
+                Toast.makeText(this, "No application list found.", Toast.LENGTH_SHORT).show();
+//                this.lvUsers.setAdapter(null);
+                return;
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                return;
+            }
+        }
+        this.id = 0;
+    }
+    //    reading data from Application forms CSV file
+    private void ReadApprovalDeclineStatus() {
+        list_application_approve.clear();
+//        dataUsersAdapter = null;
+        String path = Environment.getExternalStorageDirectory()
+                + File.separator + "ReadQrData/ApprovalDecline.csv";
+        if (new File(path).exists()) {
+            parserSettings = new CsvParserSettings();
+            parserSettings.getFormat().setLineSeparator(CSVWriter.DEFAULT_LINE_END);
+            parserSettings.selectFields("ApplicationNo","Bank","Status","Comment");
+            try {
+                for (String[] strArr : parseWithSettings(this.parserSettings, "ReadQrData/ApprovalDecline.csv")) {
+
+                    this.list_application_approve.add(new ApproveDeclineData(strArr[0], strArr[1], strArr[2], strArr[3]));
+                    try {
+                    } catch (Exception unused) {
+                        this.list_application_approve.add(new ApproveDeclineData(strArr[0], strArr[1], strArr[2], strArr[3]));
+                    }
+
+                }
+                Toast.makeText(this, "No application list found.", Toast.LENGTH_SHORT).show();
 //                this.lvUsers.setAdapter(null);
                 return;
             } catch (FileNotFoundException e) {
@@ -169,28 +244,57 @@ public class ImportEmployeesActivity extends AppCompatActivity {
                 ThirdPermissionResult == PackageManager.PERMISSION_GRANTED;
     }
 
+//    public void uploadDataOnFiresStore(View view) {
+//        if (list_show_users.size() > 0) {
+//
+//            for (int i = 0; i < list_show_users.size(); i++) {
+//                final EmpData UserData = list_show_users.get(i);
+//                final HashMap<String, Object> hm = new HashMap<>();
+//                hm.put("grade", UserData.getGrade());
+//                hm.put("name", UserData.getName());
+//                hm.put("srNo", UserData.getSrno());
+//                hm.put("doj", UserData.getDate());
+//                hm.put("agencyNo", UserData.getAgencyNo());
+//                hm.put("branch", UserData.getBranch());
+//                hm.put("branchNo", UserData.getBranchNo());
+//                hm.put("residence", UserData.getResidence());
+//                hm.put("mobileNo", UserData.getMobNo());
+//                hm.put("email", UserData.getEmail());
+//                Log.d(TAG, "onButtonClick: " + UserData.getName() + " data is successfully submit");
+//                docRef.collection("SalesRepresentatives").document(UserData.getSrno()).set(hm)
+//                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                            @Override
+//                            public void onSuccess(Void aVoid) {
+//
+//                            }
+//                        })
+//                        .addOnFailureListener(new OnFailureListener() {
+//                            @Override
+//                            public void onFailure(@NonNull Exception e) {
+//                                Log.w(TAG, "Error adding document", e);
+//                            }
+//                        });
+//            }
+//        } else {
+//            Toast.makeText(ImportEmployeesActivity.this, "No user list found", Toast.LENGTH_SHORT).show();
+//        }
+//    }
     public void uploadDataOnFiresStore(View view) {
-        if (list_show_users.size() > 0) {
+        if (list_application_form.size() > 0) {
 
-            for (int i = 0; i < list_show_users.size(); i++) {
-                final EmpData UserData = list_show_users.get(i);
+            for (int i = 0; i < list_application_form.size(); i++) {
+                final ApplicationFormData formData = list_application_form.get(i);
                 final HashMap<String, Object> hm = new HashMap<>();
-                hm.put("grade", UserData.getGrade());
-                hm.put("name", UserData.getName());
-                hm.put("srNo", UserData.getSrno());
-                hm.put("doj", UserData.getDate());
-                hm.put("agencyNo", UserData.getAgencyNo());
-                hm.put("branch", UserData.getBranch());
-                hm.put("branchNo", UserData.getBranchNo());
-                hm.put("residence", UserData.getResidence());
-                hm.put("mobileNo", UserData.getMobNo());
-                hm.put("email", UserData.getEmail());
-                Log.d(TAG, "onButtonClick: " + UserData.getName() + " data is successfully submit");
-                docRef.collection("SalesRepresentatives").document(UserData.getSrno()).set(hm)
+                hm.put("PolicyStatus", formData.getDateOfPolicy());
+
+
+                docRef.collection("SalesRepresentatives").document(formData.getSrNo())
+                        .collection("PolicyForms").document(formData.getApplicationNo())
+                        .update(hm)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-
+                                Log.d(TAG, "onButtonClick: " + formData.getApplicantName() + " data is successfully submit");
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
@@ -205,11 +309,5 @@ public class ImportEmployeesActivity extends AppCompatActivity {
         }
     }
 
-    public void logoutUser(View view) {
-        FirebaseAuth.getInstance().signOut();
-        Intent i = new Intent(ImportEmployeesActivity.this, PhoneAuthActivity.class);
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(i);
-        finish();
-    }
+
 }

@@ -28,6 +28,8 @@ import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 import in.gen2.policymanager.ImportEmployeesActivity;
+import in.gen2.policymanager.MainActivity;
+import in.gen2.policymanager.MyCreatedPolicyActivity;
 import in.gen2.policymanager.R;
 
 public class VerifyPhoneActivity extends AppCompatActivity {
@@ -45,6 +47,8 @@ public class VerifyPhoneActivity extends AppCompatActivity {
     private Button btnSignIn;
     private String srNo;
 private FirebaseFirestore docRef;
+    private String mobile;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,16 +61,16 @@ private FirebaseFirestore docRef;
         //getting mobile number from the previous activity
         //and sending the verification code to the number
 
-        String mobile = getIntent().getStringExtra("mobile");
+        mobile = getIntent().getStringExtra("mobile");
         srNo = getIntent().getStringExtra("srNo");
         sendVerificationCode(mobile);
         btnSignIn = findViewById(R.id.buttonSignIn);
-//        btnSignIn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                verifyVerificationCode(editTextCode.getText().toString().trim());
-//            }
-//        });
+        btnSignIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                verifyVerificationCode(editTextCode.getText().toString().trim());
+            }
+        });
     }
     //the method is sending verification code
     //the country id is concatenated
@@ -87,7 +91,7 @@ private FirebaseFirestore docRef;
                                         PhoneAuthProvider.ForceResendingToken token) {
 
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                phoneNumber,        // Phone number to verify
+                "+91" + phoneNumber,        // Phone number to verify
                 60,                 // Timeout duration
                 TimeUnit.SECONDS,   // Unit of timeout
                 this,               // Activity (for callback binding)
@@ -101,18 +105,18 @@ private FirebaseFirestore docRef;
         @Override
         public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
 
-//            //Getting the code sent by SMS
-//            String code = phoneAuthCredential.getSmsCode();
-//
-//            //sometime the code is not detected automatically
-//            //in this case the code will be null
-//            //so user has to manually enter the code
-//            if (code != null) {
-//                editTextCode.setText(code);
-//                //verifying the code
-////                verifyVerificationCode(code);
-//            }
-            signInWithPhoneAuthCredential(phoneAuthCredential);
+            //Getting the code sent by SMS
+            String code = phoneAuthCredential.getSmsCode();
+
+            //sometime the code is not detected automatically
+            //in this case the code will be null
+            //so user has to manually enter the code
+            if (code != null) {
+                editTextCode.setText(code);
+                //verifying the code
+                verifyVerificationCode(code);
+            }
+//            signInWithPhoneAuthCredential(phoneAuthCredential);
         }
 
         @Override
@@ -120,16 +124,16 @@ private FirebaseFirestore docRef;
             Toast.makeText(VerifyPhoneActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
         }
 
-//        @Override
-//        public void onCodeSent(String s, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
-//            super.onCodeSent(s, forceResendingToken);
-//
-//            //storing the verification id that is sent to the user
-//            mVerificationId = s;
-//            mVerificationToken = forceResendingToken;
-//            Log.e(TAG, "onCodeSent: s - " + mVerificationId + " : t - " + forceResendingToken);
-//
-//        }
+        @Override
+        public void onCodeSent(String s, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+            super.onCodeSent(s, forceResendingToken);
+
+            //storing the verification id that is sent to the user
+            mVerificationId = s;
+            mVerificationToken = forceResendingToken;
+            Log.e(TAG, "onCodeSent: s - " + mVerificationId + " : t - " + forceResendingToken);
+
+        }
     };
 
 
@@ -149,14 +153,23 @@ private FirebaseFirestore docRef;
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             final HashMap<String, Object> hm = new HashMap<>();
-                            hm.put("userFirebaseId", mAuth.getCurrentUser().getUid());
-                            docRef.collection("SalesRepresentatives").document(srNo).update(hm).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            hm.put("srNo",srNo);
+                            hm.put("contactNo",mobile);
+                            String userId=mAuth.getCurrentUser().getUid();
+                            docRef.collection("usersFirebaseId").document( userId).set(hm).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
                                     //verification successful we will start the profile activity
-                                    Intent intent = new Intent(VerifyPhoneActivity.this, ImportEmployeesActivity.class);
+                                    Intent intent = new Intent(VerifyPhoneActivity.this, MainActivity.class);
                                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                     startActivity(intent);
+                                    finish();
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(getApplicationContext(), "Somthing is wrong,data is not entered", Toast.LENGTH_SHORT).show();
                                 }
                             });
 
