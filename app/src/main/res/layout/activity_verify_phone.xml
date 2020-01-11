@@ -1,31 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
+    android:background="@color/colorPrimaryDark"
     tools:context=".authActivities.VerifyPhoneActivity">
 
-    <EditText
-        android:id="@+id/editTextCode"
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_margin="10dp"
+        android:layout_marginTop="16dp"
+        android:padding="5dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout6"
+        app:layout_constraintEnd_toEndOf="@+id/tvPhoneNumber"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/VerifyPhone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/otp" />
+
+    <TextView
+        android:id="@+id/VerifyPhone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:cursorVisible="false"
-        android:inputType="number"
-        android:layout_margin="20dp"
-        android:maxLength="6"
-        android:textIsSelectable="false"
-        android:textSize="20sp"/>
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/open_sans_bold"
+        android:text="Verify Phone Number"
+        android:textColor="#fff"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.6" />
 
-    <Button
-        android:id="@+id/buttonSignIn"
-        android:layout_width="wrap_content"
+    <TextView
+
+        android:id="@+id/tvPhoneNumber"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:background="@color/colorPrimaryDark"
-        android:text="Sign In"
-        android:textAllCaps="false"
-        android:textColor="#cdd8f1" />
-</LinearLayout>
+        android:layout_marginStart="8dp"
+        android:text="+91-xxxxxxxx00"
+        android:textColor="#fff"
+        android:textSize="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/VerifyPhone" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout6"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:background="@drawable/phone_auth_background"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/open_sans_bold"
+            android:text="Enter OTP"
+            android:textColor="#000000"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/tvVerificationStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:maxWidth="300dp"
+            android:text="We have sent you access code via SMS for mobile number verification"
+            android:textColor="#505050" />
+
+        <in.gen2.policymanager.Helpers.OtpEditText
+            android:id="@+id/et_otp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:cursorVisible="false"
+            android:inputType="number"
+            android:maxLength="6"
+
+            android:textIsSelectable="false"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:id="@+id/linearSignInBtn"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@color/colorPrimaryDark"
+            android:clickable="false"
+            android:onClick="clickToSignIn"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:fontFamily="@font/cabin_bold"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="Continue"
+                android:textColor="#fff"
+                android:textSize="18dp" />
+
+            <ImageView
+
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:padding="10dp"
+                app:srcCompat="@drawable/ic_arrow_forward" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:maxWidth="300dp"
+            android:text="Didn't receive the OTP ?"
+            android:textColor="#505050" />
+
+        <TextView
+            android:id="@+id/tvResendOTP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:fontFamily="@font/open_sans_bold"
+            android:maxWidth="300dp"
+            android:onClick="clickToResendOtp"
+            android:text="Resend Code"
+            android:textColor="@color/colorPrimaryDark" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,15 +7,16 @@
     tools:context=".ImportEmployeesActivity">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnSrData"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="uploadDataOnFiresStore"
         android:text="Upload data"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -17,6 +18,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -31,6 +34,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import in.gen2.policymanager.MainActivity;
 import in.gen2.policymanager.MyCreatedPolicyActivity;
 import in.gen2.policymanager.R;
+import in.gen2.policymanager.SrDashboardActivity;
 
 public class PhoneAuthActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
@@ -38,21 +42,48 @@ public class PhoneAuthActivity extends AppCompatActivity {
     //    firestore
     FirebaseFirestore docRef;
     private EditText etSrNo;
+    private TextView tvWelcomeText,tvWelcomeName;
+    private SharedPreferences prefs = null;
+    private Boolean admin;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phone_auth);
         mAuth = FirebaseAuth.getInstance();
-        FirebaseUser firebaseUser=mAuth.getCurrentUser();
+        prefs = getSharedPreferences("UserData", MODE_PRIVATE);
+        editor = prefs.edit();
+        admin = prefs.getBoolean("admin", false);
+        String name=prefs.getString("name","");
+        String srNumber=prefs.getString("srNo","");
+        FirebaseUser firebaseUser = mAuth.getCurrentUser();
         if (firebaseUser != null) {
-            Intent i = new Intent(PhoneAuthActivity.this, MainActivity.class);
-            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(i);
-            finish();
+            //verification successful we will start the profile activity
+            if (admin) {
+                Intent intent = new Intent(PhoneAuthActivity.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
+            } else {
+                Intent intent = new Intent(PhoneAuthActivity.this, SrDashboardActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
+            }
         }
         etSrNo = findViewById(R.id.etSrNo);
-        final Button btnContinue = findViewById(R.id.btnContinue);
+        tvWelcomeText=findViewById(R.id.welcomeText);
+        tvWelcomeName=findViewById(R.id.welcomeName);
+
+        if(!name.equals("")){
+            tvWelcomeText.setText("Welcome back,");
+            tvWelcomeName.setText(name);
+        }
+        if(srNumber!=null){
+            etSrNo.setText(srNumber);
+        }
+      LinearLayout linearProcessBtn=findViewById(R.id.linearProcessBtn);
         docRef = FirebaseFirestore.getInstance();
         etSrNo.addTextChangedListener(new TextWatcher() {
             @Override
@@ -62,18 +93,16 @@ public class PhoneAuthActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                if (s.length() > 1) {
+                    linearProcessBtn.setEnabled(true);
+                } else {
+                    Toast.makeText(getApplicationContext(),"Please enter Sr Number",Toast.LENGTH_SHORT).show();
+                    linearProcessBtn.setEnabled(false);
+                }
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (s.length() > 1) {
-                    btnContinue.setEnabled(true);
-                    btnContinue.setTextColor(getResources().getColor(R.color.colorAccent));
-                } else {
-                    btnContinue.setEnabled(false);
-                    btnContinue.setTextColor(getResources().getColor(R.color.btn_disable));
-                }
             }
         });
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -81,21 +110,36 @@ public class PhoneAuthActivity extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    Intent i = new Intent(PhoneAuthActivity.this, MainActivity.class);
-                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(i);
-                    finish();
+                    //verification successful we will start the profile activity
+                    if (admin) {
+//
+                        Intent intent = new Intent(PhoneAuthActivity.this, MainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Intent intent = new Intent(PhoneAuthActivity.this, SrDashboardActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                        finish();
+                    }
                 }
             }
         };
 
-        btnContinue.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new LoadFirebaseData().execute();
+    }
 
-            }
-        });
+    public void BtnToContinue(View view) {
+        new LoadFirebaseData().execute();
+    }
+
+    public void clickTologinWithAnotherAccount(View view) {
+        editor.clear();
+        editor.commit();
+        finish();
+        overridePendingTransition(0, 0);
+        startActivity(getIntent());
+        overridePendingTransition(0, 0);
     }
 
     //    progress dialog before laoding data
@@ -106,8 +150,7 @@ public class PhoneAuthActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            Dialog.setTitle("Please Wait");
-            Dialog.setMessage("data is loading..");
+            Dialog.setMessage("checking your data...");
             Dialog.setIndeterminate(false);
             Dialog.setCancelable(false);
             Dialog.show();
@@ -131,6 +174,7 @@ public class PhoneAuthActivity extends AppCompatActivity {
 
         @Override
         protected Integer doInBackground(Void... params) {
+
             docRef.collection("SalesRepresentatives").document(srNo).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -138,6 +182,36 @@ public class PhoneAuthActivity extends AppCompatActivity {
                         DocumentSnapshot document = task.getResult();
                         if (document != null && document.exists()) {
                             String ContactNo = document.getString("mobileNo");
+                            String name = document.getString("name");
+                            String email = document.getString("email");
+                            String branch = document.getString("branch");
+                            String doj = document.getString("doj");
+                            String residence = document.getString("residence");
+                            if (document.get("admin") != null) {
+                                editor.putString("srNo", srNo);
+                                editor.putString("contactNo", ContactNo);
+                                editor.putString("branch", branch);
+                                editor.putString("email", email);
+                                editor.putString("name", name);
+                                editor.putString("doj", doj);
+                                editor.putString("residence", residence);
+                                editor.putBoolean("admin", true);
+                                editor.commit();
+                                Toast.makeText(PhoneAuthActivity.this, "User set as Admin", Toast.LENGTH_SHORT).show();
+                            } else {
+
+                                editor.putString("srNo", srNo);
+                                editor.putString("contactNo", ContactNo);
+                                editor.putString("branch", branch);
+                                editor.putString("email", email);
+                                editor.putString("name", name);
+                                editor.putString("doj", doj);
+                                editor.putString("residence", residence);
+                                editor.putBoolean("admin", false);
+                                editor.commit();
+                                Toast.makeText(PhoneAuthActivity.this, "User set as SR", Toast.LENGTH_SHORT).show();
+                            }
+
                             Intent intentSignUp = new Intent(PhoneAuthActivity.this, VerifyPhoneActivity.class);
                             intentSignUp.putExtra("mobile", ContactNo);
                             intentSignUp.putExtra("srNo", srNo);
@@ -160,6 +234,7 @@ public class PhoneAuthActivity extends AppCompatActivity {
             return 0;
         }
     }
+
     @Override
     public void onStart() {
         super.onStart();

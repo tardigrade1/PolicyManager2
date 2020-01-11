@@ -2,14 +2,13 @@ package in.gen2.policymanager.models;
 
 public class PoliciesFormData {
 
-    private String applicantName=null;
-    private String applicantPan=null;
-    private String applicantSrNo=null;
-    private String applicationNo=null;
-    private String policyIssueDate=null;
+    private String applicantName = null;
+    private String panNo = null;
+    private String srNo = null;
+    private String applicationNo = null;
+    private String purchaseDate = null;
 
-
-    public PoliciesFormData(){
+    public PoliciesFormData() {
 
     }
 
@@ -17,19 +16,19 @@ public class PoliciesFormData {
         return applicantName;
     }
 
-    public String getApplicantPan() {
-        return applicantPan;
+    public String getPanNo() {
+        return panNo;
     }
 
-    public String getApplicantSrNo() {
-        return applicantSrNo;
+    public String getSrNo() {
+        return srNo;
     }
 
     public String getApplicationNo() {
         return applicationNo;
     }
 
-    public String getPolicyIssueDate() {
-        return policyIssueDate;
+    public String getPurchaseDate() {
+        return purchaseDate;
     }
 }

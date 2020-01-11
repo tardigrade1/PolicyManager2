@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".DataEntryActivity">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_marginBottom="320dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:text="Choose any one action"
+                android:textSize="20dp" />
+
+
+            <RadioGroup
+                android:id="@+id/radioActionGroup"
+                android:layout_width="match_parent"
+
+                android:layout_height="match_parent"
+                android:layout_marginBottom="20dp">
+
+                <RadioButton
+                    android:id="@+id/rbAddApplication"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:text="add application forms data" />
+
+                <RadioButton
+                    android:id="@+id/rbDecision"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:text="add Approval/decline data" />
+
+                <RadioButton
+                    android:id="@+id/rbQueries"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:text="add Queries data" />
+                <RadioButton
+                    android:id="@+id/rbCommission"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:text="add Commissions" />
+            </RadioGroup>
+
+            <LinearLayout
+                android:id="@+id/chooseFile"
+                android:layout_width="300dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/file_upload_background"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <ImageView
+
+                    android:id="@+id/imgChoose"
+                    android:layout_width="80dp"
+                    android:layout_height="100dp"
+                    app:srcCompat="@drawable/add_new_file" />
+
+                <TextView
+                    android:id="@+id/tvFileName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:text="click here to choose file" />
+
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnUploadData"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/colorPrimary_lite"
+                android:clickable="false"
+                android:onClick="btnUploadData"
+                android:text="Choose file"
+                android:textAllCaps="false"
+                android:textColor="#fff" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

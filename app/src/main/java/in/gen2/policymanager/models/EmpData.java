@@ -1,73 +1,84 @@
 package in.gen2.policymanager.models;
 
 public class EmpData {
-    private String sno=null;
-    private String grade=null;
-    private String date=null;
-    private String Srno=null;
+
+    private String doj=null;
+    private String srNo=null;
     private String name=null;
-    private String AgencyNo=null;
+
     private String branch=null;
-    private String branchNo=null;
+
     private String residence=null;
-    private String mobNo=null;
+    private String mobileNo=null;
     private String email=null;
 
-    public String getSno() {
-        return sno;
+    public EmpData(){
+
     }
 
-    public String getGrade() {
-        return grade;
+    public String getDoj() {
+        return doj;
     }
 
-    public String getDate() {
-        return date;
+    public void setDoj(String doj) {
+        this.doj = doj;
     }
 
-    public String getSrno() {
-        return Srno;
+    public String getSrNo() {
+        return srNo;
+    }
+
+    public void setSrNo(String srNo) {
+        this.srNo = srNo;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getAgencyNo() {
-        return AgencyNo;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getBranch() {
         return branch;
     }
 
-    public String getBranchNo() {
-        return branchNo;
+    public void setBranch(String branch) {
+        this.branch = branch;
     }
 
     public String getResidence() {
         return residence;
     }
 
-    public String getMobNo() {
-        return mobNo;
+    public void setResidence(String residence) {
+        this.residence = residence;
+    }
+
+    public String getMobileNo() {
+        return mobileNo;
+    }
+
+    public void setMobileNo(String mobileNo) {
+        this.mobileNo = mobileNo;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public EmpData(String sno, String grade, String date, String srno, String name, String agencyNo, String branch, String branchNo, String residence, String mobNo, String email) {
-        this.sno = sno;
-        this.grade = grade;
-        this.date = date;
-        Srno = srno;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public EmpData(String doj, String srNo, String name, String branch, String residence, String mobileNo, String email) {
+        this.doj = doj;
+        this.srNo = srNo;
         this.name = name;
-        AgencyNo = agencyNo;
         this.branch = branch;
-        this.branchNo = branchNo;
         this.residence = residence;
-        this.mobNo = mobNo;
+        this.mobileNo = mobileNo;
         this.email = email;
     }
 }

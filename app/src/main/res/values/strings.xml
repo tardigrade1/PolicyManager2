@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">PolicyManager</string>
+    <string name="app_name">Policy Manager</string>
+    <string name="rupee_icon">₹ </string>
 </resources>

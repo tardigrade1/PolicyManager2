@@ -13,10 +13,41 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PolicyDetailsActivity"></activity>
-        <activity android:name=".MyCreatedPolicyActivity" />
-        <activity android:name=".authActivities.VerifyPhoneActivity" />
-        <activity android:name=".authActivities.PhoneAuthActivity">
+        <activity android:name=".CommissionsActivity"
+            android:label="My Commission"
+            >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".SrDashboardActivity" />
+        </activity>
+        <activity android:name=".SrDashboardActivity" />
+        <activity
+            android:name=".SalesRepsActivity"
+            android:label="Sales Representatives"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".PoliciesListActivity"
+            android:label="Policies List"
+            android:parentActivityName=".SalesRepsActivity" />
+        <activity
+            android:name=".DataEntryActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".SmsIntegrationActivity" />
+        <activity android:name=".PolicyDetailsActivity"
+            android:label="policy Details">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MyCreatedPolicyActivity" />
+        </activity>
+        <activity
+            android:name=".MyCreatedPolicyActivity"
+            android:label="Policies"
+            android:parentActivityName=".SrDashboardActivity" />
+        <activity android:name=".authActivities.VerifyPhoneActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".authActivities.PhoneAuthActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -33,6 +64,10 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

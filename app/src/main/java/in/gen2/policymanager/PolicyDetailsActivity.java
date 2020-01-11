@@ -9,6 +9,10 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.TextView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -33,6 +37,8 @@ public class PolicyDetailsActivity extends AppCompatActivity {
     TextView tvContact;
     @BindView(R.id.tvPolicyPurchase)
     TextView tvPolicyPurchase;
+    @BindView(R.id.tvPolicyStatus)
+    TextView tvPolicyStatus;
     private FirebaseFirestore fireRef;
     private String applicationId,srNo;
     @Override
@@ -42,6 +48,7 @@ public class PolicyDetailsActivity extends AppCompatActivity {
         unbinder = ButterKnife.bind(this);
         applicationId = getIntent().getStringExtra("applicationId");
         srNo = getIntent().getStringExtra("srNo");
+        Log.d("Tag", "onCreate: "+applicationId+", "+srNo);
         tvApplicationId.setText(applicationId);
         FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
                 .setPersistenceEnabled(true)
@@ -90,15 +97,17 @@ public class PolicyDetailsActivity extends AppCompatActivity {
                                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                         DocumentSnapshot appFormDocument = task.getResult();
                                         if (appFormDocument != null && appFormDocument.exists()) {
-                                            String ContactNo = appFormDocument.getString("applicantContact");
+                                            String ContactNo = appFormDocument.getString("contactNo");
                                             String name = appFormDocument.getString("applicantName");
-                                            String panNo = appFormDocument.getString("applicantPan");
-                                            String purchaseDate = appFormDocument.getString("policyIssueDate");
+                                            String panNo = appFormDocument.getString("panNo");
+                                            String purchaseDate = appFormDocument.getString("purchaseDate");
+                                            String policyStatus = appFormDocument.getString("PolicyStatus");
 
                                             tvHolderName.setText(name);
                                             tvContact.setText(ContactNo);
                                             tvPan.setText(panNo);
                                             tvPolicyPurchase.setText(purchaseDate);
+                                            tvPolicyStatus.setText(policyStatus);
                                             Dialog.dismiss();
                                         }
 
@@ -113,5 +122,15 @@ public class PolicyDetailsActivity extends AppCompatActivity {
 
             return 0;
         }
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            onBackPressed();
+            return  true;
+        }
+        return super.onOptionsItemSelected(item);
+
     }
 }

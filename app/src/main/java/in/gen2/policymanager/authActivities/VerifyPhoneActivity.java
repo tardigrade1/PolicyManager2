@@ -4,11 +4,17 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -27,10 +33,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
+import in.gen2.policymanager.Helpers.OtpEditText;
 import in.gen2.policymanager.ImportEmployeesActivity;
 import in.gen2.policymanager.MainActivity;
 import in.gen2.policymanager.MyCreatedPolicyActivity;
 import in.gen2.policymanager.R;
+import in.gen2.policymanager.SrDashboardActivity;
 
 public class VerifyPhoneActivity extends AppCompatActivity {
     private static final String TAG = "VerifyPhoneActivity";
@@ -40,14 +48,19 @@ public class VerifyPhoneActivity extends AppCompatActivity {
     private PhoneAuthProvider.ForceResendingToken mVerificationToken;
 
     //The edittext to input the code
-    private EditText editTextCode;
+
 
     //firebase auth object
     private FirebaseAuth mAuth;
-    private Button btnSignIn;
     private String srNo;
-private FirebaseFirestore docRef;
+    private FirebaseFirestore docRef;
     private String mobile;
+    private Boolean admin;
+    private SharedPreferences prefs = null;
+    private TextView tvPhoneNumber,tvVerifyStatus;
+    private OtpEditText tvOtp;
+    private LinearLayout lvSignInBtn;
+    private TextView resendOtp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,23 +68,43 @@ private FirebaseFirestore docRef;
         setContentView(R.layout.activity_verify_phone);
         mAuth = FirebaseAuth.getInstance();
         docRef = FirebaseFirestore.getInstance();
-        editTextCode = findViewById(R.id.editTextCode);
-
-
+        resendOtp = findViewById(R.id.tvResendOTP);
+        tvPhoneNumber = findViewById(R.id.tvPhoneNumber);
+        tvVerifyStatus = findViewById(R.id.tvVerificationStatus);
+        tvOtp = findViewById(R.id.et_otp);
+        lvSignInBtn = findViewById(R.id.linearSignInBtn);
         //getting mobile number from the previous activity
         //and sending the verification code to the number
 
         mobile = getIntent().getStringExtra("mobile");
         srNo = getIntent().getStringExtra("srNo");
+        tvPhoneNumber.setText("+91-"+mobile);
+        prefs = getSharedPreferences("UserData", MODE_PRIVATE);
+        admin = prefs.getBoolean("admin", false);
         sendVerificationCode(mobile);
-        btnSignIn = findViewById(R.id.buttonSignIn);
-        btnSignIn.setOnClickListener(new View.OnClickListener() {
+        tvOtp.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onClick(View v) {
-                verifyVerificationCode(editTextCode.getText().toString().trim());
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(s.length()>5){
+                    lvSignInBtn.setEnabled(true);
+                    Log.d(TAG, "onCreate: You can verify Now"+s.length());
+                }
+                else {
+                    lvSignInBtn.setEnabled(false);
+                    Log.d(TAG, "onCreate: enter full OTP"+s.length());
+                }
+
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
     }
+
     //the method is sending verification code
     //the country id is concatenated
     //you can take the country id as user input as well
@@ -83,12 +116,11 @@ private FirebaseFirestore docRef;
                 TaskExecutors.MAIN_THREAD,
                 mCallbacks);
         Toast.makeText(VerifyPhoneActivity.this, "OTP sent", Toast.LENGTH_SHORT).show();
+       timeCount();
     }
     // [START resend_verification]
 
-    private void resendVerificationCode(String phoneNumber,
-
-                                        PhoneAuthProvider.ForceResendingToken token) {
+    private void resendVerificationCode(String phoneNumber) {
 
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
                 "+91" + phoneNumber,        // Phone number to verify
@@ -96,10 +128,32 @@ private FirebaseFirestore docRef;
                 TimeUnit.SECONDS,   // Unit of timeout
                 this,               // Activity (for callback binding)
                 mCallbacks,         // OnVerificationStateChangedCallbacks
-                token);             // ForceResendingToken from callbacks
-
+                mVerificationToken);             // ForceResendingToken from callbacks
+        Toast.makeText(VerifyPhoneActivity.this, "OTP sent", Toast.LENGTH_SHORT).show();
+        timeCount();
     }
+//time counter for resendOTP
+    private void timeCount(){
+        resendOtp.setEnabled(false);
+        new CountDownTimer(1000 * 60, 1000)
+        {
+            @Override
+            public void onTick(long millisUntilFinished)
+            {
+                int minutes = (int) ((millisUntilFinished / (1000 * 60)) % 60);
+                int seconds = (int) (millisUntilFinished / 1000) % 60;
+                resendOtp.setText("0"+minutes + ":" + " " + seconds + " " + "left");
 
+            }
+
+            @Override
+            public void onFinish()
+            {
+                resendOtp.setEnabled(true);
+                resendOtp.setText("Resend Code");
+            }
+        }.start();
+    }
     //the callback to detect the verification status
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
         @Override
@@ -112,7 +166,10 @@ private FirebaseFirestore docRef;
             //in this case the code will be null
             //so user has to manually enter the code
             if (code != null) {
-                editTextCode.setText(code);
+                tvVerifyStatus.setText("mobile verification is in progress...");
+                tvVerifyStatus.setVisibility(View.VISIBLE);
+                lvSignInBtn.setEnabled(false);
+                tvOtp.setText(code);
                 //verifying the code
                 verifyVerificationCode(code);
             }
@@ -121,6 +178,8 @@ private FirebaseFirestore docRef;
 
         @Override
         public void onVerificationFailed(FirebaseException e) {
+            tvVerifyStatus.setText("mobile verification failed!\nre-enter your OTP");
+            lvSignInBtn.setEnabled(true);
             Toast.makeText(VerifyPhoneActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
         }
 
@@ -138,11 +197,14 @@ private FirebaseFirestore docRef;
 
 
     private void verifyVerificationCode(String code) {
-        //creating the credential
-        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mVerificationId, code);
-
-        //signing the user
-        signInWithPhoneAuthCredential(credential);
+        try {
+            PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mVerificationId, code);
+            signInWithPhoneAuthCredential(credential);
+        }catch (Exception e){
+            //verification unsuccessful.. display an error message
+            lvSignInBtn.setEnabled(true);
+            tvVerifyStatus.setText("mobile verification failed!\nre-enter your OTP");
+        }
     }
 
     private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
@@ -153,39 +215,63 @@ private FirebaseFirestore docRef;
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             final HashMap<String, Object> hm = new HashMap<>();
-                            hm.put("srNo",srNo);
-                            hm.put("contactNo",mobile);
-                            String userId=mAuth.getCurrentUser().getUid();
-                            docRef.collection("usersFirebaseId").document( userId).set(hm).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            hm.put("srNo", srNo);
+                            hm.put("contactNo", mobile);
+                            String userId = mAuth.getCurrentUser().getUid();
+                            docRef.collection("usersFirebaseId").document(userId).set(hm).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
                                     //verification successful we will start the profile activity
-                                    Intent intent = new Intent(VerifyPhoneActivity.this, MainActivity.class);
-                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                    startActivity(intent);
-                                    finish();
+                                    if (admin) {
+                                        tvVerifyStatus.setText("mobile verify successfully");
+                                        Intent intent = new Intent(VerifyPhoneActivity.this, MainActivity.class);
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                        startActivity(intent);
+                                        lvSignInBtn.setEnabled(true);
+                                        finish();
+                                    } else {
+                                        tvVerifyStatus.setText("mobile verify successfully");
+                                        Intent intent = new Intent(VerifyPhoneActivity.this, SrDashboardActivity.class);
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                        startActivity(intent);
+                                        lvSignInBtn.setEnabled(true);
+                                        finish();
+                                    }
                                 }
                             })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(getApplicationContext(), "Somthing is wrong,data is not entered", Toast.LENGTH_SHORT).show();
-                                }
-                            });
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(getApplicationContext(), "Somthing is wrong,data is not entered", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
 
                         } else {
 
                             //verification unsuccessful.. display an error message
-
+                            lvSignInBtn.setEnabled(true);
                             String message = "Somthing is wrong, we will fix it soon...";
 
                             if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
+                                tvVerifyStatus.setText("mobile verification failed!\nre-enter your OTP");
                                 message = "Invalid code entered...";
                             }
                             Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-                            Log.d(TAG, "onComplete: "+message);
+                            Log.d(TAG, "onComplete: " + message);
                         }
                     }
                 });
+    }
+
+    public void clickToSignIn(View view) {
+        String code = tvOtp.getText().toString().trim();
+                tvVerifyStatus.setText("mobile verification is in progress...");
+                tvVerifyStatus.setVisibility(View.VISIBLE);
+                lvSignInBtn.setEnabled(false);
+                verifyVerificationCode(code);
+    }
+
+    public void clickToResendOtp(View view) {
+        resendVerificationCode(mobile);
     }
 }

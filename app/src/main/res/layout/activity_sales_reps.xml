@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:shimmer="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MyCreatedPolicyActivity">
+
+    <EditText
+        android:id="@+id/edtFilterEmployee"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:ems="10"
+        android:hint="Search here"
+        shimmer:layout_constraintEnd_toEndOf="parent"
+        shimmer:layout_constraintHorizontal_bias="0.0"
+        shimmer:layout_constraintStart_toStartOf="parent"
+        shimmer:layout_constraintTop_toTopOf="parent" />
+<!--        <SearchView-->
+<!--            android:id="@+id/searchSR"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            shimmer:layout_constraintEnd_toEndOf="parent"-->
+<!--            shimmer:layout_constraintHorizontal_bias="0.0"-->
+<!--            shimmer:layout_constraintStart_toStartOf="parent"-->
+<!--            shimmer:layout_constraintTop_toTopOf="parent" />-->
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_view_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        shimmer:layout_constraintEnd_toEndOf="parent"
+        shimmer:layout_constraintStart_toStartOf="parent"
+        shimmer:layout_constraintTop_toBottomOf="@+id/edtFilterEmployee"
+        shimmer:shimmer_duration="800">
+
+        <!-- Adding 3 rows of placeholders -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <include layout="@layout/sr_list" />
+
+            <include layout="@layout/sr_list" />
+
+            <include layout="@layout/sr_list" />
+
+            <include layout="@layout/sr_list" />
+
+            <include layout="@layout/sr_list" />
+
+            <include layout="@layout/sr_list" />
+
+        </LinearLayout>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <ListView
+        android:id="@+id/rvRepresentativesList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:visibility="gone"
+        shimmer:layout_constraintBottom_toBottomOf="parent"
+        shimmer:layout_constraintEnd_toEndOf="parent"
+        shimmer:layout_constraintStart_toStartOf="parent"
+        shimmer:layout_constraintTop_toBottomOf="@+id/edtFilterEmployee"
+        shimmer:layout_constraintVertical_bias="0.0" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
