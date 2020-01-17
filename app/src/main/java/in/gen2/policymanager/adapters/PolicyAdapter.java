@@ -39,14 +39,6 @@ public class PolicyAdapter extends FirestoreRecyclerAdapter<PoliciesFormData, Po
         }
     }
 
-//    @NonNull
-//    public Filter getFilter() {
-//        if (this.filter == null) {
-//            this.filter = new PolicyDataFilter(this, null);
-//        }
-//        return this.filter;
-//    }
-
     @Override
     protected void onBindViewHolder(ViewHolder holder, int i, PoliciesFormData policiesFormData) {
 
@@ -93,48 +85,5 @@ public class PolicyAdapter extends FirestoreRecyclerAdapter<PoliciesFormData, Po
             applyDate=itemView.findViewById(R.id.tvPolicyPurchaseDate);
         }
     }
-
-//    private class PolicyDataFilter extends Filter {
-//
-//        public PolicyDataFilter(PolicyAdapter policyAdapter, Object o) {
-//
-//        }
-//
-//        @Override
-//        protected FilterResults performFiltering(CharSequence charSequence) {
-//            charSequence = charSequence.toString().toLowerCase();
-//            FilterResults filterResults = new FilterResults();
-//            if (charSequence.toString().length() > 0) {
-//                ArrayList arrayList = new ArrayList();
-//                int size = originalList.size();
-//                for (int i = 0; i < size; i++) {
-//                    PoliciesFormData UserData =  originalList.get(i);
-//                    if (UserData.toString().toLowerCase().contains(charSequence)) {
-//                        arrayList.add(UserData);
-//                    }
-//                }
-//                filterResults.count = arrayList.size();
-//                filterResults.values = arrayList;
-//            } else {
-//                synchronized (this) {
-//                    filterResults.values = originalList;
-//                    filterResults.count = originalList.size();
-//                }
-//            }
-//            return filterResults;
-//        }
-//
-//        @Override
-//        protected void publishResults(CharSequence constraint, FilterResults results) {
-//            dataSet = (ObservableSnapshotArray<PoliciesFormData>) results.values;
-//            notifyDataSetChanged();
-////            int size = PolicyAdapter.this.dataSet.size();
-////            for (int i = 0; i < size; i++) {
-////                PolicyAdapter policyAdapter = PolicyAdapter.this;
-////                policyAdapter.add(dataSet.get(i));
-////            }
-//
-//        }
-//    }
 
 }

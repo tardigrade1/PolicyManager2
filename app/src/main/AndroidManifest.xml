@@ -5,6 +5,9 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+
 
     <application
         android:allowBackup="true"
@@ -13,9 +16,36 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CommissionsActivity"
-            android:label="My Commission"
-            >
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths_app" />
+        </provider>
+        <activity android:name=".MoreActivity"
+            android:label="Know More"/>
+        <activity android:name=".JoinUsActivity"
+            android:label="Join Us"
+            android:parentActivityName=".WelcomeInformationActivity"/>
+        <activity android:name=".BenifitsActivity"
+            android:label="Benefits"
+            android:parentActivityName=".WelcomeInformationActivity"/>
+        <activity android:name=".WelcomeInformationActivity"/>
+        <activity
+            android:name=".SplashScreenActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".CommissionsActivity"
+            android:label="My Commission">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".SrDashboardActivity" />
@@ -33,7 +63,8 @@
             android:name=".DataEntryActivity"
             android:parentActivityName=".MainActivity" />
         <activity android:name=".SmsIntegrationActivity" />
-        <activity android:name=".PolicyDetailsActivity"
+        <activity
+            android:name=".PolicyDetailsActivity"
             android:label="policy Details">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -43,16 +74,19 @@
             android:name=".MyCreatedPolicyActivity"
             android:label="Policies"
             android:parentActivityName=".SrDashboardActivity" />
-        <activity android:name=".authActivities.VerifyPhoneActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".authActivities.VerifyPhoneActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".authActivities.PhoneAuthActivity"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity android:name=".ImportEmployeesActivity" />
         <activity android:name=".MainActivity">

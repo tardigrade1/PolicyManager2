@@ -55,7 +55,10 @@ public class CommissionsActivity extends AppCompatActivity {
         prefs = getSharedPreferences("UserData", MODE_PRIVATE);
         srNo = prefs.getString("srNo", "");
         rupeeIcon = getResources().getString(R.string.rupee_icon);
-        listenForUsers();
+        if (srNo != null) {
+            listenForUsers();
+
+        }
     }
 
     @Override

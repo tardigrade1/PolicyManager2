@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.LicPremiumOnlinePaymentFragment">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/activity_horizontal_margin_single">
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorAccent"
+            android:textSize="18dp"
+            android:text="Follow these steps to make online payment of LIC premium:" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1.click on the bellow link to open LIC premium site" />
+
+        <TextView
+            android:layout_marginTop="@dimen/activity_horizontal_margin_single"
+            android:id="@+id/tvLicIndiaLink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="20dp"
+            android:layout_gravity="center"
+            android:text="www.licindia.in" />
+        <TextView
+            android:layout_marginTop="@dimen/activity_horizontal_margin_single"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2.After opening LIC premium site go to Pay premium online in Online services" />
+
+        <ImageView
+            android:layout_width="300dp"
+            android:layout_height="250dp"
+            android:layout_gravity="center"
+            android:src="@drawable/lic_premium1" />
+        <TextView
+            android:layout_marginTop="@dimen/activity_horizontal_margin_single"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="3.After opening Pay premium online in Online services click on pay direct." />
+
+        <ImageView
+            android:layout_width="300dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:src="@drawable/lic_premium2" />
+        <TextView
+            android:layout_marginTop="@dimen/activity_horizontal_margin_single"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="4.After opening pay direct select for renewal premium." />
+
+        <ImageView
+            android:layout_width="300dp"
+            android:layout_height="250dp"
+            android:layout_gravity="center"
+            android:src="@drawable/lic_premium3" />
+        <TextView
+            android:layout_marginTop="@dimen/activity_horizontal_margin_single"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="5.Complete all three steps go to payment." />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:src="@drawable/lic_prem4" />
+
+        <TextView
+            android:layout_marginTop="@dimen/activity_horizontal_margin_single"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="6.Enter your payment details and move ahead.\n7.Then u will receive an OTP on registered Mobile.\n8.Enter OTP\n9.Message will display for Successful transaction\n10.Renewal Reciept will appear" />
+
+        <TextView
+android:layout_marginTop="@dimen/activity_horizontal_margin_single"            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold"
+            android:textSize="16dp"
+            android:text="Similarly u can also pay Pol Loan &amp; Interest" />
+
+        <TextView
+            android:layout_marginTop="@dimen/activity_horizontal_margin_single"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="Auto Payment" />
+        <TextView
+            android:id="@+id/AutoPaymentStepText"
+            android:layout_marginTop="@dimen/activity_horizontal_margin_single"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="" />
+
+        <Button
+            android:id="@+id/btnFormDownload"
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:background="@color/colorAccent"
+            android:textColor="@color/colorWhite"
+            android:textAllCaps="false"
+            android:text="Download Form" />
+
+
+    </LinearLayout>
+</FrameLayout>

@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="application_id_background">10dp</dimen>
+    <dimen name="activity_horizontal_margin">15dp</dimen>
+    <dimen name="activity_horizontal_margin_single">10dp</dimen>
+    <dimen name="font_size_of_content">16dp</dimen>
 </resources>

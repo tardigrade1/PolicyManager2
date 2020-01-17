@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.AxisBankAppFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/activity_horizontal_margin_single"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Download Axis Bank App from Play Store Login with Registered Mob No"
+            android:textColor="#000" />
+
+        <ImageView
+            android:id="@+id/imgDownloadAxisApp"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="@dimen/activity_horizontal_margin_single"
+            android:src="@drawable/google_play_icon" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_horizontal_margin_single"
+            android:text="Benefits:"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/font_size_of_content"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_horizontal_margin_single"
+            android:text="1. View Outstanding Balance\n2. View Unbilled Transactions"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
+
+        <ImageView
+            android:layout_width="254dp"
+            android:layout_height="306dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/activity_horizontal_margin_single"
+            android:src="@drawable/axis1" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_horizontal_margin_single"
+            android:text="3.View Current Statement\n4.View Past Statements\n5.Pay Credit Card Bill Instantly"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
+
+        <ImageView
+            android:layout_width="254dp"
+            android:layout_height="306dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/activity_horizontal_margin_single"
+            android:src="@drawable/axis3" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_horizontal_margin_single"
+            android:text="6.Schedule Credit Card Bill Payment\n7.Convert transactions above 2500 to EMI\n8.E-Statement Activation\n9.Check for limit increase on your credit cards\n10.Block and Replace, Set &amp; Reset PIN and Auto debit payment"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
+
+        <ImageView
+            android:layout_width="254dp"
+            android:layout_height="306dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/activity_horizontal_margin_single"
+            android:src="@drawable/axis4" />
+    </LinearLayout>
+</FrameLayout>

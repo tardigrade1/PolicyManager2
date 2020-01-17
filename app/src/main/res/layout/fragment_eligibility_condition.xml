@@ -1,0 +1,547 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorWhite"
+    tools:context=".Fragments.EligibilityConditionFragment">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabEligibility"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabMode="fixed"
+            app:tabGravity="fill"
+            >
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/platinum_card" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/signature_card" />
+        </com.google.android.material.tabs.TabLayout>
+
+
+        <LinearLayout
+            android:id="@+id/lvPlatinumCard"
+            android:layout_margin="@dimen/activity_horizontal_margin_single"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/lic_platinum_creditcard" />
+
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold"
+                android:text="@string/applicant_must_be_policy_holder" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_horizontal_margin_single"
+                android:background="#B1B0B0"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="1dp"
+                    android:layout_weight="1"
+                    android:background="@color/colorPrimaryDark"
+                    android:padding="5dp"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorWhite"
+                    android:text="Gold Club" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/colorPrimaryDark"
+                    android:padding="5dp"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorWhite"
+                    android:text="@string/platinum_card" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#B1B0B0"
+                android:paddingBottom="1dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/colorWhite"
+                    android:padding="5dp"
+                    android:layout_marginRight="1dp"
+                    android:gravity="center"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:text="LIC Premium\n(Non Single)" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/colorWhite"
+                    android:padding="5dp"
+                    android:text="Yly 30000/-on own life &amp; Minor Children for more than 3 yrs, (2 yrs if prem of 3rd yr paid)"/>
+            </LinearLayout><LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#B1B0B0"
+                android:paddingBottom="1dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/colorWhite"
+                    android:padding="5dp"
+                    android:gravity="center"
+                    android:layout_marginRight="1dp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:text="Single Premium" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/colorWhite"
+                    android:padding="5dp"
+                    android:gravity="center"
+                    android:text="-"/>
+            </LinearLayout>
+
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_horizontal_margin_single"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold"
+                android:text="If above condition of LIC premium is NOT fulfilled, the following condition must be fulfilled
+" />
+            <LinearLayout
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#B1B0B0"
+                android:paddingBottom="1dp"
+                android:paddingTop="1dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/colorWhite"
+                    android:padding="5dp"
+                    android:gravity="center"
+                    android:layout_marginRight="1dp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:text="Salaried" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/colorWhite"
+                    android:padding="5dp"
+                    android:text="Annual Net  1.80 lacs\n( Gross 2.25 Lacs)"/>
+            </LinearLayout> <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#B1B0B0"
+                android:paddingBottom="1dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/colorWhite"
+                    android:padding="5dp"
+                    android:gravity="center"
+                    android:layout_marginRight="1dp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:text="Self Employed" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/colorWhite"
+                    android:padding="5dp"
+                    android:text="Annual Net  4 Lacs"/>
+            </LinearLayout>
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_horizontal_margin_single"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold"
+                android:text="Other Conditions" />
+            <LinearLayout
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#B1B0B0"
+                android:paddingBottom="1dp"
+                android:paddingTop="1dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/colorWhite"
+                    android:padding="5dp"
+                    android:gravity="center"
+                    android:layout_marginRight="1dp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:text="Age" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/colorWhite"
+                    android:padding="5dp"
+                    android:text="18 to 60\n(upto 70 for Single Premium)"/>
+            </LinearLayout> <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#B1B0B0"
+            android:paddingBottom="1dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/colorWhite"
+                android:padding="5dp"
+                android:gravity="center"
+                android:layout_marginRight="1dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:text="Cibil" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/colorWhite"
+                android:padding="5dp"
+                android:text="720 Score"/>
+        </LinearLayout><LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#B1B0B0"
+            android:paddingBottom="1dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/colorWhite"
+                android:padding="5dp"
+                android:gravity="center"
+                android:layout_marginRight="1dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:text="Others" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/colorWhite"
+                android:padding="5dp"
+                android:text="Some professions, NRI &amp; Non Serviceable PIN"/>
+        </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/lvSignatureCard"
+            android:visibility="gone"
+            android:layout_margin="@dimen/activity_horizontal_margin_single"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <ImageView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/lic_signature_creditcard" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold"
+                android:text="@string/applicant_must_be_policy_holder" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_horizontal_margin_single"
+                android:background="#B1B0B0"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="1dp"
+                    android:layout_weight="1"
+                    android:background="@color/colorPrimaryDark"
+                    android:padding="5dp"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorWhite"
+                    android:text="Gold Club" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/colorPrimaryDark"
+                    android:padding="5dp"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorWhite"
+                    android:text="@string/signature_card" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#B1B0B0"
+                android:paddingBottom="1dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/colorWhite"
+                    android:padding="5dp"
+                    android:layout_marginRight="1dp"
+                    android:gravity="center"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:text="LIC Premium\n(Non Single)" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/colorWhite"
+                    android:padding="5dp"
+                    android:text="Yly 50000/-on own life &amp; Minor Children for more than 3 yrs (2 yr if prem of 3rd yr paid)"/>
+            </LinearLayout><LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#B1B0B0"
+                android:paddingBottom="1dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/colorWhite"
+                    android:padding="5dp"
+                    android:gravity="center"
+                    android:layout_marginRight="1dp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:text="Single Premium" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/colorWhite"
+                    android:padding="5dp"
+                    android:text="Rs 5.00 Lacs"/>
+            </LinearLayout>
+
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_horizontal_margin_single"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold"
+                android:text="If above condition of LIC premium is NOT fulfilled, the following condition must be fulfilled
+" />
+            <LinearLayout
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#B1B0B0"
+                android:paddingBottom="1dp"
+                android:paddingTop="1dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/colorWhite"
+                    android:padding="5dp"
+                    android:gravity="center"
+                    android:layout_marginRight="1dp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:text="Salaried" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/colorWhite"
+                    android:padding="5dp"
+                    android:text="Annual Net 9 lacs\n( Gross 11.25 Lacs)"/>
+            </LinearLayout> <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#B1B0B0"
+                android:paddingBottom="1dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/colorWhite"
+                    android:padding="5dp"
+                    android:gravity="center"
+                    android:layout_marginRight="1dp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:text="Self Employed" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/colorWhite"
+                    android:padding="5dp"
+                    android:text="Annual Net 12 Lacs"/>
+            </LinearLayout>
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_horizontal_margin_single"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold"
+                android:text="Other Conditions" />
+            <LinearLayout
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#B1B0B0"
+                android:paddingBottom="1dp"
+                android:paddingTop="1dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/colorWhite"
+                    android:padding="5dp"
+                    android:gravity="center"
+                    android:layout_marginRight="1dp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:text="Age" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/colorWhite"
+                    android:padding="5dp"
+                    android:text="18 to 60\n(upto 70 for Single Premium)"/>
+            </LinearLayout> <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#B1B0B0"
+            android:paddingBottom="1dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/colorWhite"
+                android:padding="5dp"
+                android:gravity="center"
+                android:layout_marginRight="1dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:text="Cibil" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/colorWhite"
+                android:padding="5dp"
+                android:text="720 Score"/>
+        </LinearLayout><LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#B1B0B0"
+            android:paddingBottom="1dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/colorWhite"
+                android:padding="5dp"
+                android:gravity="center"
+                android:layout_marginRight="1dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:text="Others" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/colorWhite"
+                android:padding="5dp"
+                android:text="Some professions, NRI &amp; Non Serviceable PIN"/>
+        </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</FrameLayout>

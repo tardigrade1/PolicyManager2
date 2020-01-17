@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/activity_horizontal_margin_single"
+    android:paddingTop="@dimen/activity_horizontal_margin_single"
+    android:paddingRight="@dimen/activity_horizontal_margin_single">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="2dp"
+            android:layout_weight="7"
+            android:background="@color/colorPrimary_lite"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="Q."
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvFaqQues"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:layout_margin="2dp"
+            android:layout_weight="1"
+            android:paddingLeft="5dp"
+            android:text="How Bank decide limit"
+            android:textColor="#000"
+            android:textSize="15dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="2dp"
+            android:layout_weight="7"
+            android:background="@color/colorPrimary_lite"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="A."
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold" />
+
+        <TextView
+
+            android:id="@+id/tvFaqAns"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:layout_margin="2dp"
+            android:layout_weight="1"
+            android:paddingLeft="5dp"
+            android:text="Mly limit is given on the Card on the basis of Mly income and Status of the Applicant." />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1sp"
+        android:layout_marginTop="@dimen/activity_horizontal_margin_single"
+        android:background="#cecece" />
+</LinearLayout>

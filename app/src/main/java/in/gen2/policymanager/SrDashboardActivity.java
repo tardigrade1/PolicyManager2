@@ -157,4 +157,10 @@ public class SrDashboardActivity extends AppCompatActivity {
                     }
                 });
     }
+
+    public void knowMore(View view) {
+        Intent i = new Intent(SrDashboardActivity.this, MoreActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(i);
+    }
 }

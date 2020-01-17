@@ -14,12 +14,12 @@
         android:layout_margin="10dp"
         android:layout_marginStart="16dp"
         android:background="@drawable/shadow_react"
-        android:padding="5dp"
+        android:padding="15dp"
         app:layout_constraintBottom_toTopOf="@+id/welcomeText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/policy_icon" />
+        app:srcCompat="@drawable/lic_icon" />
 
     <TextView
         android:id="@+id/welcomeText"
