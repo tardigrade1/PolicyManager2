@@ -42,7 +42,6 @@
             android:background="@drawable/ask_for_login_background"
             android:text="@string/download_specimen_form"
             android:textAllCaps="false"
-            android:onClick="DownloadForm"
             android:textColor="#fff" />
 
         <TextView

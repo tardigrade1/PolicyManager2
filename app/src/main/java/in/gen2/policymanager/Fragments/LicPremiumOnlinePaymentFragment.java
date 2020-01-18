@@ -127,10 +127,12 @@ public void checkFile(){
 
     private class DownloadFile extends AsyncTask<String, Void, Void> {
 
+
+
         @Override
         protected Void doInBackground(String... strings) {
-            String fileUrl = strings[0];   // -> http://maven.apache.org/maven-1.x/maven.pdf
-            String fileName = strings[1];  // -> maven.pdf
+            String fileUrl = strings[0];   // -> link
+            String fileName = strings[1];  // -> fileName
             String path = Environment.getExternalStorageDirectory() + File.separator + "LicCardData";
             File file = new File(path);
             String fileNameText = file + "/"+fileName;

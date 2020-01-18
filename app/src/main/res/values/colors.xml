@@ -10,4 +10,5 @@
     <color name="colorWhite">#fff</color>
     <color name="black">#000</color>
     <color name="DownloadColor">#157520</color>
+    <color name="pleaseWaitColor">#5E6D0101</color>
 </resources>

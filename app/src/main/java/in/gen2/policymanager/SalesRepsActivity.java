@@ -167,28 +167,30 @@ public class SalesRepsActivity extends AppCompatActivity {
                 intentPolicyDetail.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intentPolicyDetail);
             }
+
         });
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                // stop animating Shimmer and hide the layout
-                mShimmerViewContainer.stopShimmer();
-                mShimmerViewContainer.setVisibility(View.GONE);
-                rvRepresentativesList.setVisibility(View.VISIBLE);
-            }
-        }, 2000);
+        mShimmerViewContainer.stopShimmer();
+        mShimmerViewContainer.setVisibility(View.GONE);
+        rvRepresentativesList.setVisibility(View.VISIBLE);
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                // stop animating Shimmer and hide the layout
+//                mShimmerViewContainer.stopShimmer();
+//                mShimmerViewContainer.setVisibility(View.GONE);
+//                rvRepresentativesList.setVisibility(View.VISIBLE);
+//            }
+//        }, 2000);
     }
 //
 
     @Override
     public void onResume() {
         super.onResume();
-        mShimmerViewContainer.startShimmer();
     }
 
     @Override
     public void onPause() {
-        mShimmerViewContainer.stopShimmer();
         super.onPause();
     }
 
@@ -199,6 +201,9 @@ public class SalesRepsActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            mShimmerViewContainer.startShimmer();
+            mShimmerViewContainer.setVisibility(View.VISIBLE);
+            rvRepresentativesList.setVisibility(View.GONE);
             Dialog.setTitle("Please Wait");
             Dialog.setMessage("data is on update..");
             Dialog.setIndeterminate(false);
