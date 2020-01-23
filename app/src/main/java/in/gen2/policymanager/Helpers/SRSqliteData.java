@@ -23,9 +23,6 @@ public class SRSqliteData
 
     public static final String DATABASE_NAME = "PolicyManager.db";
     public static final String CONTACTS_TABLE_NAME = "SRNameList";
-    public static final String CONTACTS_COLUMN_ID = "id";
-    public static final String CONTACTS_COLUMN_NAME = "name";
-    public static final String CONTACTS_COLUMN_SR_NO = "srNo";
     private HashMap hp;
 
     public SRSqliteData(Context context) {
@@ -45,6 +42,18 @@ public class SRSqliteData
         File dbFile = context.getDatabasePath(DATABASE_NAME);
         return dbFile.exists();
     }
+    public boolean isTableExists() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "select DISTINCT tbl_name from sqlite_master where tbl_name = '" + CONTACTS_TABLE_NAME + "'";
+        try (Cursor cursor = db.rawQuery(query, null)) {
+            if (cursor != null) {
+                if (cursor.getCount() > 0) {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -56,6 +65,12 @@ public class SRSqliteData
 
     public boolean insertSr(String name, String srNo) {
         SQLiteDatabase db = this.getWritableDatabase();
+        if(!isTableExists()){
+            db.execSQL(
+                    "create table " + CONTACTS_TABLE_NAME +
+                            " (ID INTEGER PRIMARY KEY,name TEXT,srNo TEXT)"
+            );
+        }
         ContentValues contentValues = new ContentValues();
         contentValues.put("name", name);
         contentValues.put("srNo", srNo);
@@ -91,6 +106,12 @@ public class SRSqliteData
         return db.delete(CONTACTS_TABLE_NAME,
                 "id = ? ",
                 new String[]{Integer.toString(id)});
+    }
+    public boolean deleteSrTable(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DROP TABLE IF EXISTS " + CONTACTS_TABLE_NAME);
+        db.close();
+        return true;
     }
     public void deleteAll() {
         SQLiteDatabase db = this.getWritableDatabase();

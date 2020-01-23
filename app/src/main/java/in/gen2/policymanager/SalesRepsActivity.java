@@ -89,6 +89,8 @@ public class SalesRepsActivity extends AppCompatActivity {
 //        new LoadFireStoreData().execute();
         if (!srSqliteDb.doesDatabaseExist(this)) {
             new LoadFireStoreData().execute();
+        }else if(!srSqliteDb.isTableExists()){
+            new LoadFireStoreData().execute();
         } else {
             searchUsers();
         }

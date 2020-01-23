@@ -80,10 +80,13 @@
             android:parentActivityName=".SrDashboardActivity" />
         <activity
             android:name=".authActivities.VerifyPhoneActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize"
+            />
         <activity
             android:name=".authActivities.PhoneAuthActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize">
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->

@@ -38,94 +38,11 @@ public class SalesRepresentativesAdapter extends ArrayAdapter<SalesRepsDatamodel
         this.originalList.addAll(items);
 
     }
-//    @NonNull
-//    @Override
-//    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-//        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.sr_list, parent, false);
-//        mContext = parent.getContext();
-//        return new ViewHolder(v);
-//    }
-
-//    @Override
-//    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-//
-//        SalesRepsDatamodel item=items.get(position);
-//        holder.srNo.setBackground(null);
-//        holder.srName.setBackground(null);
-//        holder.srNo.setText(item.getSrNo());
-//        holder.srName.setText(item.getName());
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intentPolicyDetail = new Intent(mContext, PoliciesListActivity.class);
-//                intentPolicyDetail.putExtra("srNo", item.getSrNo());
-//                intentPolicyDetail.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                mContext.startActivity(intentPolicyDetail);
-//            }
-//        });
-//    }
-//
-//
-//    @Override
-//    public int getItemCount() {
-//        return items.size();
-//    }
 
     public class ViewHolder {
         private TextView srNo;
         private TextView srName;
-
-
-//        public ViewHolder(@NonNull View itemView) {
-//
-//
-//            srNo = itemView.findViewById(R.id.tvRepNo);
-//            srName = itemView.findViewById(R.id.tvRepName);
-//
-//        }
     }
-
-
-//    public Filter getFilter() {
-//        return new Filter() {
-//            @Override
-//            protected FilterResults performFiltering(CharSequence charSequence) {
-//                charSequence = charSequence.toString().toLowerCase();
-//
-//                if (charSequence.toString().length() > 0)  {
-//                    List<SalesRepsDatamodel> filteredList = new ArrayList<>();
-//
-//                    for (SalesRepsDatamodel row : serchList) {
-//
-//                        // name match condition. this might differ depending on your requirement
-//                        // here we are looking for name or phone number match
-//                        if (row.toString().toLowerCase().contains(charSequence)) {
-//                            filteredList.add(row);
-//                        }
-//                    }
-//
-//                    items = filteredList;
-//                }
-//                else {
-//                    synchronized (this) {
-//                        items=serchList;
-//                    }
-//                }
-//
-//                FilterResults filterResults = new FilterResults();
-//                filterResults.values = items;
-//                return filterResults;
-//            }
-//
-//            @Override
-//            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-//                items = (ArrayList) filterResults.values;
-//
-//                // refresh the list with filtered data
-//                notifyDataSetChanged();
-//            }
-//        };
-//    }
 
 
     @NonNull

@@ -190,7 +190,7 @@ android:id="@+id/tvResidence"
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_weight="4"
             android:padding="10dp"
             android:text="Policies"
             android:textColor="#000"
@@ -199,7 +199,7 @@ android:id="@+id/tvResidence"
             android:id="@+id/policyCount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="7"
+            android:layout_weight="5"
             android:padding="10dp"
             android:gravity="end"
             android:text=""
@@ -251,7 +251,15 @@ android:id="@+id/tvResidence"
             android:textSize="18dp" />
     </LinearLayout>
 
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1sp"
+        android:layout_margin="10dp"
+        android:background="#AFACAC"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
     <LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="fill_parent"
@@ -265,8 +273,15 @@ android:id="@+id/tvResidence"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        app:layout_constraintVertical_bias="1.0"
-        android:background="@color/colorAccent">
+        app:layout_constraintVertical_bias="0.0">
+
+        <ImageView
+
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="7"
+            android:padding="5dp"
+            app:srcCompat="@drawable/more"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -274,15 +289,9 @@ android:id="@+id/tvResidence"
             android:layout_weight="1"
             android:padding="10dp"
             android:text="Know More"
-            android:textColor="#fff"
+            android:textColor="#000"
             android:textSize="18dp" />
-        <ImageView
-
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="7"
-            android:padding="10dp"
-            app:srcCompat="@drawable/ic_arrow_forward" />
+        />
     </LinearLayout>
 
 

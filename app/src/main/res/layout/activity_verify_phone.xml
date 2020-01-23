@@ -93,7 +93,6 @@
             android:cursorVisible="false"
             android:inputType="number"
             android:maxLength="6"
-
             android:textIsSelectable="false"
             android:textSize="20sp" />
 

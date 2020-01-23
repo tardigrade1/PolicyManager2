@@ -22,6 +22,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import in.gen2.policymanager.Helpers.PolicyListSqliteData;
+import in.gen2.policymanager.Helpers.SRSqliteData;
 import in.gen2.policymanager.authActivities.PhoneAuthActivity;
 
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
@@ -50,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.tvAdminResidence)
     TextView tvAdminResidence;
     private String srNoText;
+PolicyListSqliteData policySQLiteDb;
+SRSqliteData salesSQLdb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,14 +75,18 @@ public class MainActivity extends AppCompatActivity {
         tvAdminResidence.setText(residenceText);
         tvAdminDoj.setText(dojText);
         tvAdminContact.setText("+91-"+contactText);
+        policySQLiteDb=new PolicyListSqliteData(this);
+        salesSQLdb=new SRSqliteData(this);
         if (!CheckingPermissionIsEnabledOrNot()) {
             RequestMultiplePermission();
         }
 
     }
     private void logoutUser() {
+        policySQLiteDb.deleteTable();
+        salesSQLdb.deleteSrTable();
         FirebaseAuth.getInstance().signOut();
-        Intent i = new Intent(MainActivity.this, PhoneAuthActivity.class);
+        Intent i = new Intent(MainActivity.this, WelcomeInformationActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
         finish();

@@ -21,32 +21,18 @@ import in.gen2.policymanager.R;
 import in.gen2.policymanager.models.PoliciesFormData;
 
 public class PolicyAdapter extends FirestoreRecyclerAdapter<PoliciesFormData, PolicyAdapter.ViewHolder> {
-    private ArrayList<PoliciesFormData> originalList;
     private Context mContext;
-//    private PolicyDataFilter filter;
-    private FirestoreRecyclerOptions<PoliciesFormData> mOptions;
-    private ObservableSnapshotArray<PoliciesFormData> dataSet;
 
     public PolicyAdapter(FirestoreRecyclerOptions<PoliciesFormData> options) {
         super(options);
-        mOptions=options;
-        this.originalList = new ArrayList();
-        dataSet=mOptions.getSnapshots();
-        this.originalList.addAll(mOptions.getSnapshots());
-        if (mOptions.getOwner() != null) {
-
-            mOptions.getOwner().getLifecycle().addObserver(this);
-        }
     }
 
     @Override
     protected void onBindViewHolder(ViewHolder holder, int i, PoliciesFormData policiesFormData) {
 
-
-        Log.d("TAG", "policy data is"+policiesFormData.getApplicationNo()+","+policiesFormData.getApplicantName());
         holder.applicaitonId.setText(policiesFormData.getApplicationNo());
         holder.applicantName.setText(policiesFormData.getApplicantName());
-        holder.applyDate.setText(policiesFormData.getPurchaseDate());
+        holder.applyDate.setText(policiesFormData.getPolicyStatus());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

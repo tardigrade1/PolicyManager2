@@ -27,6 +27,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import in.gen2.policymanager.Helpers.PolicyListSqliteData;
 import in.gen2.policymanager.authActivities.PhoneAuthActivity;
 
 public class SrDashboardActivity extends AppCompatActivity {
@@ -51,6 +52,7 @@ public class SrDashboardActivity extends AppCompatActivity {
     TextView srResidence;
     private FirebaseFirestore fireRef;
     private String srNoText;
+    private PolicyListSqliteData policySQLiteDb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +73,8 @@ public class SrDashboardActivity extends AppCompatActivity {
         srEmail.setText(emailText);
         srResidence.setText(residenceText);
         srDoj.setText(dojText);
-        srContact.setText("+91-"+contactText);
+        srContact.setText("+91-" + contactText);
+        policySQLiteDb = new PolicyListSqliteData(this);
         FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
                 .setPersistenceEnabled(true)
                 .build();
@@ -106,7 +109,7 @@ public class SrDashboardActivity extends AppCompatActivity {
 
                 alertDialogBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                       dialog.dismiss();
+                        dialog.dismiss();
                     }
                 });
 
@@ -131,14 +134,16 @@ public class SrDashboardActivity extends AppCompatActivity {
     }
 
     private void logoutUser() {
+        policySQLiteDb.deleteTable();
         FirebaseAuth.getInstance().signOut();
-        Intent i = new Intent(SrDashboardActivity.this, PhoneAuthActivity.class);
+        Intent i = new Intent(SrDashboardActivity.this, WelcomeInformationActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
         finish();
     }
-    private void totalPolicyCount(){
-        Query query=fireRef.collection("SalesRepresentatives")
+
+    private void totalPolicyCount() {
+        Query query = fireRef.collection("SalesRepresentatives")
                 .document(srNoText)
                 .collection("PolicyForms");
 
@@ -147,8 +152,8 @@ public class SrDashboardActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
-                           int count= task.getResult().size();
-                           policyCount.setText(String.valueOf(count));
+                            int count = task.getResult().size();
+                            policyCount.setText(String.valueOf(count));
 
                         } else {
                             Log.d("TAG", "Error getting documents: ", task.getException());

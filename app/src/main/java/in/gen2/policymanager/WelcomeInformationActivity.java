@@ -89,4 +89,10 @@ public class WelcomeInformationActivity extends AppCompatActivity {
                 SecondPermissionResult == PackageManager.PERMISSION_GRANTED &&
                         ThirdPermissionResult == PackageManager.PERMISSION_GRANTED;
     }
+
+    public void knowMoreClick(View view) {
+        Intent i = new Intent(WelcomeInformationActivity.this, MoreActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(i);
+    }
 }
