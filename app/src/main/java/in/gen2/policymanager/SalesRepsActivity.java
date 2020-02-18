@@ -93,7 +93,7 @@ public class SalesRepsActivity extends AppCompatActivity {
             new LoadFireStoreData().execute();
         } else {
             searchUsers();
-        }
+    }
         edtFilter.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

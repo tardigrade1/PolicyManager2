@@ -58,7 +58,7 @@ public class SplashScreenActivity extends AppCompatActivity {
             public void run() {
 
                 try {
-                    sleep(4000);
+                    sleep(6000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } finally {

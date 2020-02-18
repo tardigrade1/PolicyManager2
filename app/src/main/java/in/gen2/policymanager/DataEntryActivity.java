@@ -51,8 +51,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -393,14 +395,14 @@ public class DataEntryActivity extends AppCompatActivity {
             parserSettings = new CsvParserSettings();
             parserSettings.getFormat().setLineSeparator(CSVWriter.DEFAULT_LINE_END);
 
-            parserSettings.selectFields("Application No", "SR No", "Commission");
+            parserSettings.selectFields("ApplicationNo", "SRNo", "Commission", "DecisionDate");
             try {
                 for (String[] strArr : parseWithSettings(this.parserSettings, path)) {
 
-                    this.list_application_Commission.add(new CommissionData(strArr[0], strArr[1], strArr[2]));
+                    this.list_application_Commission.add(new CommissionData(strArr[0], strArr[1], strArr[2], strArr[3]));
                     try {
                     } catch (Exception unused) {
-                        this.list_application_Commission.add(new CommissionData(strArr[0], strArr[1], strArr[2]));
+                        this.list_application_Commission.add(new CommissionData(strArr[0], strArr[1], strArr[2], strArr[3]));
                     }
 
                 }
@@ -814,20 +816,35 @@ public class DataEntryActivity extends AppCompatActivity {
                 for (int i = 0; i < list_application_Commission.size(); i++) {
                     final CommissionData commissionData = list_application_Commission.get(i);
                     final HashMap<String, Object> hmQueries = new HashMap<>();
+                    String dateText = commissionData.getDecisionDate();
+                    String dateSubstring = splitToNChar(dateText, 6);
+//                    hmQueries.put("applicationNo", commissionData.getApplicationNo());
+//                    hmQueries.put("commission", commissionData.getCommission());
+//                    hmQueries.put("decisionDate", commissionData.getDecisionDate());
+                    hmQueries.put("monthId", dateSubstring);
 
-
-                    hmQueries.put("applicationNo", commissionData.getApplicationNo());
-                    hmQueries.put("commission", commissionData.getCommission());
+                    Map<String, Object> nestedData = new HashMap<>();
+                    nestedData.put("ApplicationId",commissionData.getApplicationNo());
+                    nestedData.put("Commission", commissionData.getCommission());
+                    nestedData.put("decisionDate", commissionData.getDecisionDate());
 
                     firestore
-                            .collection("Commission")
+                            .collection("Commissions")
                             .document(commissionData.getSrNo())
-                            .collection("PolicyForms")
-                            .document(commissionData.getApplicationNo())
-                            .set(hmQueries)
+                            .collection("months")
+                            .document(dateSubstring)
+                            .set(hmQueries,SetOptions.merge())
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
+                                    firestore
+                                            .collection("Commissions")
+                                            .document(commissionData.getSrNo())
+                                            .collection("months")
+                                            .document(dateSubstring)
+                                            .collection("PolicyForms")
+                                            .document(commissionData.getApplicationNo())
+                                            .set(nestedData,SetOptions.merge());
                                     Log.d(TAG, "On form data submit: " + commissionData.getApplicationNo() + " data is successfully updated");
                                     Dialog.dismiss();
                                 }
@@ -1032,5 +1049,15 @@ public class DataEntryActivity extends AppCompatActivity {
 
     private void toastMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    private static String splitToNChar(String text, int size) {
+        String subString = null;
+        int length = text.length();
+//        for (int i = 0; i < length; i += size) {
+        subString = text.substring(0, Math.min(length, size));
+
+//        }
+        return subString;
     }
 }

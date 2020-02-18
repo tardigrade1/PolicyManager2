@@ -4,10 +4,13 @@ public class CommissionData {
     private String applicationNo=null;
     private String srNo=null;
     private String commission=null;
+    private String decisionDate=null;
+
 
     public CommissionData(){
 
     }
+
     public String getApplicationNo() {
         return applicationNo;
     }
@@ -32,9 +35,18 @@ public class CommissionData {
         this.commission = commission;
     }
 
-    public CommissionData(String applicationNo, String srNo, String commission) {
+    public String getDecisionDate() {
+        return decisionDate;
+    }
+
+    public void setDecisionDate(String decisionDate) {
+        this.decisionDate = decisionDate;
+    }
+
+    public CommissionData(String applicationNo, String srNo, String commission, String decisionDate) {
         this.applicationNo = applicationNo;
         this.srNo = srNo;
         this.commission = commission;
+        this.decisionDate = decisionDate;
     }
 }

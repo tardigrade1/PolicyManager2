@@ -205,7 +205,6 @@ public class MyCreatedPolicyActivity extends AppCompatActivity {
 
         policyList = new ArrayList<>(policySQLiteDb.getApplicantNames());
 
-
         for (int i = 0; i < policyList.size(); i++) {
 
             try {
@@ -213,12 +212,9 @@ public class MyCreatedPolicyActivity extends AppCompatActivity {
                 PoliciesFormData loc = policyList.get(i);
                 Log.d("TAG", "searchUsers: " + loc.getId());
 
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
-
         }
 
         adapter = new MyCreatedPolicyAdapter(policyList,getApplicationContext());
@@ -236,5 +232,6 @@ public class MyCreatedPolicyActivity extends AppCompatActivity {
             }
 
         });
+
     }
 }

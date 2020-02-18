@@ -39,6 +39,12 @@ public class PolicyDetailsActivity extends AppCompatActivity {
     TextView tvPolicyPurchase;
     @BindView(R.id.tvPolicyStatus)
     TextView tvPolicyStatus;
+    @BindView(R.id.tvApproveDate)
+    TextView tvApprovalDate;
+    @BindView(R.id.tvRejectComment)
+    TextView tvRejectComment;
+    @BindView(R.id.tvRejectRequirement)
+    TextView tvRejectReqiure;
     private FirebaseFirestore fireRef;
     private String applicationId,srNo;
     @Override
@@ -102,12 +108,18 @@ public class PolicyDetailsActivity extends AppCompatActivity {
                                             String panNo = appFormDocument.getString("panNo");
                                             String purchaseDate = appFormDocument.getString("purchaseDate");
                                             String policyStatus = appFormDocument.getString("PolicyStatus");
+                                            String approveDate = appFormDocument.getString("decisionDate");
+                                            String comment = appFormDocument.getString("comment");
+                                            String requirement = appFormDocument.getString("Requirements");
 
                                             tvHolderName.setText(name);
                                             tvContact.setText(ContactNo);
                                             tvPan.setText(panNo);
                                             tvPolicyPurchase.setText(purchaseDate);
                                             tvPolicyStatus.setText(policyStatus);
+                                            tvApprovalDate.setText(approveDate);
+                                            tvRejectComment.setText(comment);
+                                            tvRejectReqiure.setText(requirement);
                                             Dialog.dismiss();
                                         }
 

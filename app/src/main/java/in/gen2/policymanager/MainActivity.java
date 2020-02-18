@@ -195,7 +195,7 @@ SRSqliteData salesSQLdb;
     }
 
     public void MyCommission(View view) {
-        Intent i = new Intent(MainActivity.this, CommissionsActivity.class);
+        Intent i = new Intent(MainActivity.this, commissionMonthActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
 
