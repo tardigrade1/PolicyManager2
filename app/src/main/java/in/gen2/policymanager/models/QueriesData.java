@@ -7,7 +7,7 @@ public class QueriesData {
     private String srNo = null;
 
     private  String requirements= null;
-    private  String Status= null;
+
 
     public String getApplicationNo() {
         return applicationNo;
@@ -29,16 +29,12 @@ public class QueriesData {
         return requirements;
     }
 
-    public String getStatus() {
-        return Status;
-    }
-
-    public QueriesData(String applicationNo, String name, String contactNo, String srNo, String requirements, String status) {
+    public QueriesData(String applicationNo, String name, String contactNo, String srNo, String requirements) {
         this.applicationNo = applicationNo;
         this.name = name;
         this.contactNo = contactNo;
         this.srNo = srNo;
         this.requirements = requirements;
-        Status = status;
+
     }
 }

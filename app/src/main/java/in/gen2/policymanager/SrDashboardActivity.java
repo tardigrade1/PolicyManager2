@@ -128,18 +128,22 @@ public class SrDashboardActivity extends AppCompatActivity {
     }
 
     public void manageCommission(View view) {
+
         Intent i = new Intent(SrDashboardActivity.this, CommissionsActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
+
     }
 
     private void logoutUser() {
+
         policySQLiteDb.deleteTable();
         FirebaseAuth.getInstance().signOut();
         Intent i = new Intent(SrDashboardActivity.this, WelcomeInformationActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
         finish();
+
     }
 
     private void totalPolicyCount() {

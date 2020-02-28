@@ -16,6 +16,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -59,10 +60,11 @@ public class VerifyPhoneActivity extends AppCompatActivity {
     private String mobile;
     private Boolean admin;
     private SharedPreferences prefs = null;
-    private TextView tvPhoneNumber,tvVerifyStatus;
+    private TextView tvPhoneNumber, tvVerifyStatus;
     private OtpEditText tvOtp;
     private LinearLayout lvSignInBtn;
     private TextView resendOtp;
+    private ProgressBar pbStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,12 +77,13 @@ public class VerifyPhoneActivity extends AppCompatActivity {
         tvVerifyStatus = findViewById(R.id.tvVerificationStatus);
         tvOtp = findViewById(R.id.et_otp);
         lvSignInBtn = findViewById(R.id.linearSignInBtn);
+        pbStatus = findViewById(R.id.progressBarStatus);
         //getting mobile number from the previous activity
         //and sending the verification code to the number
 
         mobile = getIntent().getStringExtra("mobile");
         srNo = getIntent().getStringExtra("srNo");
-        tvPhoneNumber.setText("+91-"+mobile);
+        tvPhoneNumber.setText("+91-" + mobile);
         prefs = getSharedPreferences("UserData", MODE_PRIVATE);
         admin = prefs.getBoolean("admin", false);
         sendVerificationCode(mobile);
@@ -88,20 +91,21 @@ public class VerifyPhoneActivity extends AppCompatActivity {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(s.length()>5){
-                    InputMethodManager inm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-                    inm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);
+                if (s.length() > 5) {
+                    InputMethodManager inm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
                     lvSignInBtn.setEnabled(true);
-                    Log.d(TAG, "onCreate: You can verify Now"+s.length());
-                }
-                else {
+                    Log.d(TAG, "onCreate: You can verify Now" + s.length());
+                } else {
                     lvSignInBtn.setEnabled(false);
-                    Log.d(TAG, "onCreate: enter full OTP"+s.length());
+                    Log.d(TAG, "onCreate: enter full OTP" + s.length());
                 }
 
             }
+
             @Override
             public void afterTextChanged(Editable s) {
 
@@ -120,7 +124,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
                 TaskExecutors.MAIN_THREAD,
                 mCallbacks);
         Toast.makeText(VerifyPhoneActivity.this, "OTP sent", Toast.LENGTH_SHORT).show();
-       timeCount();
+        timeCount();
     }
     // [START resend_verification]
 
@@ -136,28 +140,27 @@ public class VerifyPhoneActivity extends AppCompatActivity {
         Toast.makeText(VerifyPhoneActivity.this, "OTP sent", Toast.LENGTH_SHORT).show();
         timeCount();
     }
-//time counter for resendOTP
-    private void timeCount(){
+
+    //time counter for resendOTP
+    private void timeCount() {
         resendOtp.setEnabled(false);
-        new CountDownTimer(1000 * 60, 1000)
-        {
+        new CountDownTimer(1000 * 60, 1000) {
             @Override
-            public void onTick(long millisUntilFinished)
-            {
+            public void onTick(long millisUntilFinished) {
                 int minutes = (int) ((millisUntilFinished / (1000 * 60)) % 60);
                 int seconds = (int) (millisUntilFinished / 1000) % 60;
-                resendOtp.setText("0"+minutes + ":" + " " + seconds + " " + "left");
+                resendOtp.setText("0" + minutes + ":" + " " + seconds + " " + "left");
 
             }
 
             @Override
-            public void onFinish()
-            {
+            public void onFinish() {
                 resendOtp.setEnabled(true);
                 resendOtp.setText("Resend Code");
             }
         }.start();
     }
+
     //the callback to detect the verification status
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
         @Override
@@ -170,8 +173,8 @@ public class VerifyPhoneActivity extends AppCompatActivity {
             //in this case the code will be null
             //so user has to manually enter the code
             if (code != null) {
-                tvVerifyStatus.setText("mobile verification is in progress...");
-                tvVerifyStatus.setVisibility(View.VISIBLE);
+                pbStatus.setVisibility(View.VISIBLE);
+                tvVerifyStatus.setVisibility(View.GONE);
                 lvSignInBtn.setEnabled(false);
                 tvOtp.setText(code);
                 //verifying the code
@@ -182,6 +185,8 @@ public class VerifyPhoneActivity extends AppCompatActivity {
 
         @Override
         public void onVerificationFailed(FirebaseException e) {
+            pbStatus.setVisibility(View.GONE);
+            tvVerifyStatus.setVisibility(View.VISIBLE);
             tvVerifyStatus.setText("mobile verification failed!\nre-enter your OTP");
             lvSignInBtn.setEnabled(true);
             Toast.makeText(VerifyPhoneActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
@@ -204,9 +209,11 @@ public class VerifyPhoneActivity extends AppCompatActivity {
         try {
             PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mVerificationId, code);
             signInWithPhoneAuthCredential(credential);
-        }catch (Exception e){
+        } catch (Exception e) {
             //verification unsuccessful.. display an error message
             lvSignInBtn.setEnabled(true);
+            pbStatus.setVisibility(View.GONE);
+            tvVerifyStatus.setVisibility(View.VISIBLE);
             tvVerifyStatus.setText("mobile verification failed!\nre-enter your OTP");
         }
     }
@@ -257,6 +264,8 @@ public class VerifyPhoneActivity extends AppCompatActivity {
                             String message = "Somthing is wrong, we will fix it soon...";
 
                             if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
+                                pbStatus.setVisibility(View.GONE);
+                                tvVerifyStatus.setVisibility(View.VISIBLE);
                                 tvVerifyStatus.setText("mobile verification failed!\nre-enter your OTP");
                                 message = "Invalid code entered...";
                             }
@@ -269,10 +278,11 @@ public class VerifyPhoneActivity extends AppCompatActivity {
 
     public void clickToSignIn(View view) {
         String code = tvOtp.getText().toString().trim();
-                tvVerifyStatus.setText("mobile verification is in progress...");
-                tvVerifyStatus.setVisibility(View.VISIBLE);
-                lvSignInBtn.setEnabled(false);
-                verifyVerificationCode(code);
+        tvVerifyStatus.setText("mobile verification is in progress...");
+        pbStatus.setVisibility(View.VISIBLE);
+        tvVerifyStatus.setVisibility(View.GONE);
+        lvSignInBtn.setEnabled(false);
+        verifyVerificationCode(code);
     }
 
     public void clickToResendOtp(View view) {

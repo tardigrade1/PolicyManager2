@@ -170,7 +170,7 @@ public class MyCreatedPolicyActivity extends AppCompatActivity {
 
         @Override
         protected Integer doInBackground(Void... voids) {
-            Query query=fireRef.collection("SalesRepresentatives").document(srNo).collection("PolicyForms")
+            Query query=fireRef.collection("SalesRepresentatives").document(srNo).collection("ApplicationForms")
                     .orderBy("applicantName");
 
             query.get()

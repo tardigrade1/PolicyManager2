@@ -84,6 +84,12 @@
             android:maxWidth="300dp"
             android:text="We have sent you access code via SMS for mobile number verification"
             android:textColor="#505050" />
+        <ProgressBar
+            android:id="@+id/progressBarStatus"
+            android:visibility="gone"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <in.gen2.policymanager.Helpers.OtpEditText
             android:id="@+id/et_otp"
@@ -106,6 +112,7 @@
             android:clickable="false"
             android:onClick="clickToSignIn"
             android:orientation="horizontal">
+
 
 
             <TextView

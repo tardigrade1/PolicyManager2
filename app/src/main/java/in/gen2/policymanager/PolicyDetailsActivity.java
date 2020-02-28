@@ -95,7 +95,7 @@ public class PolicyDetailsActivity extends AppCompatActivity {
         @Override
         protected Integer doInBackground(Void... params) {
             fireRef.collection("SalesRepresentatives").document(srNo)
-                    .collection("PolicyForms")
+                    .collection("ApplicationForms")
                                 .document(applicationId)
                                 .get()
                                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {

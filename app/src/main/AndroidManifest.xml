@@ -16,7 +16,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".commissionMonthActivity"></activity>
+        <activity android:name=".commissionMonthActivity">
+
+        </activity>
 
         <uses-library
             android:name="org.apache.http.legacy"
@@ -66,12 +68,13 @@
             android:label="Sales Representatives"
             android:parentActivityName=".MainActivity" />
         <activity
+            android:name=".DataEntryActivity"
+            android:label="Data Entry"
+            android:parentActivityName=".MainActivity" />
+        <activity
             android:name=".PoliciesListActivity"
             android:label="Policies List"
             android:parentActivityName=".SalesRepsActivity" />
-        <activity
-            android:name=".DataEntryActivity"
-            android:parentActivityName=".MainActivity" />
         <activity android:name=".SmsIntegrationActivity" />
         <activity
             android:name=".PolicyDetailsActivity"

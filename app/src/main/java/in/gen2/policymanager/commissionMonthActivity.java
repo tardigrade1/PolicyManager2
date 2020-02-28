@@ -2,6 +2,7 @@ package in.gen2.policymanager;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.SharedPreferences;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
@@ -18,6 +20,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -73,64 +76,67 @@ public class commissionMonthActivity extends AppCompatActivity {
     }
 
     public void listenForUsers() {
-        fireRef.collection("Commissions")
-                .document(srNo)
-                .collection("months")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-
-
-                if(task.isSuccessful()){
-                    List<HashMap<String,String>> list = new ArrayList<>();
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        list = (List) document.get("PoliciesCommission");
-
-                    }
-                    Log.d("TAG", "data for "+ list);
-//                    for(QueryDocumentSnapshot document : task.getResult()) {
-//                        Log.d("TAG", "data for "+ document.getId() + " => " + document.getData());
-//                        Log.d("TAG", "data for "+ document.getId() + " => " + document.get("PoliciesCommission"));
-////                        CommissionMonthData miss = document.toObject(CommissionMonthData.class);
-////                        monthList.add(new CommissionMonthData(document.getData().))
-////                        monthList.add(miss.);
-//                    }
-//                    ListView mMissionsListView = (ListView) findViewById(R.id.missionList);
-//                    MissionsAdapter mMissionAdapter = new MissionsAdapter(this, mMissionsList);
-//                    mMissionsListView.setAdapter(mMissionAdapter);
-                } else {
-                    Log.d("MissionActivity", "Error getting documents: ", task.getException());
-                }
-            }
-        });
-
-//        options = new FirestoreRecyclerOptions.Builder<CommissionMonthData>().setQuery(query, CommissionMonthData.class).build();
-//        adapter = new CommissionMonthsAdapter(options)
-//        {
+//        fireRef.collection("Commissions")
+//                .document(srNo)
+//                .collection("months")
+//                .get()
+//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
 //            @Override
-//            public void onDataChanged() {
+//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
 //
-//                if(getItemCount()!=0){
-//                    for (CommissionMonthData document : options.getSnapshots()) {
-//                        int amount= Integer.parseInt(document.getCommission());
-//                        count+=amount;
+//
+//                if(task.isSuccessful()){
+//                    List<HashMap<String,String>> list = new ArrayList<>();
+//                    for (QueryDocumentSnapshot document : task.getResult()) {
+//                        list = (List) document.get("PoliciesCommission");
+//
 //                    }
-//                    invalidateOptionsMenu();
-//                    pbLoadMyCommission.setVisibility(View.GONE);
+//                    Log.d("TAG", "data for "+ list);
+////                    for(QueryDocumentSnapshot document : task.getResult()) {
+////                        Log.d("TAG", "data for "+ document.getId() + " => " + document.getData());
+////                        Log.d("TAG", "data for "+ document.getId() + " => " + document.get("PoliciesCommission"));
+//////                        CommissionMonthData miss = document.toObject(CommissionMonthData.class);
+//////                        monthList.add(new CommissionMonthData(document.getData().))
+//////                        monthList.add(miss.);
+////                    }
+////                    ListView mMissionsListView = (ListView) findViewById(R.id.missionList);
+////                    MissionsAdapter mMissionAdapter = new MissionsAdapter(this, mMissionsList);
+////                    mMissionsListView.setAdapter(mMissionAdapter);
+//                } else {
+//                    Log.d("MissionActivity", "Error getting documents: ", task.getException());
 //                }
-//                else
-//                {
-//                    pbLoadMyCommission.setVisibility(View.GONE);
-//                    lvMyEmptyCommissionList.setVisibility(View.VISIBLE);
-//                }
-//                super.onDataChanged();
 //            }
-//        };
-//        rvCommission.setHasFixedSize(true);
-//        rvCommission.setLayoutManager(new LinearLayoutManager(commissionMonthActivity.this));
-//        adapter.startListening();
-//        rvCommission.setAdapter(adapter);
+//        });
+        Query query=  fireRef.collection("Commissions")
+                .document(srNo)
+                .collection("months");
+
+        options = new FirestoreRecyclerOptions.Builder<CommissionMonthData>().setQuery(query, CommissionMonthData.class).build();
+        adapter = new CommissionMonthsAdapter(options)
+        {
+            @Override
+            public void onDataChanged() {
+
+                if(getItemCount()!=0){
+                    for (CommissionMonthData document : options.getSnapshots()) {
+                        int amount= Integer.parseInt(document.getCommission());
+                        count+=amount;
+                    }
+                    invalidateOptionsMenu();
+                    pbLoadMyCommission.setVisibility(View.GONE);
+                }
+                else
+                {
+                    pbLoadMyCommission.setVisibility(View.GONE);
+                    lvMyEmptyCommissionList.setVisibility(View.VISIBLE);
+                }
+                super.onDataChanged();
+            }
+        };
+        rvCommission.setHasFixedSize(true);
+        rvCommission.setLayoutManager(new LinearLayoutManager(commissionMonthActivity.this));
+        adapter.startListening();
+        rvCommission.setAdapter(adapter);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

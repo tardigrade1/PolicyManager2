@@ -48,32 +48,33 @@
         android:id="@+id/lvMyEmptyCommissionList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:gravity="center"
+        android:orientation="vertical"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="200dp"
             android:layout_height="100dp"
-            app:srcCompat="@drawable/emptycart"/>
+            app:srcCompat="@drawable/empty_wallet" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Your commission ammout is empty!"
             android:textColor="#000"
-            android:textSize="20dp"
-            android:text="Empty List!" />
+            android:textSize="15dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:maxWidth="200dp"
-            android:text="This employee have no documents at this moment" />
+            android:maxWidth="350dp"
+            android:text="Looks liker their is no commission amount for your purchase! kindly purchase more to continue..." />
 
     </LinearLayout>
     <ProgressBar

@@ -5,9 +5,7 @@ public class EmpData {
     private String doj=null;
     private String srNo=null;
     private String name=null;
-
     private String branch=null;
-
     private String residence=null;
     private String mobileNo=null;
     private String email=null;
@@ -15,6 +13,7 @@ public class EmpData {
     public EmpData(){
 
     }
+
 
     public String getDoj() {
         return doj;

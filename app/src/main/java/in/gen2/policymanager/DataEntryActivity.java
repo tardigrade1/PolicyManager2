@@ -28,30 +28,23 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
+import com.google.firebase.firestore.WriteBatch;
 import com.opencsv.CSVWriter;
 import com.univocity.parsers.common.processor.RowListProcessor;
 import com.univocity.parsers.csv.CsvParser;
 import com.univocity.parsers.csv.CsvParserSettings;
 
-import org.apache.poi.hssf.usermodel.HSSFDateUtil;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellValue;
-import org.apache.poi.ss.usermodel.FormulaEvaluator;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.File;
-import java.io.FileInputStream;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -129,9 +122,9 @@ public class DataEntryActivity extends AppCompatActivity {
     }
 
     private void variableControl() {
+
         firestore = FirebaseFirestore.getInstance();
         ConnectivityManager conn = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-
         activeNetwork = conn.getActiveNetworkInfo();
         chooseFile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -214,8 +207,8 @@ public class DataEntryActivity extends AppCompatActivity {
                     tvFileName.setText(file.getName());
                     btnUploadData.setText("DONE");
                     btnUploadData.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-//                    ReadApplicationForm(filename);
-                    readExcelData(filename);
+//                    ReadSRList(filename);
+                    ReadApplicationForm(filename);
                     Toast.makeText(this, "Application file successfully", Toast.LENGTH_LONG).show();
 
                 }
@@ -243,6 +236,7 @@ public class DataEntryActivity extends AppCompatActivity {
                     tvFileName.setText(fileQuesries.getName());
                     btnUploadData.setText("DONE");
                     btnUploadData.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+//                    ReadSRList(filename);
                     ReadQueriesList(filename);
                     Toast.makeText(this, "Queries successfully", Toast.LENGTH_LONG).show();
                 }
@@ -265,17 +259,18 @@ public class DataEntryActivity extends AppCompatActivity {
         }
     }
 
-    private void ReadSRList() {
+    private void ReadSRList(String fileLocationName) {
         list_sales_representatives.clear();
 //        dataUsersAdapter = null;
         String path = Environment.getExternalStorageDirectory()
-                + File.separator + "ReadQrData/SRList.csv";
+                + File.separator + fileLocationName;
+        Log.d(TAG, "ReadSrList: " + path);
         if (new File(path).exists()) {
             parserSettings = new CsvParserSettings();
             parserSettings.getFormat().setLineSeparator(CSVWriter.DEFAULT_LINE_END);
             parserSettings.selectFields("Date", "SR No", "Name", "Branch", "Residence", "Mob No", "Email");
             try {
-                for (String[] strArr : parseWithSettings(this.parserSettings, "ReadQrData/SRList.csv")) {
+                for (String[] strArr : parseWithSettings(this.parserSettings, path)) {
 
                     this.list_sales_representatives.add(new EmpData(strArr[0], strArr[1], strArr[2], strArr[3], strArr[4], strArr[5], strArr[6]));
                     try {
@@ -288,7 +283,7 @@ public class DataEntryActivity extends AppCompatActivity {
                 if (this.list_sales_representatives.size() > 0) {
                     for (int i = 0; i < list_sales_representatives.size(); i++) {
                         EmpData UserData = list_sales_representatives.get(i);
-                        Log.d(TAG, "ReadUsersList: " + i + ", " + UserData.getName() + ", " + UserData.getSrNo());
+                        Log.d(TAG, "ReadUsersList: " + i + ", " + UserData.getName() + ", " + UserData.getSrNo() + ", " + UserData.getMobileNo() + ", " + UserData.getEmail());
                     }
                     return;
                 }
@@ -433,13 +428,13 @@ public class DataEntryActivity extends AppCompatActivity {
         if (new File(path).exists()) {
             parserSettings = new CsvParserSettings();
             parserSettings.getFormat().setLineSeparator(CSVWriter.DEFAULT_LINE_END);
-            parserSettings.selectFields("ApplicationNo", "Name", "Mobile No", "SR No", "Requirements", "Status");
+            parserSettings.selectFields("ApplicationNo", "Name", "Mobile No", "SR No", "Requirements");
             try {
                 for (String[] strArr : parseWithSettings(this.parserSettings, path)) {
-                    this.list_queries.add(new QueriesData(strArr[0], strArr[1], strArr[2], strArr[3], strArr[4], strArr[5]));
+                    this.list_queries.add(new QueriesData(strArr[0], strArr[1], strArr[2], strArr[3], strArr[4]));
                     try {
                     } catch (Exception unused) {
-                        this.list_queries.add(new QueriesData(strArr[0], strArr[1], strArr[2], strArr[3], strArr[4], strArr[5]));
+                        this.list_queries.add(new QueriesData(strArr[0], strArr[1], strArr[2], strArr[3], strArr[4]));
                     }
 
                 }
@@ -477,15 +472,16 @@ public class DataEntryActivity extends AppCompatActivity {
         } else {
 
 //
+
             if (rbAddApplication.isChecked()) {
                 new uploadApplicaitonFormData().execute();
             } else if (rbDecision.isChecked()) {
                 new uploadApplicaitoDecisionStatusData().execute();
             } else if (rbQueries.isChecked()) {
                 new uploadQueriesData().execute();
-
+//                new uploadSRData().execute();
             } else if (rbCommission.isChecked()) {
-                new uploadCommissionData().execute();
+//                new uploadCommissionData().execute();
             }
         }
     }
@@ -530,7 +526,10 @@ public class DataEntryActivity extends AppCompatActivity {
                     hm.put("residence", srData.getResidence());
                     hm.put("mobileNo", srData.getMobileNo());
                     hm.put("email", srData.getEmail());
-                    firestore.collection("SalesRepresentatives").document(srData.getSrNo()).update(hm)
+                    firestore
+                            .collection("SalesRepresentatives")
+                            .document(srData.getSrNo())
+                            .set(hm, SetOptions.merge())
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
@@ -575,27 +574,45 @@ public class DataEntryActivity extends AppCompatActivity {
 
         @Override
         protected Integer doInBackground(Void... params) {
-            if (uploadData.size() > 0) {
-                for (int i = 0; i < uploadData.size(); i++) {
 
-                    final XYValue formData = uploadData.get(i);
+            if (list_application_form.size() > 0) {
+
+                for (int i = 0; i < list_application_form.size(); i++) {
+                    final ApplicationFormData formData = list_application_form.get(i);
                     final HashMap<String, Object> hmApplication = new HashMap<>();
-                    hmApplication.put("applicationNo", formData.getAppNo());
-                    hmApplication.put("applicantName", formData.getName());
-                    hmApplication.put("panNo", formData.getPan());
+                    hmApplication.put("applicationNo", formData.getApplicationNo());
+                    hmApplication.put("applicantName", formData.getApplicantName());
+                    hmApplication.put("panNo", formData.getPanNo());
                     hmApplication.put("srNo", formData.getSrNo());
-                    hmApplication.put("contactNo", formData.getContact());
+                    hmApplication.put("purchaseDate", formData.getDateOfPolicy());
+                    hmApplication.put("contactNo", formData.getContactNo());
                     hmApplication.put("CSM Code", "LM216305CS");
+//                    WriteBatch batch = firestore.batch();on
+                    DocumentReference docRef = firestore
 
-                    firestore
-                            .collection("PolicyForms")
-                            .document(formData.getAppNo())
-                            .set(hmApplication)
+                            .collection("SalesRepresentatives")
+                            .document(formData.getSrNo())
+                            .collection("ApplicationForms")
+                            .document(formData.getApplicationNo());
+//                         batch.set(docRef,hmApplication,SetOptions.merge()).commit().addOnCompleteListener(new OnCompleteListener<Void>() {
+//                             @Override
+//                             public void onComplete(@NonNull Task<Void> task) {
+//                                 Log.d(TAG, "On form data submit: " + formData.getApplicantName() + " data is successfully submit");
+//                                    Dialog.dismiss();
+//                             }
+//                         }).addOnFailureListener(new OnFailureListener() {
+//                             @Override
+//                             public void onFailure(@NonNull Exception e) {
+//                                 Log.w(TAG, "Error adding document", e);
+//                                    Dialog.dismiss();
+//                             }
+//                         });
 
+                    docRef.set(hmApplication, SetOptions.merge())
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
-                                    Log.d(TAG, "On form data submit: " + formData.getAppNo() + " data is successfully submit");
+                                    Log.d(TAG, "On form data submit: " + formData.getApplicantName() + " data is successfully submit");
                                     Dialog.dismiss();
                                 }
                             })
@@ -609,47 +626,7 @@ public class DataEntryActivity extends AppCompatActivity {
                 }
             } else {
                 Toast.makeText(DataEntryActivity.this, "No user list found", Toast.LENGTH_SHORT).show();
-
             }
-
-//            if (list_application_form.size() > 0) {
-//
-//                for (int i = 0; i < list_application_form.size(); i++) {
-//                    final ApplicationFormData formData = list_application_form.get(i);
-//                    final HashMap<String, Object> hmApplication = new HashMap<>();
-//                hmApplication.put("applicationNo", formData.getApplicationNo());
-//                hmApplication.put("applicantName", formData.getApplicantName());
-//                hmApplication.put("panNo", formData.getPanNo());
-//                hmApplication.put("srNo", formData.getSrNo());
-//                hmApplication.put("purchaseDate", formData.getDateOfPolicy());
-//                hmApplication.put("contactNo", formData.getContactNo());
-//                hmApplication.put("CSM Code", "LM216305CS");
-//
-//                    firestore
-//                            .collection("SalesRepresentatives")
-//                            .document(formData.getSrNo())
-//                            .collection("PolicyForms")
-//                            .document(formData.getApplicationNo())
-//                            .update(hmApplication)
-//
-//                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                                @Override
-//                                public void onSuccess(Void aVoid) {
-//                                    Log.d(TAG, "On form data submit: " + formData.getApplicantName() + " data is successfully submit");
-//                                    Dialog.dismiss();
-//                                }
-//                            })
-//                            .addOnFailureListener(new OnFailureListener() {
-//                                @Override
-//                                public void onFailure(@NonNull Exception e) {
-//                                    Log.w(TAG, "Error adding document", e);
-//                                    Dialog.dismiss();
-//                                }
-//                            });
-//                }
-//            } else {
-//                Toast.makeText(DataEntryActivity.this, "No user list found", Toast.LENGTH_SHORT).show();
-//            }
             return 0;
         }
     }
@@ -686,20 +663,19 @@ public class DataEntryActivity extends AppCompatActivity {
             if (list_application_decision.size() > 0) {
 
                 for (int i = 0; i < list_application_decision.size(); i++) {
+
                     final ApproveDeclineData formData = list_application_decision.get(i);
                     final HashMap<String, Object> hmDecision = new HashMap<>();
                     hmDecision.put("bankName", formData.getBankName());
                     hmDecision.put("decisionDate", formData.getDecisionDate());
                     hmDecision.put("PolicyStatus", formData.getStatus());
                     hmDecision.put("comment", formData.getComment());
-
-
                     firestore
                             .collection("SalesRepresentatives")
                             .document(formData.getSrNo())
-                            .collection("PolicyForms")
+                            .collection("ApplicationForms")
                             .document(formData.getApplicationNo())
-                            .update(hmDecision)
+                            .set(hmDecision, SetOptions.merge())
 
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
@@ -752,17 +728,14 @@ public class DataEntryActivity extends AppCompatActivity {
                     final QueriesData formData = list_queries.get(i);
                     final HashMap<String, Object> hmQueries = new HashMap<>();
 
-                    hmQueries.put("applicationNo", formData.getApplicationNo());
-                    hmQueries.put("applicantName", formData.getName());
-                    hmQueries.put("srNo", formData.getSrNo());
-                    hmQueries.put("contactNo", formData.getContactNo());
-                    hmQueries.put("PolicyStatus", formData.getStatus());
-                    hmQueries.put("Requirements", formData.getRequirements());
+
+                    hmQueries.put("PolicyStatus", "In complete");
+                    hmQueries.put("comment", formData.getRequirements());
 
                     firestore
                             .collection("SalesRepresentatives")
                             .document(formData.getSrNo())
-                            .collection("PolicyForms")
+                            .collection("ApplicationForms")
                             .document(formData.getApplicationNo())
                             .set(hmQueries, SetOptions.merge())
 
@@ -815,6 +788,7 @@ public class DataEntryActivity extends AppCompatActivity {
 
                 for (int i = 0; i < list_application_Commission.size(); i++) {
                     final CommissionData commissionData = list_application_Commission.get(i);
+                    if(commissionData.getApplicationNo() != null){
                     final HashMap<String, Object> hmQueries = new HashMap<>();
                     String dateText = commissionData.getDecisionDate();
                     String dateSubstring = splitToNChar(dateText, 6);
@@ -824,7 +798,7 @@ public class DataEntryActivity extends AppCompatActivity {
                     hmQueries.put("monthId", dateSubstring);
 
                     Map<String, Object> nestedData = new HashMap<>();
-                    nestedData.put("ApplicationId",commissionData.getApplicationNo());
+                    nestedData.put("ApplicationId", commissionData.getApplicationNo());
                     nestedData.put("Commission", commissionData.getCommission());
                     nestedData.put("decisionDate", commissionData.getDecisionDate());
 
@@ -833,7 +807,7 @@ public class DataEntryActivity extends AppCompatActivity {
                             .document(commissionData.getSrNo())
                             .collection("months")
                             .document(dateSubstring)
-                            .set(hmQueries,SetOptions.merge())
+                            .set(hmQueries, SetOptions.merge())
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
@@ -844,7 +818,7 @@ public class DataEntryActivity extends AppCompatActivity {
                                             .document(dateSubstring)
                                             .collection("PolicyForms")
                                             .document(commissionData.getApplicationNo())
-                                            .set(nestedData,SetOptions.merge());
+                                            .set(nestedData, SetOptions.merge());
                                     Log.d(TAG, "On form data submit: " + commissionData.getApplicationNo() + " data is successfully updated");
                                     Dialog.dismiss();
                                 }
@@ -856,6 +830,43 @@ public class DataEntryActivity extends AppCompatActivity {
                                     Dialog.dismiss();
                                 }
                             });
+                    }
+                    else{
+                        Map<String, Object> ExtraData = new HashMap<>();
+                        ExtraData.put("monthId", "Extras");
+                        Map<String, Object> nestedData = new HashMap<>();
+                        nestedData.put("ApplicationId", "");
+                        nestedData.put("Commission", commissionData.getCommission());
+                        firestore
+                                .collection("Commissions")
+                                .document(commissionData.getSrNo())
+                                .collection("months")
+                                .document("Extras")
+                                .set(ExtraData, SetOptions.merge())
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        firestore
+
+                                                .collection("Commissions")
+                                                .document(commissionData.getSrNo())
+                                                .collection("months")
+                                                .document("Extras")
+                                                .collection("PolicyForms")
+                                                .document()
+                                                .set(nestedData, SetOptions.merge());
+                                        Log.d(TAG, "On form data submit: " + commissionData.getApplicationNo() + " data is successfully updated");
+                                        Dialog.dismiss();
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.w(TAG, "Error adding document", e);
+                                        Dialog.dismiss();
+                                    }
+                                });
+                    }
                 }
             } else {
                 Toast.makeText(DataEntryActivity.this, "No user list found", Toast.LENGTH_SHORT).show();
@@ -912,141 +923,6 @@ public class DataEntryActivity extends AppCompatActivity {
     }
 
 
-    //excel sheet data read
-    private void readExcelData(String filePath) {
-
-        Log.d(TAG, "readExcelData: Reading Excel File.");
-        String path = Environment.getExternalStorageDirectory()
-                + File.separator + filePath;
-        //decarle input file
-        File inputFile = new File(path);
-        if (inputFile.exists()) {
-            try {
-                InputStream inputStream = new FileInputStream(inputFile);
-                XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
-                XSSFSheet sheet = workbook.getSheetAt(0);
-                int rowsCount = sheet.getPhysicalNumberOfRows();
-                FormulaEvaluator formulaEvaluator = workbook.getCreationHelper().createFormulaEvaluator();
-                StringBuilder sb = new StringBuilder();
-
-                //outter loop, loops through rows
-                for (int r = 1; r < rowsCount; r++) {
-                    Row row = sheet.getRow(r);
-                    int cellsCount = row.getPhysicalNumberOfCells();
-                    //inner loop, loops through columns
-                    for (int c = 0; c < cellsCount; c++) {
-                        //handles if there are to many columns on the excel sheet.
-                        if (c > 6) {
-                            Log.e(TAG, "readExcelData: ERROR. Excel File Format is incorrect! ");
-                            toastMessage("ERROR: Excel File Format is incorrect!");
-                            break;
-                        } else {
-                            String value = getCellAsString(row, c, formulaEvaluator);
-                            String cellInfo = "r:" + r + "; c:" + c + "; v:" + value;
-                            Log.d(TAG, "readExcelData: Data from row: " + cellInfo);
-                            sb.append(value + ", ");
-                        }
-                    }
-                    sb.append(":");
-                }
-                Log.d(TAG, "readExcelData: STRINGBUILDER: " + sb.toString());
-
-                parseStringBuilder(sb);
-
-            } catch (FileNotFoundException e) {
-                Log.e(TAG, "readExcelData: FileNotFoundException. " + e.getMessage());
-            } catch (IOException e) {
-                Log.e(TAG, "readExcelData: Error reading inputstream. " + e.getMessage());
-            }
-        }
-    }
-
-    /**
-     * Method for parsing imported data and storing in ArrayList<XYValue>
-     */
-    public void parseStringBuilder(StringBuilder mStringBuilder) {
-        Log.d(TAG, "parseStringBuilder: Started parsing.");
-
-        // splits the sb into rows.
-        String[] rows = mStringBuilder.toString().split(":");
-
-        //Add to the ArrayList<XYValue> row by row
-        for (int i = 0; i < rows.length; i++) {
-            //Split the columns of the rows
-            String[] columns = rows[i].split(",");
-
-            //use try catch to make sure there are no "" that try to parse into doubles.
-            try {
-                String id = columns[0];
-                String appNo = columns[1];
-                String name = columns[2];
-                String mobile = columns[3];
-                String pan = columns[4];
-                String srNo = columns[5];
-
-                String cellInfo = "(x,y): (" + id + "," + appNo + "," + name + "," + mobile + "," + pan + "," + srNo + ")";
-                Log.d(TAG, "ParseStringBuilder: Data from row: " + cellInfo);
-
-                //add the the uploadData ArrayList
-                uploadData.add(new XYValue(id, appNo, name, mobile, pan, srNo));
-
-            } catch (NumberFormatException e) {
-
-                Log.e(TAG, "parseStringBuilder: NumberFormatException: " + e.getMessage());
-
-            }
-        }
-
-        printDataToLog();
-    }
-
-    private void printDataToLog() {
-        Log.d(TAG, "printDataToLog: Printing data to log...");
-
-        if (uploadData.size() > 0) {
-            for (int i = 0; i < uploadData.size(); i++) {
-                String name = uploadData.get(i).getName();
-                String appNo = uploadData.get(i).getAppNo();
-                Log.d(TAG, "printDataToLog: (x,y): (" + appNo + "," + name + ")");
-            }
-        } else {
-            Log.d(TAG, "printDataToLog: array list is empty");
-        }
-    }
-
-
-    private String getCellAsString(Row row, int c, FormulaEvaluator formulaEvaluator) {
-        String value = "";
-        try {
-            Cell cell = row.getCell(c);
-            CellValue cellValue = formulaEvaluator.evaluate(cell);
-            switch (cellValue.getCellType()) {
-                case Cell.CELL_TYPE_BOOLEAN:
-                    value = "" + cellValue.getBooleanValue();
-                    break;
-                case Cell.CELL_TYPE_NUMERIC:
-                    double numericValue = cellValue.getNumberValue();
-                    if (HSSFDateUtil.isCellDateFormatted(cell)) {
-                        double date = cellValue.getNumberValue();
-                        SimpleDateFormat formatter =
-                                new SimpleDateFormat("MM/dd/yy");
-                        value = formatter.format(HSSFDateUtil.getJavaDate(date));
-                    } else {
-                        value = "" + numericValue;
-                    }
-                    break;
-                case Cell.CELL_TYPE_STRING:
-                    value = "" + cellValue.getStringValue();
-                    break;
-                default:
-            }
-        } catch (NullPointerException e) {
-
-            Log.e(TAG, "getCellAsString: NullPointerException: " + e.getMessage());
-        }
-        return value;
-    }
-
     private void toastMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
@@ -1059,5 +935,20 @@ public class DataEntryActivity extends AppCompatActivity {
 
 //        }
         return subString;
+    }
+
+    private void compareApplicationNo() {
+        if (list_application_decision.size() > 0) {
+
+            for (int i = 0; i < list_application_decision.size(); i++) {
+
+                final ApproveDeclineData formData = list_application_decision.get(i);
+                for (ApplicationFormData applicationFormData:list_application_form){
+                    if(formData.getApplicationNo().equals(applicationFormData.getApplicationNo())){
+                        Log.d(TAG, "compareApplicationNo: "+i+", "+formData.getApplicationNo());
+                    }
+                }
+            }
+        }
     }
 }
