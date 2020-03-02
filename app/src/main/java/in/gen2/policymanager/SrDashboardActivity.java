@@ -129,7 +129,7 @@ public class SrDashboardActivity extends AppCompatActivity {
 
     public void manageCommission(View view) {
 
-        Intent i = new Intent(SrDashboardActivity.this, CommissionsActivity.class);
+        Intent i = new Intent(SrDashboardActivity.this, commissionMonthActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
 
@@ -149,7 +149,7 @@ public class SrDashboardActivity extends AppCompatActivity {
     private void totalPolicyCount() {
         Query query = fireRef.collection("SalesRepresentatives")
                 .document(srNoText)
-                .collection("PolicyForms");
+                .collection("ApplicationForms");
 
         query.get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {

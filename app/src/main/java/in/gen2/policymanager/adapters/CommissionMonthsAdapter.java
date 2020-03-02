@@ -1,6 +1,7 @@
 package in.gen2.policymanager.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
+import in.gen2.policymanager.CommissionsActivity;
 import in.gen2.policymanager.R;
 import in.gen2.policymanager.models.CommissionMonthData;
 
@@ -24,8 +26,17 @@ public class CommissionMonthsAdapter extends FirestoreRecyclerAdapter<Commission
 
     @Override
     protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull CommissionMonthData commissionData) {
-        holder.month.setText(commissionData.getMonth());
-        holder.commission.setText("₹ "+commissionData.getCommission());
+        holder.month.setText(commissionData.getMonthName());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentPolicyDetail = new Intent(mContext, CommissionsActivity.class);
+                intentPolicyDetail.putExtra("monthId", commissionData.getMonthId());
+                intentPolicyDetail.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                mContext.startActivity(intentPolicyDetail);
+            }
+        });
     }
 
     @NonNull
@@ -38,13 +49,12 @@ public class CommissionMonthsAdapter extends FirestoreRecyclerAdapter<Commission
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView month;
-        private TextView commission;
 
         public ViewHolder(@NonNull View itemView) {
 
             super(itemView);
             month=itemView.findViewById(R.id.tvMonth);
-            commission=itemView.findViewById(R.id.tvTotalCommission);
+
 
         }
     }

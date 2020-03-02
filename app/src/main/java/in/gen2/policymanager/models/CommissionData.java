@@ -1,14 +1,26 @@
 package in.gen2.policymanager.models;
 
 public class CommissionData {
-    private String applicationNo=null;
-    private String srNo=null;
-    private String commission=null;
-    private String decisionDate=null;
+    private String applicationNo = null;
+    private String srNo = null;
+    private String name = null;
+    private String decisionDate = null;
+    private String ApplicationId = null;
+    private String Commission = null;
+    public CommissionData() {
 
+    }
 
-    public CommissionData(){
+    public String getCommission() {
+        return Commission;
+    }
 
+    public void setCommission(String commission) {
+        Commission = commission;
+    }
+
+    public String getApplicationId() {
+        return ApplicationId;
     }
 
     public String getApplicationNo() {
@@ -27,13 +39,15 @@ public class CommissionData {
         this.srNo = srNo;
     }
 
-    public String getCommission() {
-        return commission;
+    public String getName() {
+        return name;
     }
 
-    public void setCommission(String commission) {
-        this.commission = commission;
+    public void setName(String name) {
+        this.name = name;
     }
+
+
 
     public String getDecisionDate() {
         return decisionDate;
@@ -43,10 +57,11 @@ public class CommissionData {
         this.decisionDate = decisionDate;
     }
 
-    public CommissionData(String applicationNo, String srNo, String commission, String decisionDate) {
+    public CommissionData(String srNo, String applicationNo, String name, String decisionDate, String commission) {
         this.applicationNo = applicationNo;
         this.srNo = srNo;
-        this.commission = commission;
+        this.name = name;
+        this.Commission = commission;
         this.decisionDate = decisionDate;
     }
 }

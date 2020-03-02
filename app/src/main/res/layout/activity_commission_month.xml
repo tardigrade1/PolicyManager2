@@ -24,14 +24,6 @@
             android:layout_weight="1"
             android:text="Months"
             android:textColor="#fff" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="end"
-            android:text="Commission Amount"
-            android:textColor="#fff" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView

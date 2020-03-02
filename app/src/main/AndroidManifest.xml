@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="in.gen2.policymanager">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -16,9 +17,6 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".commissionMonthActivity">
-
-        </activity>
 
         <uses-library
             android:name="org.apache.http.legacy"
@@ -58,6 +56,13 @@
         <activity
             android:name=".CommissionsActivity"
             android:label="My Commission">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".SrDashboardActivity" />
+        </activity>
+        <activity
+            android:name=".commissionMonthActivity"
+            android:label="Choose Month">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".SrDashboardActivity" />

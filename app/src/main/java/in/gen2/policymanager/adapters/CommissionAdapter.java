@@ -27,7 +27,7 @@ public class CommissionAdapter extends FirestoreRecyclerAdapter<CommissionData,C
 
     @Override
     protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull CommissionData commissionData) {
-        holder.policyId.setText(commissionData.getApplicationNo());
+        holder.policyId.setText(commissionData.getApplicationId());
         holder.commission.setText("₹ "+commissionData.getCommission());
     }
 

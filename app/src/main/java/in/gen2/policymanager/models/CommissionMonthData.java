@@ -2,29 +2,14 @@ package in.gen2.policymanager.models;
 
 public class CommissionMonthData {
 
-    private String commission=null;
-    private String month=null;
+    private String monthId=null;
+    private String monthName=null;
 
-    public String getCommission() {
-        return commission;
+    public String getMonthId() {
+        return monthId;
     }
-
-    public void setCommission(String commission) {
-        this.commission = commission;
+    public String getMonthName() {
+        return monthName;
     }
-
-    public String getMonth() {
-        return month;
-    }
-
-    public void setMonth(String month) {
-        this.month = month;
-    }
-
-    public CommissionMonthData(){
-
-    }
-
-
 
 }

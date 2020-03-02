@@ -58,7 +58,7 @@ public class PoliciesListActivity extends AppCompatActivity {
     }
     public void listenForUsers() {
 
-        Query query =fireRef.collection("SalesRepresentatives").document(srNo).collection("ApplicationForms                                                                                                                                                                                                                                                                                                                                      ");
+        Query query =fireRef.collection("SalesRepresentatives").document(srNo).collection("ApplicationForms");
 
         options = new FirestoreRecyclerOptions.Builder<PoliciesFormData>().setQuery(query, PoliciesFormData.class).build();
         adapter = new PolicyAdapter(options){

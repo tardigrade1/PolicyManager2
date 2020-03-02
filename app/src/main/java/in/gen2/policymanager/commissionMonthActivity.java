@@ -47,9 +47,6 @@ public class commissionMonthActivity extends AppCompatActivity {
     private String srNo;
     private SharedPreferences prefs = null;
     private FirestoreRecyclerOptions<CommissionMonthData> options;
-    int count=0;
-    private String rupeeIcon;
-    private Menu menu;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +59,7 @@ public class commissionMonthActivity extends AppCompatActivity {
         fireRef.setFirestoreSettings(settings);
         prefs = getSharedPreferences("UserData", MODE_PRIVATE);
         srNo = prefs.getString("srNo", "");
-        rupeeIcon = getResources().getString(R.string.rupee_icon);
+
         if (srNo != null) {
             listenForUsers();
 
@@ -76,40 +73,9 @@ public class commissionMonthActivity extends AppCompatActivity {
     }
 
     public void listenForUsers() {
-//        fireRef.collection("Commissions")
-//                .document(srNo)
-//                .collection("months")
-//                .get()
-//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//
-//
-//                if(task.isSuccessful()){
-//                    List<HashMap<String,String>> list = new ArrayList<>();
-//                    for (QueryDocumentSnapshot document : task.getResult()) {
-//                        list = (List) document.get("PoliciesCommission");
-//
-//                    }
-//                    Log.d("TAG", "data for "+ list);
-////                    for(QueryDocumentSnapshot document : task.getResult()) {
-////                        Log.d("TAG", "data for "+ document.getId() + " => " + document.getData());
-////                        Log.d("TAG", "data for "+ document.getId() + " => " + document.get("PoliciesCommission"));
-//////                        CommissionMonthData miss = document.toObject(CommissionMonthData.class);
-//////                        monthList.add(new CommissionMonthData(document.getData().))
-//////                        monthList.add(miss.);
-////                    }
-////                    ListView mMissionsListView = (ListView) findViewById(R.id.missionList);
-////                    MissionsAdapter mMissionAdapter = new MissionsAdapter(this, mMissionsList);
-////                    mMissionsListView.setAdapter(mMissionAdapter);
-//                } else {
-//                    Log.d("MissionActivity", "Error getting documents: ", task.getException());
-//                }
-//            }
-//        });
         Query query=  fireRef.collection("Commissions")
                 .document(srNo)
-                .collection("months");
+                .collection("months").orderBy("monthId", Query.Direction.DESCENDING);
 
         options = new FirestoreRecyclerOptions.Builder<CommissionMonthData>().setQuery(query, CommissionMonthData.class).build();
         adapter = new CommissionMonthsAdapter(options)
@@ -118,11 +84,7 @@ public class commissionMonthActivity extends AppCompatActivity {
             public void onDataChanged() {
 
                 if(getItemCount()!=0){
-                    for (CommissionMonthData document : options.getSnapshots()) {
-                        int amount= Integer.parseInt(document.getCommission());
-                        count+=amount;
-                    }
-                    invalidateOptionsMenu();
+
                     pbLoadMyCommission.setVisibility(View.GONE);
                 }
                 else
@@ -138,20 +100,7 @@ public class commissionMonthActivity extends AppCompatActivity {
         adapter.startListening();
         rvCommission.setAdapter(adapter);
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.commission_menu, menu);
-        this.menu= menu;
-        return true;
-    }
 
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        MenuItem item = menu.findItem(R.id.action_commission_count);
-        item.setTitle(rupeeIcon+" "+count);
-        return super.onPrepareOptionsMenu(menu);
-    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();

@@ -43,8 +43,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -390,14 +393,14 @@ public class DataEntryActivity extends AppCompatActivity {
             parserSettings = new CsvParserSettings();
             parserSettings.getFormat().setLineSeparator(CSVWriter.DEFAULT_LINE_END);
 
-            parserSettings.selectFields("ApplicationNo", "SRNo", "Commission", "DecisionDate");
+            parserSettings.selectFields("SR Code", "Application No","Name", "Dt of Decision", "Comm Paid");
             try {
                 for (String[] strArr : parseWithSettings(this.parserSettings, path)) {
 
-                    this.list_application_Commission.add(new CommissionData(strArr[0], strArr[1], strArr[2], strArr[3]));
+                    this.list_application_Commission.add(new CommissionData(strArr[0], strArr[1], strArr[2], strArr[3], strArr[4]));
                     try {
                     } catch (Exception unused) {
-                        this.list_application_Commission.add(new CommissionData(strArr[0], strArr[1], strArr[2], strArr[3]));
+                        this.list_application_Commission.add(new CommissionData(strArr[0], strArr[1], strArr[2], strArr[3], strArr[4]));
                     }
 
                 }
@@ -481,7 +484,7 @@ public class DataEntryActivity extends AppCompatActivity {
                 new uploadQueriesData().execute();
 //                new uploadSRData().execute();
             } else if (rbCommission.isChecked()) {
-//                new uploadCommissionData().execute();
+                new uploadCommissionData().execute();
             }
         }
     }
@@ -763,7 +766,8 @@ public class DataEntryActivity extends AppCompatActivity {
 
     class uploadCommissionData extends AsyncTask<Void, Void, Integer> {
         ProgressDialog Dialog = new ProgressDialog(DataEntryActivity.this);
-
+        final String OLD_FORMAT = "yyyyMM";
+        final String NEW_FORMAT = "MMMM, yyyy";
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -792,11 +796,17 @@ public class DataEntryActivity extends AppCompatActivity {
                     final HashMap<String, Object> hmQueries = new HashMap<>();
                     String dateText = commissionData.getDecisionDate();
                     String dateSubstring = splitToNChar(dateText, 6);
-//                    hmQueries.put("applicationNo", commissionData.getApplicationNo());
-//                    hmQueries.put("commission", commissionData.getCommission());
-//                    hmQueries.put("decisionDate", commissionData.getDecisionDate());
-                    hmQueries.put("monthId", dateSubstring);
+                        SimpleDateFormat sdf = new SimpleDateFormat(OLD_FORMAT);
+                        Date d = null;
+                        try {
+                            d = sdf.parse(dateSubstring);
+                            sdf.applyPattern(NEW_FORMAT);
 
+                            hmQueries.put("monthName", sdf.format(d));
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                    hmQueries.put("monthId", dateSubstring);
                     Map<String, Object> nestedData = new HashMap<>();
                     nestedData.put("ApplicationId", commissionData.getApplicationNo());
                     nestedData.put("Commission", commissionData.getCommission());
@@ -833,9 +843,10 @@ public class DataEntryActivity extends AppCompatActivity {
                     }
                     else{
                         Map<String, Object> ExtraData = new HashMap<>();
+                        ExtraData.put("monthName", "Extras");
                         ExtraData.put("monthId", "Extras");
                         Map<String, Object> nestedData = new HashMap<>();
-                        nestedData.put("ApplicationId", "");
+                        nestedData.put("ApplicationId", commissionData.getName());
                         nestedData.put("Commission", commissionData.getCommission());
                         firestore
                                 .collection("Commissions")
@@ -855,7 +866,7 @@ public class DataEntryActivity extends AppCompatActivity {
                                                 .collection("PolicyForms")
                                                 .document()
                                                 .set(nestedData, SetOptions.merge());
-                                        Log.d(TAG, "On form data submit: " + commissionData.getApplicationNo() + " data is successfully updated");
+                                        Log.d(TAG, "On form data submit: " + commissionData.getName() + " data is successfully updated");
                                         Dialog.dismiss();
                                     }
                                 })

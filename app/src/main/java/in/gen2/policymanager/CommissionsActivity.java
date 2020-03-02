@@ -39,14 +39,17 @@ public class CommissionsActivity extends AppCompatActivity {
     private String srNo;
     private SharedPreferences prefs = null;
     private FirestoreRecyclerOptions<CommissionData> options;
-    int count=0;
+    int count = 0;
     private String rupeeIcon;
     private Menu menu;
+    private String monthId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_commissions);
         unbinder = ButterKnife.bind(this);
+        monthId = getIntent().getStringExtra("monthId");
         FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
                 .setPersistenceEnabled(true)
                 .build();
@@ -69,23 +72,24 @@ public class CommissionsActivity extends AppCompatActivity {
 
     public void listenForUsers() {
 
-        Query query = fireRef.collection("Commission").document(srNo).collection("ApplicationForms");
+        Query query = fireRef.collection("Commissions").document(srNo).collection("months").document(monthId).collection("PolicyForms");
         options = new FirestoreRecyclerOptions.Builder<CommissionData>().setQuery(query, CommissionData.class).build();
-        adapter = new CommissionAdapter(options)
-        {
+        adapter = new CommissionAdapter(options) {
             @Override
             public void onDataChanged() {
 
-                if(getItemCount()!=0){
+                if (getItemCount() != 0) {
                     for (CommissionData document : options.getSnapshots()) {
-                       int amount= Integer.parseInt(document.getCommission());
-                       count+=amount;
+                        String commissionAmmount = document.getCommission();
+                        if (commissionAmmount != null) {
+                            int amount = Integer.parseInt(document.getCommission());
+                            count += amount;
+                        }
+
                     }
                     invalidateOptionsMenu();
                     pbLoadMyCommission.setVisibility(View.GONE);
-                }
-                else
-                {
+                } else {
                     pbLoadMyCommission.setVisibility(View.GONE);
                     lvMyEmptyCommissionList.setVisibility(View.VISIBLE);
                 }
@@ -97,26 +101,28 @@ public class CommissionsActivity extends AppCompatActivity {
         adapter.startListening();
         rvCommission.setAdapter(adapter);
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.commission_menu, menu);
-        this.menu= menu;
+        this.menu = menu;
         return true;
     }
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         MenuItem item = menu.findItem(R.id.action_commission_count);
-        item.setTitle(rupeeIcon+" "+count);
+        item.setTitle(rupeeIcon + " " + count);
         return super.onPrepareOptionsMenu(menu);
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == android.R.id.home) {
             onBackPressed();
-            return  true;
+            return true;
         }
         return super.onOptionsItemSelected(item);
 
