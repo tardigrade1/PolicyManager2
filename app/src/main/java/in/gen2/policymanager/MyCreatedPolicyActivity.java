@@ -138,6 +138,8 @@ public class MyCreatedPolicyActivity extends AppCompatActivity {
         }
     }
 
+
+
     class LoadFireStoreData extends AsyncTask<Void, Void, Integer> {
         ProgressDialog Dialog = new ProgressDialog(MyCreatedPolicyActivity.this);
 
@@ -184,7 +186,11 @@ public class MyCreatedPolicyActivity extends AppCompatActivity {
                                     String applicationNoText = (String) document.get("applicationNo");
                                     String policyStatusText = (String) document.get("PolicyStatus");
 
-                                    policySQLiteDb.insertPolicies(nameText,srNo,applicationNoText,policyStatusText);
+                                    assert applicationNoText != null;
+                                    if(applicationNoText.length()>0){
+                                        policySQLiteDb.insertPolicies(nameText,srNo,applicationNoText,policyStatusText);
+                                    }
+
 
                                 }
                                 Dialog.dismiss();

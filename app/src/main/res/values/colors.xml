@@ -3,7 +3,8 @@
     <color name="colorPrimary">#006A85</color>
     <color name="colorPrimary_lite">#28006A85</color>
     <color name="colorPrimaryDark">#004A57</color>
-    <color name="colorAccent">#D18400</color>
+    <color name="colorAccent">#D58003</color>
+    <color name="colorAccentDark">#973803</color>
     <color name="btn_disable">#aaa</color>
     <color name="policy_icon_color">#2F3A4B</color>
     <color name="simmer_bg">#B8B8B8</color>
@@ -11,4 +12,5 @@
     <color name="black">#000</color>
     <color name="DownloadColor">#157520</color>
     <color name="pleaseWaitColor">#5E6D0101</color>
+    <color name="grey">#363636</color>
 </resources>

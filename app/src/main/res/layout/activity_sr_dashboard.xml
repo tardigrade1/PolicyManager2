@@ -192,7 +192,7 @@ android:id="@+id/tvResidence"
             android:layout_height="wrap_content"
             android:layout_weight="4"
             android:padding="10dp"
-            android:text="Policies"
+            android:text="My Applications"
             android:textColor="#000"
             android:textSize="18dp" />
         <TextView

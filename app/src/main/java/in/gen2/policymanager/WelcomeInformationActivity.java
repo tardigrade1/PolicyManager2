@@ -95,4 +95,11 @@ public class WelcomeInformationActivity extends AppCompatActivity {
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
     }
+
+    public void contactUsClick(View view) {
+        Intent i = new Intent(WelcomeInformationActivity.this, ContactUsActivity
+                .class);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(i);
+    }
 }

@@ -86,6 +86,7 @@ public class LicPremiumOnlinePaymentFragment extends Fragment {
         String licLinkColor="<span style=color:#006A85>liccards@axisbank.com</span>";
         autoPaymentText.setText(Html.fromHtml("<ul>" +
                 "<li>Premium can be auto paid by card directly.</li>" +
+                "<li>Only qly/hly/yly premiums taken.</li>" +
                 "<li>This payment is made after 25 days from due date.</li>" +
                 "<li>Applicant has to send LIC Premium Registration form to "+licLinkColor+" from his registered email.</li>" +
                 "<li>Message will be send by bank.</li>" +

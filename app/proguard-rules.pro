@@ -15,7 +15,11 @@
 # Uncomment this to preserve the line number information for
 # debugging stack traces.
 #-keepattributes SourceFile,LineNumberTable
-
+-keep class in.gen2.policymanager.models.** { *; }
+#-keepclassmembers class in.gen2.policymanager.models.CommissionMonthData {*;}
+#-keepclassmembers class in.gen2.policymanager.models.CommissionData {*;}
+#-keepclassmembers class in.gen2.policymanager.models.EmpData {*;}
+#-keepclassmembers class in.gen2.policymanager.models.PoliciesFormData {*;}
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile

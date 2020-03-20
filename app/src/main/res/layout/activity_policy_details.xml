@@ -122,7 +122,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:text="Policy Form Information"
+        android:text="Application Form Information"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="18dp"
         android:textStyle="bold"
@@ -161,7 +161,7 @@
                     android:layout_weight="1"
                     android:paddingTop="5dp"
                     android:paddingBottom="5dp"
-                    android:text="Policy Number" />
+                    android:text="Application Number" />
 
                 <TextView
                     android:id="@+id/tvApplicationId"
@@ -214,7 +214,7 @@
                     android:layout_weight="1"
                     android:paddingTop="5dp"
                     android:paddingBottom="5dp"
-                    android:text="Purchase Date" />
+                    android:text="Date" />
 
                 <TextView
                     android:id="@+id/tvPolicyPurchase"
@@ -284,7 +284,6 @@
                     android:textColor="#101010" />
 
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -301,7 +300,7 @@
 
                 <TextView
 
-                    android:id="@+id/tvRejectComment"
+                    android:id="@+id/tvRejectComments"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -312,6 +311,8 @@
                     android:textColor="#101010" />
 
             </LinearLayout>
+
+
 
             <LinearLayout
                 android:layout_width="fill_parent"

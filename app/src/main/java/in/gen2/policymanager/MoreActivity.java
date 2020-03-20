@@ -66,16 +66,16 @@ public class MoreActivity extends AppCompatActivity {
 
     }
 
-    @OnClick(R.id.BenefitsOfLICCards)
-    public void onClickBenefitsLicCards() {
-        lvQueries.setVisibility(View.GONE);
-        fm.beginTransaction()
-                .setCustomAnimations(R.animator.slide_left, 0, 0, 0)
-                .replace(R.id.frame_container, BenefitsLic)
-                .addToBackStack(null)
-                .commit();
-
-    }
+//    @OnClick(R.id.BenefitsOfLICCards)
+//    public void onClickBenefitsLicCards() {
+//        lvQueries.setVisibility(View.GONE);
+//        fm.beginTransaction()
+//                .setCustomAnimations(R.animator.slide_left, 0, 0, 0)
+//                .replace(R.id.frame_container, BenefitsLic)
+//                .addToBackStack(null)
+//                .commit();
+//
+//    }
 
     @OnClick(R.id.EligibilityCondition)
     public void onClickEligibleCondition() {

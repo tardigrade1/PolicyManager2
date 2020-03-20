@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,6 +46,22 @@ public class MainActivity extends AppCompatActivity {
     TextView tvAdminEmail;
     @BindView(R.id.tvAdminContact)
     TextView tvAdminContact;
+
+    @BindView(R.id.linearLayout)
+    LinearLayout linearLayout;
+    @BindView(R.id.linearLayout2)
+    LinearLayout linearLayout2;
+    @BindView(R.id.linearLayout4)
+    LinearLayout linearLayout4;
+    @BindView(R.id.viewApplication)
+    View viewApplication;
+    @BindView(R.id.viewcommission)
+    View viewCommission;
+    @BindView(R.id.viewManageData)
+    View viewManageData;
+
+
+
 //    @BindView(R.id.policyCount)
 //    TextView policyCount;
     @BindView(R.id.tvAdminDoj)
@@ -54,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
     private String srNoText;
 PolicyListSqliteData policySQLiteDb;
 SRSqliteData salesSQLdb;
+    private Boolean supervisor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +86,16 @@ SRSqliteData salesSQLdb;
         String contactText = prefs.getString("contactNo", "");
         String dojText = prefs.getString("doj", "");
         String residenceText = prefs.getString("residence", "");
+        Boolean supervisor = prefs.getBoolean("supervisor", false);
+        if(supervisor){
+            viewApplication.setVisibility(View.GONE);
+            viewCommission.setVisibility(View.GONE);
+            viewManageData.setVisibility(View.GONE);
+            linearLayout.setVisibility(View.GONE);
+            linearLayout2.setVisibility(View.GONE);
+            linearLayout4.setVisibility(View.GONE);
+        }
+
         tvAdminName.setText(nameText);
         tvAdminId.setText(srNoText);
         tvAdminBranch.setText(branchText);

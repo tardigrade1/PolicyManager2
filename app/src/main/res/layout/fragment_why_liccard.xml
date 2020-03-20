@@ -25,14 +25,14 @@
             android:id="@+id/tvLicCardPoints"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="" />
         <TextView
             android:layout_marginTop="@dimen/activity_horizontal_margin_single"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/colorPrimary"
             android:textSize="20dp"
-            android:text="LIC Cards offered by AXIS bank" />
+            android:text="LIC Cards powered by AXIS bank" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -52,7 +52,13 @@
                 android:orientation="vertical"
                 android:gravity="center"
                 android:padding="@dimen/activity_horizontal_margin">
-
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorAccentDark"
+                    android:textSize="@dimen/font_size_of_content"
+                    android:textStyle="bold"
+                    android:text="Platinum Card" />
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -60,10 +66,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/font_size_of_content"
                     android:textStyle="bold"
-                    android:text="Platinum Card" />
+                    android:text="Ordinary cards" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
         <androidx.cardview.widget.CardView
@@ -78,7 +84,13 @@
                 android:orientation="vertical"
                 android:gravity="center"
                 android:padding="@dimen/activity_horizontal_margin">
-
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorAccentDark"
+                    android:textSize="@dimen/font_size_of_content"
+                    android:textStyle="bold"
+                    android:text="Signature Card" />
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -86,10 +98,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/font_size_of_content"
-                    android:textStyle="bold"
-                    android:text="Signature Card" />
+                   android:textStyle="bold"
+                    android:text="VIP cards" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
         </LinearLayout>

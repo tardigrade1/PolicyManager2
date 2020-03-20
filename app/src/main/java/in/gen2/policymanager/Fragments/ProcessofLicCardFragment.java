@@ -49,9 +49,9 @@ public class ProcessofLicCardFragment extends Fragment {
         init();
     }
     private void init(){
-        String dipOkColor="<span style=color:#D18400>DIP OK</span>";
-        String verifyCallNoColor="<span style=color:#D18400>022-71372314/15/16/17 or 022-621723/14/15/16/17</span>";
-        String tollFreeNoColor="<span style=color:#D18400>18002331100 / 18004190064.</span>";
+        String dipOkColor="<span style=color:#961301>DIP OK</span>";
+        String verifyCallNoColor="<span style=color:#961301>022-71372314/15/16/17 or 022-62172314/15/16/17</span>";
+        String tollFreeNoColor="<span style=color:#961301>18004190064.</span>";
         processOfIssue.setText(Html.fromHtml("<ul>" +
                 "<li>Submit form with documents at CSM office, Bvli W.</li>" +
                 "<li>Forms sent to Axis Bank Airoli for Card issue.</li>" +

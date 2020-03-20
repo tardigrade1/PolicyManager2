@@ -49,7 +49,7 @@
                 android:gravity="center"
                 android:textStyle="bold"
                 android:textColor="@color/colorPrimaryDark"
-                android:text="Axix Bank" />
+                android:text="Commission" />
         </LinearLayout>
 
         <LinearLayout
@@ -142,7 +142,7 @@
                 android:background="@color/colorWhite"
                 android:padding="5dp"
                 android:textColor="#000"
-                android:text="Add 1 ₹100 per card" />
+                android:text="Additional ₹100 per card" />
         </LinearLayout>
 
         <LinearLayout
@@ -172,7 +172,7 @@
                 android:background="@color/colorWhite"
                 android:padding="5dp"
                 android:textColor="#000"
-                android:text="Add 1 ₹50 per card" />
+                android:text="Additional ₹50 per card" />
 
 
         </LinearLayout>

@@ -17,7 +17,7 @@
             android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/colorAccentDark"
             android:textSize="18dp"
             android:text="Follow these steps to make online payment of LIC premium:" />
 
@@ -89,10 +89,10 @@
         <TextView
 android:layout_marginTop="@dimen/activity_horizontal_margin_single"            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/colorAccentDark"
             android:textStyle="bold"
             android:textSize="16dp"
-            android:text="Similarly u can also pay Pol Loan &amp; Interest" />
+            android:text="Similarly you can also pay Pol Loan &amp; Interest" />
 
         <TextView
             android:layout_marginTop="@dimen/activity_horizontal_margin_single"

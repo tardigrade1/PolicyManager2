@@ -7,26 +7,41 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:paddingLeft="20dp"
-        android:paddingTop="20dp"
-        android:paddingRight="20dp"
-        android:paddingBottom="20dp"
+        android:padding="10dp"
         android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/tvPolicyId"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="" />
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvApplicantName"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textStyle="bold"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/tvApplicationId"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginTop="3dp"
+                android:textSize="13dp"
+                android:textColor="@color/colorAccentDark"
+                android:text="" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/tvPolicyCommission"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
             android:gravity="end"
             android:text=""
             android:textColor="#1E8802" />

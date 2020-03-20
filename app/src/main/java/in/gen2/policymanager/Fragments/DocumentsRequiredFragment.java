@@ -50,14 +50,14 @@ public class DocumentsRequiredFragment extends Fragment {
         init();
     }
     private void init(){
-        String colorPhotoColor="<span style=color:#D18400>Color photo</span>";
-        String panColor="<span style=color:#D18400>PAN</span>";
-        String addressProofColor="<span style=color:#D18400>Address proof</span>";
-        String eAdarNotAcceptableColor="<span style=color:#D18400> E-AADHAR IS NOT ACCEPTABLE.</span>";
-        String licPremColor="<span style=color:#D18400>LIC premium</span>";
-        String employeeIdColor="<span style=color:#D18400>Employee ID</span>";
-        String incomeProofColor="<span style=color:#D18400>Income proof- </span>";
-        String noIncomeProofColor="<span style=color:#D18400> NO INCOME PROOF </span>";
+        String colorPhotoColor="<span style=color:#961301>Color photo</span>";
+        String panColor="<span style=color:#961301>PAN</span>";
+        String addressProofColor="<span style=color:#961301>Address proof</span>";
+        String eAdarNotAcceptableColor="<span style=color:#961301> E-AADHAR IS NOT ACCEPTABLE.</span>";
+        String licPremColor="<span style=color:#961301>LIC premium</span>";
+        String employeeIdColor="<span style=color:#961301>Employee ID</span>";
+        String incomeProofColor="<span style=color:#961301>Income proof- </span>";
+        String noIncomeProofColor="<span style=color:#961301> NO INCOME PROOF </span>";
 
         docRequired.setText(Html.fromHtml("<ul>" +
                 "<li>"+colorPhotoColor+" ( Passport size with plane background, Ticket Size, Stylish photo not acceptable)</li>" +

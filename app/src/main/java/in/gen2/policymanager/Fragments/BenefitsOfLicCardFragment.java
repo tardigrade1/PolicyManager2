@@ -53,22 +53,22 @@ public class BenefitsOfLicCardFragment extends Fragment {
 
 
     private void init() {
-        String LifetimeFreeColor="<span style=color:#D18400>Lifetime Free- </span>";
-        String FreeAccidentalColor="<span style=color:#D18400>Free accidental death risk cover</span>";
-        String CardMustActiveColor="<span style=color:#D18400>Card must active atleast once in six months</span>";
-        String FreeColor="<span style=color:#D18400>Free</span>";
-        String InterestFreeColor="<span style=color:#D18400>Interest Free</span>";
-        String ConvenienceFreeColor="<span style=color:#D18400>Free Convenience fees</span>";
-        String AirportVIPColor="<span style=color:#D18400>Airport VIP Lounge Access</span>";
-        String OneRewardColor="<span style=color:#D18400>One reward point</span>";
-        String Each100Color="<span style=color:#D18400>each ₹ 100/-</span>";
-        String DoubleRewardColor="<span style=color:#D18400>double reward points</span>";
-        String DinningDelightColor="<span style=color:#D18400>Dinning delight program</span>";
-        String ZerolostcardColor="<span style=color:#D18400>Zero lost card liability</span>";
+        String LifetimeFreeColor="<span style=color:#961301>Lifetime Free- </span>";
+        String FreeAccidentalColor="<span style=color:#961301>Free accidental death risk cover</span>";
+        String CardMustActiveColor="<span style=color:#961301>Card must active atleast once in 90 days</span>";
+        String FreeColor="<span style=color:#961301>Reimbursement</span>";
+        String InterestFreeColor="<span style=color:#961301>Interest Free</span>";
+        String ConvenienceFreeColor="<span style=color:#961301>Free Convenience fees</span>";
+        String AirportVIPColor="<span style=color:#961301>Airport VIP Lounge Access</span>";
+        String OneRewardColor="<span style=color:#961301>One Reward Point</span>";
+        String Each100Color="<span style=color:#961301>each ₹ 100/-</span>";
+        String DoubleRewardColor="<span style=color:#961301>Double Reward Points</span>";
+        String DinningDelightColor="<span style=color:#961301>Dinning delight program</span>";
+        String ZerolostcardColor="<span style=color:#961301>Zero lost card liability</span>";
         tvBenefitsListText.setText(Html.fromHtml("<ul>" +
                 "<li>"+LifetimeFreeColor+"No joing, Annual, Renewal or Convenience fees in payment of LIC Prem.</li>" +
-                "<li>"+FreeAccidentalColor+" from 3 lacs/5lacs in Platinum /Signature Card("+CardMustActiveColor+")</li>" +
-                "<li>"+FreeColor+" Petrol surcharge upto 1%(Min 400/-)</li>" +
+                "<li>"+FreeAccidentalColor+" 3 lacs/5lacs in Platinum /Signature Card("+CardMustActiveColor+")</li>" +
+                "<li>"+FreeColor+" of Petrol surcharge upto 1%(Min 400/-)</li>" +
                 "<li>"+InterestFreeColor+" Credit limit for 20 to 50 days.</li>" +
                 "<li>"+ConvenienceFreeColor+" for paying LIC prem giving longer grace period upto 75 days.</li>" +
                 "<li>"+AirportVIPColor+" in Signature card at selected airport of 21 Cities of India.</li>" +

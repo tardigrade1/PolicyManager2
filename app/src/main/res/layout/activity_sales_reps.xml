@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MyCreatedPolicyActivity">
+    tools:context=".SalesRepsActivity">
 
     <LinearLayout
         android:id="@+id/lvSearch"
@@ -35,6 +35,7 @@
             android:layout_marginRight="5dp"
             android:layout_marginBottom="5dp"
             android:textSize="13dp"
+            android:maxLines="1"
             android:background="@drawable/etsearch_background"
             android:hint="Search by Name/sr No.."
             android:padding="10dp" />
@@ -83,7 +84,25 @@
         shimmer:layout_constraintEnd_toEndOf="parent"
         shimmer:layout_constraintStart_toStartOf="parent"
         shimmer:layout_constraintTop_toBottomOf="@+id/lvSearch"
-        shimmer:layout_constraintVertical_bias="0.0" />
+        shimmer:layout_constraintVertical_bias="0.0" >
+
+    </ListView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addNewSr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:clickable="true"
+        android:onClick="addNewSr"
+        shimmer:layout_constraintBottom_toBottomOf="parent"
+        shimmer:layout_constraintEnd_toEndOf="parent"
+        shimmer:layout_constraintHorizontal_bias="1.0"
+        shimmer:layout_constraintStart_toStartOf="parent"
+        shimmer:layout_constraintTop_toBottomOf="@+id/lvSearch"
+        shimmer:layout_constraintVertical_bias="1.0"
+        shimmer:srcCompat="@drawable/ic_add" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

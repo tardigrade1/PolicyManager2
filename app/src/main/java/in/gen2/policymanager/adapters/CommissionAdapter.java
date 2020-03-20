@@ -1,5 +1,6 @@
 package in.gen2.policymanager.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,10 +26,25 @@ public class CommissionAdapter extends FirestoreRecyclerAdapter<CommissionData,C
         super(options);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull CommissionData commissionData) {
-        holder.policyId.setText(commissionData.getApplicationId());
-        holder.commission.setText("₹ "+commissionData.getCommission());
+        String applicationId=commissionData.getApplicationId();
+        String commissionAmount=commissionData.getCommission();
+        if(applicationId != null){
+            holder.policyId.setText("("+applicationId+")");
+        }
+        else{
+            holder.policyId.setText("");
+        }
+        holder.applicantName.setText(commissionData.getApplicantName());
+        if(commissionAmount!=null){
+            holder.commission.setText("₹ "+commissionAmount);
+        }
+        else {
+            holder.commission.setText("");
+        }
+
     }
 
     @NonNull
@@ -40,12 +56,13 @@ public class CommissionAdapter extends FirestoreRecyclerAdapter<CommissionData,C
     }
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView policyId;
+        private TextView policyId,applicantName;
         private TextView commission;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            policyId=itemView.findViewById(R.id.tvPolicyId);
+            policyId=itemView.findViewById(R.id.tvApplicationId);
+            applicantName=itemView.findViewById(R.id.tvApplicantName);
             commission=itemView.findViewById(R.id.tvPolicyCommission);
         }
     }

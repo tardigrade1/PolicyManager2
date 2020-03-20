@@ -29,6 +29,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.firestore.WriteBatch;
@@ -136,14 +137,10 @@ public class DataEntryActivity extends AppCompatActivity {
                     // no radio buttons are checked
                     Toast.makeText(DataEntryActivity.this, "please choose any one action", Toast.LENGTH_SHORT).show();
                 } else {
-
-//
                     if (rbAddApplication.isChecked()) {
-
                         openFile(applicationRequestCode);
                         Toast.makeText(DataEntryActivity.this, "application form", Toast.LENGTH_SHORT).show();
                     } else if (rbDecision.isChecked()) {
-
                         openFile(decisionRequestCode);
                         Toast.makeText(DataEntryActivity.this, "Decision list", Toast.LENGTH_SHORT).show();
                     } else if (rbQueries.isChecked()) {
@@ -354,7 +351,7 @@ public class DataEntryActivity extends AppCompatActivity {
             parserSettings = new CsvParserSettings();
             parserSettings.getFormat().setLineSeparator(CSVWriter.DEFAULT_LINE_END);
 
-            parserSettings.selectFields("ApplicationNo", "Bank", "SR No", "Decision", "DecisionDate", "Comment");
+            parserSettings.selectFields("ApplicationNo", "Name", "SR No", "Decision", "Dt of Decision", "Reason of Rejection");
             try {
                 for (String[] strArr : parseWithSettings(this.parserSettings, path)) {
 
@@ -393,14 +390,14 @@ public class DataEntryActivity extends AppCompatActivity {
             parserSettings = new CsvParserSettings();
             parserSettings.getFormat().setLineSeparator(CSVWriter.DEFAULT_LINE_END);
 
-            parserSettings.selectFields("SR Code", "Application No","Name", "Dt of Decision", "Comm Paid");
+            parserSettings.selectFields("SR Code", "Application No", "Name", "Dt of Decision", "Comm Paid", "DecisionMonth");
             try {
                 for (String[] strArr : parseWithSettings(this.parserSettings, path)) {
 
-                    this.list_application_Commission.add(new CommissionData(strArr[0], strArr[1], strArr[2], strArr[3], strArr[4]));
+                    this.list_application_Commission.add(new CommissionData(strArr[0], strArr[1], strArr[2], strArr[3], strArr[4], strArr[5]));
                     try {
                     } catch (Exception unused) {
-                        this.list_application_Commission.add(new CommissionData(strArr[0], strArr[1], strArr[2], strArr[3], strArr[4]));
+                        this.list_application_Commission.add(new CommissionData(strArr[0], strArr[1], strArr[2], strArr[3], strArr[4], strArr[5]));
                     }
 
                 }
@@ -431,7 +428,7 @@ public class DataEntryActivity extends AppCompatActivity {
         if (new File(path).exists()) {
             parserSettings = new CsvParserSettings();
             parserSettings.getFormat().setLineSeparator(CSVWriter.DEFAULT_LINE_END);
-            parserSettings.selectFields("ApplicationNo", "Name", "Mobile No", "SR No", "Requirements");
+            parserSettings.selectFields("ApplicationNo", "Name", "Mobile No", "SR No", " ");
             try {
                 for (String[] strArr : parseWithSettings(this.parserSettings, path)) {
                     this.list_queries.add(new QueriesData(strArr[0], strArr[1], strArr[2], strArr[3], strArr[4]));
@@ -597,19 +594,6 @@ public class DataEntryActivity extends AppCompatActivity {
                             .document(formData.getSrNo())
                             .collection("ApplicationForms")
                             .document(formData.getApplicationNo());
-//                         batch.set(docRef,hmApplication,SetOptions.merge()).commit().addOnCompleteListener(new OnCompleteListener<Void>() {
-//                             @Override
-//                             public void onComplete(@NonNull Task<Void> task) {
-//                                 Log.d(TAG, "On form data submit: " + formData.getApplicantName() + " data is successfully submit");
-//                                    Dialog.dismiss();
-//                             }
-//                         }).addOnFailureListener(new OnFailureListener() {
-//                             @Override
-//                             public void onFailure(@NonNull Exception e) {
-//                                 Log.w(TAG, "Error adding document", e);
-//                                    Dialog.dismiss();
-//                             }
-//                         });
 
                     docRef.set(hmApplication, SetOptions.merge())
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -626,6 +610,12 @@ public class DataEntryActivity extends AppCompatActivity {
                                     Dialog.dismiss();
                                 }
                             });
+//                    docRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+//                        @Override
+//                        public void onSuccess(Void aVoid) {
+//                            Log.d(TAG, "On form data submit: " + formData.getApplicantName() + " data is successfully deleted");
+//                        }
+//                    });
                 }
             } else {
                 Toast.makeText(DataEntryActivity.this, "No user list found", Toast.LENGTH_SHORT).show();
@@ -669,7 +659,7 @@ public class DataEntryActivity extends AppCompatActivity {
 
                     final ApproveDeclineData formData = list_application_decision.get(i);
                     final HashMap<String, Object> hmDecision = new HashMap<>();
-                    hmDecision.put("bankName", formData.getBankName());
+                    hmDecision.put("bankName", "Axis");
                     hmDecision.put("decisionDate", formData.getDecisionDate());
                     hmDecision.put("PolicyStatus", formData.getStatus());
                     hmDecision.put("comment", formData.getComment());
@@ -732,8 +722,9 @@ public class DataEntryActivity extends AppCompatActivity {
                     final HashMap<String, Object> hmQueries = new HashMap<>();
 
 
-                    hmQueries.put("PolicyStatus", "In complete");
-                    hmQueries.put("comment", formData.getRequirements());
+                    hmQueries.put("PolicyStatus", "Pending");
+                    hmQueries.put("requirements", formData.getRequirements());
+//                    hmQueries.put("comment", FieldValue.delete());
 
                     firestore
                             .collection("SalesRepresentatives")
@@ -742,6 +733,7 @@ public class DataEntryActivity extends AppCompatActivity {
                             .document(formData.getApplicationNo())
                             .set(hmQueries, SetOptions.merge())
 
+//                            .update(hmQueries)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
@@ -768,12 +760,14 @@ public class DataEntryActivity extends AppCompatActivity {
         ProgressDialog Dialog = new ProgressDialog(DataEntryActivity.this);
         final String OLD_FORMAT = "yyyyMM";
         final String NEW_FORMAT = "MMMM, yyyy";
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
             Dialog.setTitle("Please Wait");
             Dialog.setMessage("entering data..");
             Dialog.setIndeterminate(false);
+            Dialog.setCancelable(false);
             Dialog.show();
 
 
@@ -792,78 +786,59 @@ public class DataEntryActivity extends AppCompatActivity {
 
                 for (int i = 0; i < list_application_Commission.size(); i++) {
                     final CommissionData commissionData = list_application_Commission.get(i);
-                    if(commissionData.getApplicationNo() != null){
+                    String monthText = commissionData.getDecisionMonth();
                     final HashMap<String, Object> hmQueries = new HashMap<>();
-                    String dateText = commissionData.getDecisionDate();
-                    String dateSubstring = splitToNChar(dateText, 6);
-                        SimpleDateFormat sdf = new SimpleDateFormat(OLD_FORMAT);
-                        Date d = null;
-                        try {
-                            d = sdf.parse(dateSubstring);
-                            sdf.applyPattern(NEW_FORMAT);
 
-                            hmQueries.put("monthName", sdf.format(d));
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        }
-                    hmQueries.put("monthId", dateSubstring);
-                    Map<String, Object> nestedData = new HashMap<>();
-                    nestedData.put("ApplicationId", commissionData.getApplicationNo());
-                    nestedData.put("Commission", commissionData.getCommission());
-                    nestedData.put("decisionDate", commissionData.getDecisionDate());
+//                    String dateSubstring = splitToNChar(dateText, 6);
+                    SimpleDateFormat sdf = new SimpleDateFormat(OLD_FORMAT);
+                    Date d = null;
+                    try {
+                        d = sdf.parse(monthText);
+                        sdf.applyPattern(NEW_FORMAT);
 
-                    firestore
+                        hmQueries.put("monthName", sdf.format(d));
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    hmQueries.put("monthId", monthText);
+                    DocumentReference docRef = firestore
                             .collection("Commissions")
                             .document(commissionData.getSrNo())
                             .collection("months")
-                            .document(dateSubstring)
-                            .set(hmQueries, SetOptions.merge())
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    firestore
-                                            .collection("Commissions")
-                                            .document(commissionData.getSrNo())
-                                            .collection("months")
-                                            .document(dateSubstring)
-                                            .collection("PolicyForms")
-                                            .document(commissionData.getApplicationNo())
-                                            .set(nestedData, SetOptions.merge());
-                                    Log.d(TAG, "On form data submit: " + commissionData.getApplicationNo() + " data is successfully updated");
-                                    Dialog.dismiss();
-                                }
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Log.w(TAG, "Error adding document", e);
-                                    Dialog.dismiss();
-                                }
-                            });
-                    }
-                    else{
-                        Map<String, Object> ExtraData = new HashMap<>();
-                        ExtraData.put("monthName", "Extras");
-                        ExtraData.put("monthId", "Extras");
+                            .document(monthText);
+                    if (commissionData.getApplicationNo() != null) {
                         Map<String, Object> nestedData = new HashMap<>();
-                        nestedData.put("ApplicationId", commissionData.getName());
+                        nestedData.put("ApplicationId", commissionData.getApplicationNo());
                         nestedData.put("Commission", commissionData.getCommission());
-                        firestore
-                                .collection("Commissions")
-                                .document(commissionData.getSrNo())
-                                .collection("months")
-                                .document("Extras")
-                                .set(ExtraData, SetOptions.merge())
+                        nestedData.put("ApplicantName", commissionData.getName());
+                        nestedData.put("decisionDate", commissionData.getDecisionDate());
+                        docRef.set(hmQueries, SetOptions.merge())
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
-                                        firestore
-
-                                                .collection("Commissions")
-                                                .document(commissionData.getSrNo())
-                                                .collection("months")
-                                                .document("Extras")
-                                                .collection("PolicyForms")
+                                        docRef.collection("ApplicationForms")
+                                                .document(commissionData.getApplicationNo())
+                                                .set(nestedData, SetOptions.merge());
+                                        Log.d(TAG, "On form data submit: " + commissionData.getApplicationNo() + " data is successfully updated");
+                                        Dialog.dismiss();
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.w(TAG, "Error adding document", e);
+                                        Dialog.dismiss();
+                                    }
+                                });
+                    } else {
+                        Map<String, Object> nestedData = new HashMap<>();
+                        nestedData.put("Commission", commissionData.getCommission());
+                        nestedData.put("ApplicantName", commissionData.getName());
+                        docRef.set(hmQueries, SetOptions.merge())
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                       docRef.collection("ApplicationForms")
                                                 .document()
                                                 .set(nestedData, SetOptions.merge());
                                         Log.d(TAG, "On form data submit: " + commissionData.getName() + " data is successfully updated");
@@ -877,6 +852,7 @@ public class DataEntryActivity extends AppCompatActivity {
                                         Dialog.dismiss();
                                     }
                                 });
+
                     }
                 }
             } else {
@@ -954,9 +930,9 @@ public class DataEntryActivity extends AppCompatActivity {
             for (int i = 0; i < list_application_decision.size(); i++) {
 
                 final ApproveDeclineData formData = list_application_decision.get(i);
-                for (ApplicationFormData applicationFormData:list_application_form){
-                    if(formData.getApplicationNo().equals(applicationFormData.getApplicationNo())){
-                        Log.d(TAG, "compareApplicationNo: "+i+", "+formData.getApplicationNo());
+                for (ApplicationFormData applicationFormData : list_application_form) {
+                    if (formData.getApplicationNo().equals(applicationFormData.getApplicationNo())) {
+                        Log.d(TAG, "compareApplicationNo: " + i + ", " + formData.getApplicationNo());
                     }
                 }
             }

@@ -49,7 +49,7 @@ android:background="#F3F3F3"
                 android:text="status"
                 android:textSize="13dp"
                 android:layout_weight="1"
-                android:textColor="@color/colorAccent"
+                android:textColor="@color/colorAccentDark"
                 android:textStyle="italic" />
         </LinearLayout>
     </LinearLayout>

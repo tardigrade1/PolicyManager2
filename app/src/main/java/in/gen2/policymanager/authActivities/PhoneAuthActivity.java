@@ -44,7 +44,7 @@ public class PhoneAuthActivity extends AppCompatActivity {
     private EditText etSrNo;
     private TextView tvWelcomeText,tvWelcomeName;
     private SharedPreferences prefs = null;
-    private Boolean admin;
+    private Boolean admin,supervisor;
     private SharedPreferences.Editor editor;
 
     @Override
@@ -55,12 +55,18 @@ public class PhoneAuthActivity extends AppCompatActivity {
         prefs = getSharedPreferences("UserData", MODE_PRIVATE);
         editor = prefs.edit();
         admin = prefs.getBoolean("admin", false);
+        supervisor = prefs.getBoolean("supervisor", false);
         String name=prefs.getString("name","");
         String srNumber=prefs.getString("srNo","");
         FirebaseUser firebaseUser = mAuth.getCurrentUser();
         if (firebaseUser != null) {
             //verification successful we will start the profile activity
             if (admin) {
+                Intent intent = new Intent(PhoneAuthActivity.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
+            } else if(supervisor){
                 Intent intent = new Intent(PhoneAuthActivity.this, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
@@ -111,18 +117,23 @@ public class PhoneAuthActivity extends AppCompatActivity {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     //verification successful we will start the profile activity
-                    if (admin) {
-//
-                        Intent intent = new Intent(PhoneAuthActivity.this, MainActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
-                        finish();
-                    } else {
-                        Intent intent = new Intent(PhoneAuthActivity.this, SrDashboardActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
-                        finish();
-                    }
+                        if (admin) {
+                            Intent intent = new Intent(PhoneAuthActivity.this, MainActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                            finish();
+                        } else if(supervisor){
+                            Intent intent = new Intent(PhoneAuthActivity.this, MainActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            Intent intent = new Intent(PhoneAuthActivity.this, SrDashboardActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                            finish();
+                        }
+
                 }
             }
         };
@@ -196,10 +207,11 @@ public class PhoneAuthActivity extends AppCompatActivity {
                                 editor.putString("doj", doj);
                                 editor.putString("residence", residence);
                                 editor.putBoolean("admin", true);
+                                editor.putBoolean("supervisor", false);
                                 editor.commit();
                                 Toast.makeText(PhoneAuthActivity.this, "User set as Admin", Toast.LENGTH_SHORT).show();
-                            } else {
-
+                            }
+                            else if (document.get("supervisor") != null){
                                 editor.putString("srNo", srNo);
                                 editor.putString("contactNo", ContactNo);
                                 editor.putString("branch", branch);
@@ -207,6 +219,20 @@ public class PhoneAuthActivity extends AppCompatActivity {
                                 editor.putString("name", name);
                                 editor.putString("doj", doj);
                                 editor.putString("residence", residence);
+                                editor.putBoolean("supervisor", true);
+                                editor.putBoolean("admin", false);
+                                editor.commit();
+                                Toast.makeText(PhoneAuthActivity.this, "User set as supervisor", Toast.LENGTH_SHORT).show();
+                            }
+                            else {
+                                editor.putString("srNo", srNo);
+                                editor.putString("contactNo", ContactNo);
+                                editor.putString("branch", branch);
+                                editor.putString("email", email);
+                                editor.putString("name", name);
+                                editor.putString("doj", doj);
+                                editor.putString("residence", residence);
+                                editor.putBoolean("supervisor", false);
                                 editor.putBoolean("admin", false);
                                 editor.commit();
                                 Toast.makeText(PhoneAuthActivity.this, "User set as SR", Toast.LENGTH_SHORT).show();

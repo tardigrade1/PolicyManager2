@@ -32,6 +32,7 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
@@ -58,7 +59,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
     private String srNo;
     private FirebaseFirestore docRef;
     private String mobile;
-    private Boolean admin;
+    private Boolean admin,supervisor;
     private SharedPreferences prefs = null;
     private TextView tvPhoneNumber, tvVerifyStatus;
     private OtpEditText tvOtp;
@@ -83,9 +84,10 @@ public class VerifyPhoneActivity extends AppCompatActivity {
 
         mobile = getIntent().getStringExtra("mobile");
         srNo = getIntent().getStringExtra("srNo");
-        tvPhoneNumber.setText("+91-" + mobile);
+        tvPhoneNumber.setText("+91-" + mobile.replaceAll("\\w(?=\\w{3})", "*"));
         prefs = getSharedPreferences("UserData", MODE_PRIVATE);
         admin = prefs.getBoolean("admin", false);
+        supervisor = prefs.getBoolean("supervisor", false);
         sendVerificationCode(mobile);
         tvOtp.addTextChangedListener(new TextWatcher() {
             @Override
@@ -229,11 +231,19 @@ public class VerifyPhoneActivity extends AppCompatActivity {
                             hm.put("srNo", srNo);
                             hm.put("contactNo", mobile);
                             String userId = mAuth.getCurrentUser().getUid();
-                            docRef.collection("usersFirebaseId").document(userId).set(hm).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            docRef.collection("usersFirebaseId").document(userId).set(hm, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
                                     //verification successful we will start the profile activity
                                     if (admin) {
+                                        tvVerifyStatus.setText("mobile verify successfully");
+                                        Intent intent = new Intent(VerifyPhoneActivity.this, MainActivity.class);
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                        startActivity(intent);
+                                        lvSignInBtn.setEnabled(true);
+                                        finish();
+                                    }
+                                    else if (supervisor) {
                                         tvVerifyStatus.setText("mobile verify successfully");
                                         Intent intent = new Intent(VerifyPhoneActivity.this, MainActivity.class);
                                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -288,4 +298,6 @@ public class VerifyPhoneActivity extends AppCompatActivity {
     public void clickToResendOtp(View view) {
         resendVerificationCode(mobile);
     }
+
+
 }

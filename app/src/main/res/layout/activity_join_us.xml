@@ -18,6 +18,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:padding="@dimen/activity_horizontal_margin_single"
+            android:textStyle="bold"
+            android:textColor="@color/grey"
             android:text="To Join LIC Card Agency"
             android:textSize="20dp" />
 
@@ -67,7 +69,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Correspondence Address:"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@color/colorAccentDark"
+                    android:textStyle="bold"
                     android:textSize="18dp" />
 
                 <TextView

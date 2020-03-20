@@ -28,8 +28,9 @@ public class PolicyAdapter extends FirestoreRecyclerAdapter<PoliciesFormData, Po
     }
 
     @Override
-    protected void onBindViewHolder(ViewHolder holder, int i, PoliciesFormData policiesFormData) {
+    protected void onBindViewHolder(@NonNull ViewHolder holder, int i, PoliciesFormData policiesFormData) {
 
+        if(policiesFormData.getApplicationNo()!=null){
         holder.applicaitonId.setText(policiesFormData.getApplicationNo());
         holder.applicantName.setText(policiesFormData.getApplicantName());
         holder.applyDate.setText(policiesFormData.getPolicyStatus());
@@ -44,8 +45,9 @@ public class PolicyAdapter extends FirestoreRecyclerAdapter<PoliciesFormData, Po
                 mContext.startActivity(intentPolicyDetail);
             }
         });
-    }
+        }
 
+    }
 
     @NonNull
     @Override

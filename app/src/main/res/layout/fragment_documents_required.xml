@@ -36,8 +36,8 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="(Not required if Prem more than 30000 in last 3 yrs)"
-            android:textColor="@color/colorAccent"
+            android:text="(Not required if Prem more than 30000 in each last 3 yrs)"
+            android:textColor="@color/colorAccentDark"
             android:textStyle="italic" />
 
         <LinearLayout
@@ -185,7 +185,7 @@
                 android:layout_marginRight="@dimen/activity_horizontal_margin_single"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorAccent"
+                android:textColor="@color/colorAccentDark"
                 android:textStyle="bold"
                 android:gravity="center"
                 android:text='\" All documents must be self attested by applicant in BLUE INK and verified by agent with Stamp \"' />

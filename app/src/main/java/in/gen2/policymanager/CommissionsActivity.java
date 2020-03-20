@@ -72,7 +72,7 @@ public class CommissionsActivity extends AppCompatActivity {
 
     public void listenForUsers() {
 
-        Query query = fireRef.collection("Commissions").document(srNo).collection("months").document(monthId).collection("PolicyForms");
+        Query query = fireRef.collection("Commissions").document(srNo).collection("months").document(monthId).collection("ApplicationForms");
         options = new FirestoreRecyclerOptions.Builder<CommissionData>().setQuery(query, CommissionData.class).build();
         adapter = new CommissionAdapter(options) {
             @Override

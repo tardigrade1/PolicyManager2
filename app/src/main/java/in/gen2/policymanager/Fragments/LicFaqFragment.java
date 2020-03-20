@@ -132,7 +132,7 @@ public class LicFaqFragment extends Fragment {
 
         dm = new FaqsDataModel();
         dm.setQues("After issue of Card for any query.");
-        dm.setAns("Call on toll free no is 18002331100, 18004190064, IRVS 18604195555.");
+        dm.setAns("Call on toll free no is 18004190064, IRVS 18604195555.");
         objList.add(dm);
 
         dm = new FaqsDataModel();

@@ -4,6 +4,7 @@ public class CommissionMonthData {
 
     private String monthId=null;
     private String monthName=null;
+    public CommissionMonthData(){}
 
     public String getMonthId() {
         return monthId;
@@ -11,5 +12,6 @@ public class CommissionMonthData {
     public String getMonthName() {
         return monthName;
     }
+
 
 }

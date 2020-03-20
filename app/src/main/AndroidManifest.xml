@@ -17,6 +17,14 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".AddNewSrActivity"></activity>
+        <activity
+            android:name=".ContactUsActivity"
+            android:label="Contact Us"
+            android:parentActivityName=".WelcomeInformationActivity" />
+        <activity
+            android:name=".ViewSrDetailsActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <uses-library
             android:name="org.apache.http.legacy"
@@ -78,19 +86,20 @@
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".PoliciesListActivity"
-            android:label="Policies List"
+            android:label="Application List"
             android:parentActivityName=".SalesRepsActivity" />
         <activity android:name=".SmsIntegrationActivity" />
         <activity
             android:name=".PolicyDetailsActivity"
-            android:label="policy Details">
+            android:label="Application Details">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MyCreatedPolicyActivity" />
         </activity>
+
         <activity
             android:name=".MyCreatedPolicyActivity"
-            android:label="Policies"
+            android:label="Applications"
             android:parentActivityName=".SrDashboardActivity" />
         <activity
             android:name=".authActivities.VerifyPhoneActivity"

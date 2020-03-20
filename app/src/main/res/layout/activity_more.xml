@@ -67,36 +67,7 @@
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:background="#cecece" />
 
-        <LinearLayout
-            android:id="@+id/BenefitsOfLICCards"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/activity_horizontal_margin"
-            android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Benefits of LIC card"
-                android:textColor="#000"
-                android:textSize="@dimen/font_size_of_content" />
-
-            <ImageView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="5"
-
-                app:srcCompat="@drawable/forward_arrow" />
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1sp"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:background="#cecece" />
 
         <LinearLayout
             android:id="@+id/EligibilityCondition"
@@ -353,7 +324,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="How to"
+                android:text="LIC marketing"
                 android:textColor="#000"
                 android:textSize="@dimen/font_size_of_content" />
 

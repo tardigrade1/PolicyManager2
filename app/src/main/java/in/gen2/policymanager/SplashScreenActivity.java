@@ -27,6 +27,7 @@ public class SplashScreenActivity extends AppCompatActivity {
     private Boolean admin;
     private SharedPreferences.Editor editor;
     private Intent intent=null;
+    private Boolean supervisor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +40,14 @@ public class SplashScreenActivity extends AppCompatActivity {
         prefs = getSharedPreferences("UserData", MODE_PRIVATE);
         editor = prefs.edit();
         admin = prefs.getBoolean("admin", false);
+        supervisor = prefs.getBoolean("supervisor", false);
         FirebaseUser firebaseUser = mAuth.getCurrentUser();
         if (firebaseUser != null) {
             //verification successful we will start the profile activity
             if (admin) {
+                intent = new Intent(this, MainActivity.class);
+            }
+            else if (supervisor) {
                 intent = new Intent(this, MainActivity.class);
             } else {
               intent = new Intent(this, SrDashboardActivity.class);

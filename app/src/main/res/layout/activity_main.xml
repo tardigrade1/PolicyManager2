@@ -189,12 +189,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="10dp"
-            android:text="My Policies"
+            android:text="My Applications"
             android:textColor="#000"
             android:textSize="18dp" />
     </LinearLayout>
 
     <View
+        android:id="@+id/viewApplication"
         android:layout_width="match_parent"
         android:layout_height="1sp"
         android:layout_margin="10dp"
@@ -238,6 +239,7 @@
             android:textSize="18dp" />
     </LinearLayout>
     <View
+        android:id="@+id/viewcommission"
         android:layout_width="match_parent"
         android:layout_height="1sp"
         android:layout_margin="10dp"
@@ -281,6 +283,7 @@
             android:textSize="18dp" />
     </LinearLayout>
     <View
+        android:id="@+id/viewManageData"
         android:layout_width="match_parent"
         android:layout_height="1sp"
         android:layout_margin="10dp"

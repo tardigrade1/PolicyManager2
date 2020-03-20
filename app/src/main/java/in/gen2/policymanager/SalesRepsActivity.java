@@ -6,9 +6,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
@@ -33,6 +35,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -65,6 +68,8 @@ public class SalesRepsActivity extends AppCompatActivity {
 //    SearchView searchSr;
     @BindView(R.id.edtFilterEmployee)
     EditText edtFilter;
+    @BindView(R.id.addNewSr)
+    FloatingActionButton addNewSr;
     private ShimmerFrameLayout mShimmerViewContainer;
     private SQLiteDatabase database = null;
     SRSqliteData srSqliteDb;
@@ -72,13 +77,18 @@ public class SalesRepsActivity extends AppCompatActivity {
     private SalesRepresentativesAdapter adapter;
     private ArrayList<SalesRepsDatamodel> srList;
 
-
+    @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sales_reps);
         mShimmerViewContainer = findViewById(R.id.shimmer_view_container);
         unbinder = ButterKnife.bind(this);
+        SharedPreferences prefs = getSharedPreferences("UserData", MODE_PRIVATE);
+        Boolean supervisor = prefs.getBoolean("supervisor", false);
+        if(supervisor){
+            addNewSr.setVisibility(View.GONE);
+        }
         FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
                 .setPersistenceEnabled(true)
                 .build();
@@ -140,23 +150,6 @@ public class SalesRepsActivity extends AppCompatActivity {
     private void searchUsers() {
 
         srList = new ArrayList<>(srSqliteDb.getSrNames());
-
-
-        for (int i = 0; i < srList.size(); i++) {
-
-            try {
-
-                SalesRepsDatamodel loc = srList.get(i);
-                Log.d("TAG", "searchUsers: " + loc.getId());
-
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-
-        }
-
         adapter = new SalesRepresentativesAdapter(srList,getApplicationContext());
         rvRepresentativesList.setAdapter(adapter);
         rvRepresentativesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -164,8 +157,9 @@ public class SalesRepsActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 SalesRepsDatamodel dataModel= srList.get(position);
-                Intent intentPolicyDetail = new Intent(SalesRepsActivity.this, PoliciesListActivity.class);
+                Intent intentPolicyDetail = new Intent(SalesRepsActivity.this, ViewSrDetailsActivity.class);
                 intentPolicyDetail.putExtra("srNo", dataModel.getSrNo());
+                intentPolicyDetail.putExtra("srName", dataModel.getName());
                 intentPolicyDetail.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intentPolicyDetail);
             }
@@ -194,6 +188,12 @@ public class SalesRepsActivity extends AppCompatActivity {
     @Override
     public void onPause() {
         super.onPause();
+    }
+
+    public void addNewSr(View view) {
+        Intent i = new Intent(SalesRepsActivity.this, AddNewSrActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(i);
     }
 
 
@@ -242,13 +242,13 @@ public class SalesRepsActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 for (QueryDocumentSnapshot document : task.getResult()) {
 
-                                    String nameText = (String) document.get("name");
-                                    String srNoText = (String) document.get("srNo");
-                                    Log.d("TAG", document.getId() + " => " + nameText + " => " + srNoText);
-                                    if(!nameText.equalsIgnoreCase("admin"))
-                                    {
+                                        String nameText = (String) document.get("name");
+                                        String srNoText = (String) document.get("srNo");
+                                        Log.d("TAG", document.getId() + " => " + nameText + " => " + srNoText);
                                         srSqliteDb.insertSr(nameText, srNoText);
-                                    }
+
+
+
 
 
 

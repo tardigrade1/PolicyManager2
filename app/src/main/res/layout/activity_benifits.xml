@@ -1,21 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
+    android:fillViewport="true"
     tools:context=".BenifitsActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="@dimen/activity_horizontal_margin_single"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:padding="@dimen/activity_horizontal_margin_single">
 
         <TextView
             android:layout_width="wrap_content"
@@ -23,6 +20,8 @@
             android:layout_gravity="center"
             android:padding="@dimen/activity_horizontal_margin_single"
             android:text="Benefits"
+            android:textColor="@color/grey"
+            android:fontFamily="@font/nunito_extrabold"
             android:textSize="20dp" />
 
         <View
@@ -32,81 +31,12 @@
             android:background="#cecece" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="@dimen/activity_horizontal_margin_single"
-            android:text="Life time free"
-            android:textColor="@color/colorAccent"
-            android:textSize="@dimen/font_size_of_content" />
-
-        <TextView
+            android:layout_marginTop="@dimen/activity_horizontal_margin_single"
+            android:id="@+id/tvBenefitsListText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="You can Offer Life time free LIC cradit card to policy holders."
-            android:textColor="#000" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="@dimen/activity_horizontal_margin_single"
-            android:text="LIC Premium"
-            android:textColor="@color/colorAccent"
-            android:textSize="@dimen/font_size_of_content" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Easy payment of LIC Premium through Credit Card."
-            android:textColor="#000" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="@dimen/activity_horizontal_margin_single"
-            android:text="Auto deduction"
-            android:textColor="@color/colorAccent"
-            android:textSize="@dimen/font_size_of_content" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="If Auto deduction is exercised, chances of lapsation of policy is zero."
-            android:textColor="#000" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="@dimen/activity_horizontal_margin_single"
-            android:text="Double reward points"
-            android:textColor="@color/colorAccent"
-            android:textSize="@dimen/font_size_of_content" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Double reward points on payment of LIC Premium through LIC credit card which is 1.5% to 2% of premium paid."
-            android:textColor="#000" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="@dimen/activity_horizontal_margin_single"
-            android:text="Commission"
-            android:textColor="@color/colorAccent"
-            android:textSize="@dimen/font_size_of_content" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="You will get Commission from ₹300/- to ₹900/- per card issued."
-            android:textColor="#000" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="@dimen/activity_horizontal_margin_single"
-            android:text="Competitions are also floated time to time."
-            android:textColor="#000" />
+            android:textColor="#000"
+            android:text="" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -115,9 +45,10 @@
             android:gravity="center"
             android:maxWidth="300dp"
             android:paddingTop="@dimen/activity_horizontal_margin"
+            android:textStyle="bold"
             android:text="after all it gives Golden chance to create new leads for LIC policies."
             android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/font_size_of_content" />
 
     </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

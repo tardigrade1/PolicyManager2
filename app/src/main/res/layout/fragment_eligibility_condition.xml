@@ -50,7 +50,7 @@
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorAccent"
+                android:textColor="@color/colorAccentDark"
                 android:textStyle="bold"
                 android:text="@string/applicant_must_be_policy_holder" />
             <LinearLayout
@@ -102,12 +102,13 @@
                     android:text="LIC Premium\n(Non Single)" />
 
                 <TextView
+                    android:id="@+id/tvPlatinumLicPremium"
                     android:layout_width="fill_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@color/colorWhite"
                     android:padding="5dp"
-                    android:text="Yly 30000/-on own life &amp; Minor Children for more than 3 yrs, (2 yrs if prem of 3rd yr paid)"/>
+                    android:text=""/>
             </LinearLayout><LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -127,13 +128,14 @@
                     android:text="Single Premium" />
 
                 <TextView
+                    android:id="@+id/tvPlatinumLicPremiumSingle"
                     android:layout_width="fill_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@color/colorWhite"
                     android:padding="5dp"
                     android:gravity="center"
-                    android:text="-"/>
+                    android:text=""/>
             </LinearLayout>
 
             <TextView
@@ -166,13 +168,15 @@
                     android:text="Salaried" />
 
                 <TextView
+                    android:id="@+id/tvPlatinumLicSalaried"
                     android:layout_width="fill_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@color/colorWhite"
                     android:padding="5dp"
-                    android:text="Annual Net  1.80 lacs\n( Gross 2.25 Lacs)"/>
-            </LinearLayout> <LinearLayout
+                    android:text=""/>
+            </LinearLayout>
+            <LinearLayout
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -192,12 +196,13 @@
                     android:text="Self Employed" />
 
                 <TextView
+                    android:id="@+id/tvPlatinumLicSelfEmployed"
                     android:layout_width="fill_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@color/colorWhite"
                     android:padding="5dp"
-                    android:text="Annual Net  4 Lacs"/>
+                    android:text=""/>
             </LinearLayout>
             <TextView
 
@@ -233,7 +238,7 @@
                     android:layout_weight="1"
                     android:background="@color/colorWhite"
                     android:padding="5dp"
-                    android:text="18 to 60\n(upto 70 for Single Premium)"/>
+                    android:text="18 to 60"/>
             </LinearLayout> <LinearLayout
 
             android:layout_width="match_parent"
@@ -259,7 +264,7 @@
                 android:layout_weight="1"
                 android:background="@color/colorWhite"
                 android:padding="5dp"
-                android:text="720 Score"/>
+                android:text="minimum 720 Score"/>
         </LinearLayout><LinearLayout
 
             android:layout_width="match_parent"
@@ -355,12 +360,13 @@
                     android:text="LIC Premium\n(Non Single)" />
 
                 <TextView
+                    android:id="@+id/tvSignatureLicPremium"
                     android:layout_width="fill_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@color/colorWhite"
                     android:padding="5dp"
-                    android:text="Yly 50000/-on own life &amp; Minor Children for more than 3 yrs (2 yr if prem of 3rd yr paid)"/>
+                    android:text=""/>
             </LinearLayout><LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -380,12 +386,13 @@
                     android:text="Single Premium" />
 
                 <TextView
+                    android:id="@+id/tvSignatureLicPremiumSingle"
                     android:layout_width="fill_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@color/colorWhite"
                     android:padding="5dp"
-                    android:text="Rs 5.00 Lacs"/>
+                    android:text=""/>
             </LinearLayout>
 
             <TextView
@@ -418,12 +425,13 @@
                     android:text="Salaried" />
 
                 <TextView
+                    android:id="@+id/tvSignatureLicSalaried"
                     android:layout_width="fill_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@color/colorWhite"
                     android:padding="5dp"
-                    android:text="Annual Net 9 lacs\n( Gross 11.25 Lacs)"/>
+                    android:text=""/>
             </LinearLayout> <LinearLayout
 
                 android:layout_width="match_parent"
@@ -444,12 +452,13 @@
                     android:text="Self Employed" />
 
                 <TextView
+                    android:id="@+id/tvSignatureLicSelfEmployed"
                     android:layout_width="fill_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@color/colorWhite"
                     android:padding="5dp"
-                    android:text="Annual Net 12 Lacs"/>
+                    android:text=""/>
             </LinearLayout>
             <TextView
 
@@ -511,7 +520,7 @@
                 android:layout_weight="1"
                 android:background="@color/colorWhite"
                 android:padding="5dp"
-                android:text="720 Score"/>
+                android:text="minimum 720 Score"/>
         </LinearLayout><LinearLayout
 
             android:layout_width="match_parent"

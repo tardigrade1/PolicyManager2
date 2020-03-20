@@ -1,5 +1,7 @@
 package in.gen2.policymanager.models;
 
+import com.google.firebase.firestore.Exclude;
+
 public class PoliciesFormData {
 
     private String id = null;
@@ -10,17 +12,14 @@ public class PoliciesFormData {
     private String purchaseDate = null;
     private String PolicyStatus = null;
 
+    public PoliciesFormData() {
+
+    }
+    @Exclude
     public String getPolicyStatus() {
         return PolicyStatus;
     }
 
-    public void setPolicyStatus(String policyStatus) {
-        PolicyStatus = policyStatus;
-    }
-
-    public PoliciesFormData() {
-
-    }
 
     public String getId() {
         return id;

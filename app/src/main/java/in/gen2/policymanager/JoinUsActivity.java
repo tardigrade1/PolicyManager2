@@ -53,7 +53,7 @@ public class JoinUsActivity extends AppCompatActivity {
         }
         checkFile();
         needDocs.setText(Html.fromHtml("<ul>\n" +
-                "  <li>Fill Form -specimen if Application form</li>" +
+                "  <li>Fill Form-Specimen of Application form</li>" +
                 "  <li>One passpost size photo</li>" +
                 "  <li>Copy of PAN card" +
                 "<li>Copy of Address Proof</li><li>Cancelled cheque</li><li>Copy of LIC Agency letter or Agency status from sales deptt. of the Branch</li>" +

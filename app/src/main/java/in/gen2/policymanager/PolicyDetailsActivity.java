@@ -41,10 +41,10 @@ public class PolicyDetailsActivity extends AppCompatActivity {
     TextView tvPolicyStatus;
     @BindView(R.id.tvApproveDate)
     TextView tvApprovalDate;
-    @BindView(R.id.tvRejectComment)
-    TextView tvRejectComment;
     @BindView(R.id.tvRejectRequirement)
     TextView tvRejectReqiure;
+    @BindView(R.id.tvRejectComments)
+    TextView tvRejectComments;
     private FirebaseFirestore fireRef;
     private String applicationId,srNo;
     @Override
@@ -54,7 +54,7 @@ public class PolicyDetailsActivity extends AppCompatActivity {
         unbinder = ButterKnife.bind(this);
         applicationId = getIntent().getStringExtra("applicationId");
         srNo = getIntent().getStringExtra("srNo");
-        Log.d("Tag", "onCreate: "+applicationId+", "+srNo);
+
         tvApplicationId.setText(applicationId);
         FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
                 .setPersistenceEnabled(true)
@@ -94,6 +94,9 @@ public class PolicyDetailsActivity extends AppCompatActivity {
 
         @Override
         protected Integer doInBackground(Void... params) {
+            if(applicationId!=null&&srNo!=null){
+
+
             fireRef.collection("SalesRepresentatives").document(srNo)
                     .collection("ApplicationForms")
                                 .document(applicationId)
@@ -110,7 +113,7 @@ public class PolicyDetailsActivity extends AppCompatActivity {
                                             String policyStatus = appFormDocument.getString("PolicyStatus");
                                             String approveDate = appFormDocument.getString("decisionDate");
                                             String comment = appFormDocument.getString("comment");
-                                            String requirement = appFormDocument.getString("Requirements");
+                                            String requirement = appFormDocument.getString("requirements");
 
                                             tvHolderName.setText(name);
                                             tvContact.setText(ContactNo);
@@ -118,8 +121,8 @@ public class PolicyDetailsActivity extends AppCompatActivity {
                                             tvPolicyPurchase.setText(purchaseDate);
                                             tvPolicyStatus.setText(policyStatus);
                                             tvApprovalDate.setText(approveDate);
-                                            tvRejectComment.setText(comment);
                                             tvRejectReqiure.setText(requirement);
+                                            tvRejectComments.setText(comment);
                                             Dialog.dismiss();
                                         }
 
@@ -131,7 +134,7 @@ public class PolicyDetailsActivity extends AppCompatActivity {
 
                                     }
                                 });
-
+            }
             return 0;
         }
     }
