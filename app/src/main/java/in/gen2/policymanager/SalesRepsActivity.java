@@ -207,7 +207,7 @@ public class SalesRepsActivity extends AppCompatActivity {
             mShimmerViewContainer.setVisibility(View.VISIBLE);
             rvRepresentativesList.setVisibility(View.GONE);
             Dialog.setTitle("Please Wait");
-            Dialog.setMessage("data is on update..");
+            Dialog.setMessage("loading...");
             Dialog.setIndeterminate(false);
             Dialog.setCancelable(false);
             Dialog.show();

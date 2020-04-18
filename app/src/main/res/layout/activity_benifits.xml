@@ -50,5 +50,15 @@
             android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/font_size_of_content" />
 
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#710606"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:text="Terms &amp; conditions apply" />
+
     </LinearLayout>
 </ScrollView>

@@ -77,7 +77,7 @@ public class ViewSrDetailsActivity extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
             dialog.setTitle("Please Wait");
-            dialog.setMessage("data is loading..");
+            dialog.setMessage("loading..");
             dialog.setIndeterminate(false);
             dialog.setCancelable(false);
             dialog.show();

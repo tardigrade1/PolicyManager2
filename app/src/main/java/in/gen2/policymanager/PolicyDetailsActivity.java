@@ -70,7 +70,7 @@ public class PolicyDetailsActivity extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
             Dialog.setTitle("Please Wait");
-            Dialog.setMessage("data is loading..");
+            Dialog.setMessage("loading..");
             Dialog.setIndeterminate(false);
             Dialog.setCancelable(false);
             Dialog.show();

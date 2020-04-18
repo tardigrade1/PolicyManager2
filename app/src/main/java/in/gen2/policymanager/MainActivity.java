@@ -46,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
     TextView tvAdminEmail;
     @BindView(R.id.tvAdminContact)
     TextView tvAdminContact;
-
     @BindView(R.id.linearLayout)
     LinearLayout linearLayout;
     @BindView(R.id.linearLayout2)

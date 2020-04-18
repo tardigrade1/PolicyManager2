@@ -147,7 +147,7 @@ public class MyCreatedPolicyActivity extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
             Dialog.setTitle("Please Wait");
-            Dialog.setMessage("data is on update..");
+            Dialog.setMessage("loading...");
             Dialog.setIndeterminate(false);
             Dialog.setCancelable(false);
             Dialog.show();

@@ -5,12 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import android.app.DownloadManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
@@ -52,10 +55,12 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import in.gen2.policymanager.Helpers.RealFilePathUtil;
 import in.gen2.policymanager.models.ApplicationFormData;
 import in.gen2.policymanager.models.ApproveDeclineData;
 import in.gen2.policymanager.models.CommissionData;
@@ -165,9 +170,12 @@ public class DataEntryActivity extends AppCompatActivity {
     public void openFile(int requestcode) {
 
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType(mimeType);
+        File path=Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+        Uri uri = Uri.parse(path.getPath());
+        Log.d(TAG, "openFile: "+uri);
+        intent.setDataAndType(Uri.fromFile(path), mimeType);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
-
+        intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
         // special intent for Samsung file manager
         Intent sIntent = new Intent("com.sec.android.app.myfiles.PICK_DATA");
         // if you want any file type, you can skip next line
@@ -200,15 +208,17 @@ public class DataEntryActivity extends AppCompatActivity {
             case 1:
 
                 if (resultCode == RESULT_OK) {
-                    File file = new File(data.getData().getPath());
+                    File file = new File(Objects.requireNonNull(data.getData()).getPath());
                     String pathApplication = data.getData().getPath();
                     String filename = pathApplication.substring(pathApplication.indexOf("/", 2) + 1);
-                    imgChoose.setImageResource(R.drawable.csv);
-                    tvFileName.setText(file.getName());
-                    btnUploadData.setText("DONE");
-                    btnUploadData.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+
 //                    ReadSRList(filename);
-                    ReadApplicationForm(filename);
+                    if(ReadApplicationForm(filename)){
+                        imgChoose.setImageResource(R.drawable.csv);
+                        tvFileName.setText(file.getName());
+                        btnUploadData.setText("DONE");
+                        btnUploadData.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    }
                     Toast.makeText(this, "Application file successfully", Toast.LENGTH_LONG).show();
 
                 }
@@ -232,25 +242,37 @@ public class DataEntryActivity extends AppCompatActivity {
                     String pathQueries = data.getData().getPath();
                     String filename = pathQueries.substring(pathQueries.indexOf("/", 2) + 1);
                     File fileQuesries = new File(data.getData().getPath());
-                    imgChoose.setImageResource(R.drawable.csv);
-                    tvFileName.setText(fileQuesries.getName());
-                    btnUploadData.setText("DONE");
-                    btnUploadData.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+
+
+
 //                    ReadSRList(filename);
-                    ReadQueriesList(filename);
+                    if(ReadQueriesList(filename)){
+                        imgChoose.setImageResource(R.drawable.csv);
+                        tvFileName.setText(fileQuesries.getName());
+                        btnUploadData.setText("DONE");
+                        btnUploadData.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    }
+                    else{
+                        tvFileName.setText("Please select file again");
+                    }
+
                     Toast.makeText(this, "Queries successfully", Toast.LENGTH_LONG).show();
                 }
                 break;
             case 4:
                 if (resultCode == RESULT_OK) {
-                    String pathQueries = data.getData().getPath();
-                    String filename = pathQueries.substring(pathQueries.indexOf("/", 2) + 1);
-                    File fileQuesries = new File(data.getData().getPath());
+                    Uri selectedImageURI = data.getData();
+                    String imageFile = RealFilePathUtil.getPath(this,selectedImageURI);
+
+                    String filename = imageFile.substring(imageFile.indexOf("/", 3) + 1);
+                    Log.d(TAG, "onActivityResult: "+imageFile);
+                    Log.d(TAG, "onActivityResult: "+filename);
+                    File fileQuesries = new File(imageFile);
                     imgChoose.setImageResource(R.drawable.csv);
                     tvFileName.setText(fileQuesries.getName());
                     btnUploadData.setText("DONE");
                     btnUploadData.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                    ReadCommissionData(filename);
+                    ReadCommissionData(imageFile);
                     Toast.makeText(this, "Commission List Successfully fetched", Toast.LENGTH_SHORT).show();
                 }
                 break;
@@ -258,7 +280,6 @@ public class DataEntryActivity extends AppCompatActivity {
 
         }
     }
-
     private void ReadSRList(String fileLocationName) {
         list_sales_representatives.clear();
 //        dataUsersAdapter = null;
@@ -300,18 +321,18 @@ public class DataEntryActivity extends AppCompatActivity {
     }
 
     //    reading data from Application forms CSV file
-    private void ReadApplicationForm(String fileLocationName) {
+    private boolean ReadApplicationForm(String fileLocationName) {
         list_application_form.clear();
 //        dataUsersAdapter = null;
-        String path = Environment.getExternalStorageDirectory()
-                + File.separator + fileLocationName;
-        Log.d(TAG, "ReadApplicationForm: " + path);
-        if (new File(path).exists()) {
+//        String path = Environment.getExternalStorageDirectory()
+//                + File.separator + fileLocationName;
+//        Log.d(TAG, "ReadApplicationForm: " + path);
+        if (new File(fileLocationName).exists()) {
             parserSettings = new CsvParserSettings();
             parserSettings.getFormat().setLineSeparator(CSVWriter.DEFAULT_LINE_END);
             parserSettings.selectFields("Application No", "Name", "Mobile No", "PAN No", "SR No", "Date");
             try {
-                for (String[] strArr : parseWithSettings(this.parserSettings, path)) {
+                for (String[] strArr : parseWithSettings(this.parserSettings, fileLocationName)) {
 
                     this.list_application_form.add(new ApplicationFormData(strArr[0], strArr[1], strArr[2], strArr[3], strArr[4], strArr[5]));
                     try {
@@ -327,33 +348,34 @@ public class DataEntryActivity extends AppCompatActivity {
                         Log.d(TAG, "ApplictionFormsList: " + i + ", " + formData.getApplicantName() + ", " + formData.getApplicationNo());
 
                     }
-                    return;
+                    return true;
                 }
                 Toast.makeText(this, "No application list found.", Toast.LENGTH_SHORT).show();
 //                this.lvUsers.setAdapter(null);
-                return;
+                return false;
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
                 Log.d(TAG, "ReadApplicationForm: " + e);
                 Toast.makeText(this, "No application list found.", Toast.LENGTH_SHORT).show();
-                return;
+                return false;
             }
         }
+        return false;
     }
 
     //    reading data from Application forms CSV file
-    private void ReadApprovalDeclineStatus(String fileLocationName) {
+    private boolean ReadApprovalDeclineStatus(String fileLocationName) {
         list_application_decision.clear();
 
-        String path = Environment.getExternalStorageDirectory()
-                + File.separator + fileLocationName;
-        if (new File(path).exists()) {
+//        String path = Environment.getExternalStorageDirectory()
+//                + File.separator + fileLocationName;
+        if (new File(fileLocationName).exists()) {
             parserSettings = new CsvParserSettings();
             parserSettings.getFormat().setLineSeparator(CSVWriter.DEFAULT_LINE_END);
 
             parserSettings.selectFields("ApplicationNo", "Name", "SR No", "Decision", "Dt of Decision", "Reason of Rejection");
             try {
-                for (String[] strArr : parseWithSettings(this.parserSettings, path)) {
+                for (String[] strArr : parseWithSettings(this.parserSettings, fileLocationName)) {
 
                     this.list_application_decision.add(new ApproveDeclineData(strArr[0], strArr[1], strArr[2], strArr[3], strArr[4], strArr[5]));
                     try {
@@ -368,31 +390,32 @@ public class DataEntryActivity extends AppCompatActivity {
                         Log.d(TAG, "Decision List: " + i + ", " + formData.getApplicationNo());
 
                     }
-                    return;
+                    return true;
                 }
                 Toast.makeText(this, "No Decision list found.", Toast.LENGTH_SHORT).show();
 //                this.lvUsers.setAdapter(null);
-                return;
+                return false;
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
-                return;
+                return false;
             }
         }
+        return false;
     }
 
     //    reading data from Commissions CSV file
-    private void ReadCommissionData(String fileLocationName) {
+    private boolean ReadCommissionData(String fileLocationName) {
         list_application_Commission.clear();
 
-        String path = Environment.getExternalStorageDirectory()
-                + File.separator + fileLocationName;
-        if (new File(path).exists()) {
+//        String path = Environment.getExternalStorageDirectory()
+//                + File.separator + fileLocationName;
+        if (new File(fileLocationName).exists()) {
             parserSettings = new CsvParserSettings();
             parserSettings.getFormat().setLineSeparator(CSVWriter.DEFAULT_LINE_END);
 
             parserSettings.selectFields("SR Code", "Application No", "Name", "Dt of Decision", "Comm Paid", "DecisionMonth");
             try {
-                for (String[] strArr : parseWithSettings(this.parserSettings, path)) {
+                for (String[] strArr : parseWithSettings(this.parserSettings, fileLocationName)) {
 
                     this.list_application_Commission.add(new CommissionData(strArr[0], strArr[1], strArr[2], strArr[3], strArr[4], strArr[5]));
                     try {
@@ -407,30 +430,31 @@ public class DataEntryActivity extends AppCompatActivity {
                         Log.d(TAG, "Commission List: " + i + ", " + commissionData.getApplicationNo() + "'s commission is" + commissionData.getCommission());
 
                     }
-                    return;
+                    return true;
                 }
                 Toast.makeText(this, "No commission list found.", Toast.LENGTH_SHORT).show();
 
-                return;
+                return false;
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
-                return;
+                return false;
             }
         }
+        return false;
     }
 
     //    reading data from Application forms CSV file
-    private void ReadQueriesList(String fileLocationName) {
+    private boolean ReadQueriesList(String fileLocationName) {
         list_queries.clear();
 
-        String path = Environment.getExternalStorageDirectory()
-                + File.separator + fileLocationName;
-        if (new File(path).exists()) {
+//        String path = Environment.getExternalStorageDirectory()
+//                + File.separator + fileLocationName;
+        if (new File(fileLocationName).exists()) {
             parserSettings = new CsvParserSettings();
             parserSettings.getFormat().setLineSeparator(CSVWriter.DEFAULT_LINE_END);
             parserSettings.selectFields("ApplicationNo", "Name", "Mobile No", "SR No", " ");
             try {
-                for (String[] strArr : parseWithSettings(this.parserSettings, path)) {
+                for (String[] strArr : parseWithSettings(this.parserSettings, fileLocationName)) {
                     this.list_queries.add(new QueriesData(strArr[0], strArr[1], strArr[2], strArr[3], strArr[4]));
                     try {
                     } catch (Exception unused) {
@@ -444,16 +468,17 @@ public class DataEntryActivity extends AppCompatActivity {
                         Log.d(TAG, "Queries List: " + i + ", " + formData.getApplicationNo());
 
                     }
-                    return;
+                    return true;
                 }
                 Toast.makeText(this, "No Decision list found.", Toast.LENGTH_SHORT).show();
 //                this.lvUsers.setAdapter(null);
-                return;
+                return false;
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
-                return;
+                return false;
             }
         }
+        return false;
     }
 
     private List<String[]> parseWithSettings(CsvParserSettings csvParserSettings, String path) throws FileNotFoundException {
@@ -758,8 +783,8 @@ public class DataEntryActivity extends AppCompatActivity {
 
     class uploadCommissionData extends AsyncTask<Void, Void, Integer> {
         ProgressDialog Dialog = new ProgressDialog(DataEntryActivity.this);
-        final String OLD_FORMAT = "yyyyMM";
-        final String NEW_FORMAT = "MMMM, yyyy";
+        final String NEW_FORMAT = "yyyyMM";
+        final String OLD_FORMAT = "MMMM, yyyy";
 
         @Override
         protected void onPreExecute() {
@@ -789,18 +814,19 @@ public class DataEntryActivity extends AppCompatActivity {
                     String monthText = commissionData.getDecisionMonth();
                     final HashMap<String, Object> hmQueries = new HashMap<>();
 
-//                    String dateSubstring = splitToNChar(dateText, 6);
+////                    String dateSubstring = splitToNChar(dateText, 6);
                     SimpleDateFormat sdf = new SimpleDateFormat(OLD_FORMAT);
                     Date d = null;
                     try {
                         d = sdf.parse(monthText);
                         sdf.applyPattern(NEW_FORMAT);
 
-                        hmQueries.put("monthName", sdf.format(d));
+                        hmQueries.put("monthId", sdf.format(d));
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
-                    hmQueries.put("monthId", monthText);
+//                    hmQueries.put("monthId", monthText);
+                    hmQueries.put("monthName", monthText);
                     DocumentReference docRef = firestore
                             .collection("Commissions")
                             .document(commissionData.getSrNo())

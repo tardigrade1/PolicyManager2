@@ -76,7 +76,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
         resendOtp = findViewById(R.id.tvResendOTP);
         tvPhoneNumber = findViewById(R.id.tvPhoneNumber);
         tvVerifyStatus = findViewById(R.id.tvVerificationStatus);
-        tvOtp = findViewById(R.id.et_otp);
+            tvOtp = findViewById(R.id.et_otp);
         lvSignInBtn = findViewById(R.id.linearSignInBtn);
         pbStatus = findViewById(R.id.progressBarStatus);
         //getting mobile number from the previous activity
@@ -126,7 +126,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
                 TaskExecutors.MAIN_THREAD,
                 mCallbacks);
         Toast.makeText(VerifyPhoneActivity.this, "OTP sent", Toast.LENGTH_SHORT).show();
-        timeCount();
+//        timeCount();
     }
     // [START resend_verification]
 
