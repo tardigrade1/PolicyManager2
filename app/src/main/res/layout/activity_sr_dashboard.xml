@@ -1,298 +1,343 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    android:fillViewport="true"
     tools:context=".SrDashboardActivity">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/profileCard"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        android:layout_height="0dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/srActiveScreen"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/profileCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="#288B8B8B"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+
+                    <TextView
+                        android:id="@+id/tvSrName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text=""
+                        android:textColor="#000"
+                        android:textSize="18dp" />
+
+                    <TextView
+
+                        android:id="@+id/tvSrId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="5dp"
+                        android:text="" />
+
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2sp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:background="@drawable/view_background" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2.5"
+                            android:padding="5dp"
+                            android:text="Branch" />
+
+                        <TextView
+                            android:id="@+id/tvSrBranch"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="5dp"
+                            android:text=""
+                            android:textColor="#122C3A" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2.5"
+                            android:padding="5dp"
+                            android:text="Email" />
+
+                        <TextView
+                            android:id="@+id/tvSrEmail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="5dp"
+                            android:text=""
+                            android:textColor="#122C3A" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2.5"
+                            android:padding="5dp"
+                            android:text="Date of joining" />
+
+                        <TextView
+                            android:id="@+id/tvdoj"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="5dp"
+                            android:text=""
+                            android:textColor="#122C3A" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2.5"
+                            android:padding="5dp"
+                            android:text="Residence" />
+
+                        <TextView
+                            android:id="@+id/tvResidence"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="5dp"
+                            android:text=""
+                            android:textColor="#122C3A" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2.5"
+                            android:padding="5dp"
+                            android:text="Contact" />
+
+                        <TextView
+                            android:id="@+id/tvSrContact"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="5dp"
+                            android:text=""
+                            android:textColor="#122C3A" />
+                    </LinearLayout>
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="14dp"
+                android:onClick="myPolicies"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/profileCard"
+                app:layout_constraintVertical_bias="0.0">
+
+                <ImageView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="7"
+                    android:padding="10dp"
+                    app:srcCompat="@drawable/insurance" />
+
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:padding="10dp"
+                    android:text="My Applications"
+                    android:textColor="#000"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:id="@+id/policyCount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:gravity="end"
+                    android:padding="10dp"
+                    android:text=""
+                    android:textColor="#000"
+                    android:textSize="18dp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1sp"
+                android:layout_margin="10dp"
+                android:background="#AFACAC"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
 
             <LinearLayout
-                android:background="#288B8B8B"
-                android:layout_width="match_parent"
+                android:id="@+id/linearLayout2"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:padding="10dp"
-                >
+                android:layout_margin="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="14dp"
+                android:onClick="manageCommission"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+                app:layout_constraintVertical_bias="0.0">
 
+                <ImageView
 
-                        <TextView
-                            android:id="@+id/tvSrName"
-                            android:padding="5dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textSize="18dp"
-                            android:text=""
-                            android:textColor="#000" />
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="7"
+                    android:padding="10dp"
+                    app:srcCompat="@drawable/commission" />
 
-                        <TextView
-
-                            android:paddingLeft="5dp"
-                            android:id="@+id/tvSrId"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="" />
-
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2sp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:background="@drawable/view_background" />
-                <LinearLayout
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2.5"
-                        android:padding="5dp"
-                        android:text="Branch"/>
-
-                    <TextView
-android:id="@+id/tvSrBranch"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:padding="5dp"
-                        android:text=""
-                        android:textColor="#122C3A" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2.5"
-                        android:padding="5dp"
-                        android:text="Email"/>
-
-                    <TextView
-                        android:id="@+id/tvSrEmail"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:padding="5dp"
-                        android:text=""
-                        android:textColor="#122C3A" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2.5"
-                        android:padding="5dp"
-                        android:text="Date of joining"/>
-
-                    <TextView
-android:id="@+id/tvdoj"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:padding="5dp"
-                        android:text=""
-                        android:textColor="#122C3A" />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2.5"
-                        android:padding="5dp"
-                        android:text="Residence"/>
-
-                    <TextView
-android:id="@+id/tvResidence"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:padding="5dp"
-                        android:text=""
-                        android:textColor="#122C3A" />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2.5"
-                        android:padding="5dp"
-                        android:text="Contact"/>
-
-                    <TextView
-                        android:id="@+id/tvSrContact"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:padding="5dp"
-                        android:text=""
-                        android:textColor="#122C3A" />
-                </LinearLayout>
+                    android:layout_weight="1"
+                    android:padding="10dp"
+                    android:text="My Commission"
+                    android:textColor="#000"
+                    android:textSize="18dp" />
             </LinearLayout>
 
-    </androidx.cardview.widget.CardView>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1sp"
+                android:layout_margin="10dp"
+                android:background="#AFACAC"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="14dp"
-        android:onClick="myPolicies"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/profileCard"
-        app:layout_constraintVertical_bias="0.0">
+            <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="14dp"
+                android:onClick="knowMore"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+                app:layout_constraintVertical_bias="0.0">
 
-        <ImageView
+                <ImageView
 
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="7"
+                    android:padding="5dp"
+                    app:srcCompat="@drawable/more" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="10dp"
+                    android:text="Know More"
+                    android:textColor="#000"
+                    android:textSize="18dp" />
+                />
+            </LinearLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/srSuspendScreen"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="7"
-            android:padding="10dp"
-            app:srcCompat="@drawable/insurance" />
+            android:visibility="gone">
 
-        <TextView
+            <ImageView
+                android:id="@+id/imageView11"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.536"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.3"
+                app:srcCompat="@drawable/dismissed" />
 
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="4"
-            android:padding="10dp"
-            android:text="My Applications"
-            android:textColor="#000"
-            android:textSize="18dp" />
-        <TextView
-            android:id="@+id/policyCount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="5"
-            android:padding="10dp"
-            android:gravity="end"
-            android:text=""
-            android:textColor="#000"
-            android:textSize="18dp" />
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1sp"
-        android:layout_margin="10dp"
-        android:background="#AFACAC"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="14dp"
-        android:onClick="manageCommission"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.0">
-
-        <ImageView
-
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="7"
-            android:padding="10dp"
-            app:srcCompat="@drawable/commission" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="10dp"
-            android:text="My Commission"
-            android:textColor="#000"
-            android:textSize="18dp" />
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1sp"
-        android:layout_margin="10dp"
-        android:background="#AFACAC"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="14dp"
-        android:onClick="knowMore"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        app:layout_constraintVertical_bias="0.0">
-
-        <ImageView
-
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="7"
-            android:padding="5dp"
-            app:srcCompat="@drawable/more"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="10dp"
-            android:text="Know More"
-            android:textColor="#000"
-            android:textSize="18dp" />
-        />
-    </LinearLayout>
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:text="You're account is suspended.\nPlease talk to your manager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/imageView11"
+                app:layout_constraintStart_toStartOf="@+id/imageView11"
+                app:layout_constraintTop_toBottomOf="@+id/imageView11"
+                app:layout_constraintVertical_bias="0.0" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
+</ScrollView>

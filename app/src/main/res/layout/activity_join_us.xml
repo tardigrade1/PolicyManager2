@@ -20,7 +20,7 @@
             android:padding="@dimen/activity_horizontal_margin_single"
             android:textStyle="bold"
             android:textColor="@color/grey"
-            android:text="To Join LIC Card Agency"
+            android:text="To Join LIC Credit Card"
             android:textSize="20dp" />
 
         <View
@@ -28,35 +28,11 @@
             android:layout_height="1sp"
             android:background="#cecece" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="@dimen/activity_horizontal_margin"
-            android:text="Submit following documents"
-            android:textColor="#000" />
-
-        <Button
-            android:id="@+id/btnDownloadSpecimen"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_horizontal_margin_single"
-            android:layout_marginBottom="@dimen/activity_horizontal_margin_single"
-            android:background="@drawable/ask_for_login_background"
-            android:text="@string/download_specimen_form"
-            android:textAllCaps="false"
-            android:textColor="#fff" />
-
-        <TextView
-
-            android:id="@+id/documentsListText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textColor="#141414" />
-
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            android:layout_marginTop="5dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -68,16 +44,11 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Correspondence Address:"
-                    android:textColor="@color/colorAccentDark"
+                    android:text="Please share your following details on WhatApp:"
+                    android:textColor="#555"
                     android:textStyle="bold"
                     android:textSize="18dp" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-
-                    android:text="LIC Credit card office,\n2nd Floor,Jeevan Shikha building\nJeevan Bima Nagar\n(Near Karuna Hospital)\nBorivali West, Mumbai-400103" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -89,15 +60,17 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
-                        android:text="Website:"
+                        android:text="Name:"
                         android:textColor="#000" />
 
-                    <TextView
+                    <EditText
+                        android:id="@+id/etVisitorName"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:textSize="15dp"
                         android:inputType="textWebEmailAddress"
-                        android:text="NA" />
+                        android:hint="enter your name" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -110,15 +83,17 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
-                        android:text="Email:"
+                        android:text="Place:"
                         android:textColor="#000" />
 
-                    <TextView
+                    <EditText
+                        android:id="@+id/etVisitorPlace"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:inputType="textWebEmailAddress"
-                        android:text="lic.ccmum@gmail.com" />
+                        android:textSize="15dp"
+                        android:hint="under Mumbai &amp; Thane only" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -131,15 +106,17 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
-                        android:text="P.B.X.:"
+                        android:text="Contact No:"
                         android:textColor="#000" />
 
-                    <TextView
+                    <EditText
+                        android:id="@+id/etVisitorContact"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:inputType="textWebEmailAddress"
-                        android:text="9819521877, 8850720125" />
+                        android:inputType="phone|number"
+                        android:textSize="15dp"
+                        android:hint="enter mobile no" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -152,17 +129,91 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
-                        android:text="Fax:"
+                        android:text="Relation:"
                         android:textColor="#000" />
 
-                    <TextView
-                        android:layout_width="fill_parent"
+                    <LinearLayout android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:inputType="textWebEmailAddress"
-                        android:text="NA" />
+                        android:orientation="vertical">
+
+                        <CheckBox
+                            android:id="@+id/cbLICAgent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="LIC agent" />
+
+                        <CheckBox
+                            android:id="@+id/cbPolicyHolder"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Policy Holder" />
+                        <CheckBox
+                            android:id="@+id/cbOthers"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Others" />
+                    </LinearLayout>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/shareDetailsOnWhatsApp"
+                    android:layout_width="200dp"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/activity_horizontal_margin_single"
+                    android:layout_gravity="end"
+                    android:background="@drawable/share_on_whatsapp_background">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="5"
+                        android:text="Share details"
+                        android:gravity="center"
+                        android:textSize="18dp"
+                        android:textColor="#fff" />
+
+                    <ImageView
+                        android:id="@+id/imageView9"
+                        android:layout_width="20dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/whatsapp" />
+
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/activity_horizontal_margin"
+            android:text="Submit following documents"
+            android:textStyle="bold"
+            android:textColor="#000" />
+        <TextView
+            android:layout_marginTop="@dimen/activity_horizontal_margin_single"
+            android:id="@+id/documentsListText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="#141414" />
+        <Button
+            android:id="@+id/btnDownloadSpecimen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_horizontal_margin_single"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin_single"
+            android:background="@drawable/ask_for_login_background"
+            android:text="@string/download_specimen_form"
+            android:textAllCaps="false"
+            android:textColor="#fff" />
+
+
+
+
     </LinearLayout>
 </ScrollView>

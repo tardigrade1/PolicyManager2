@@ -189,6 +189,32 @@
             android:ems="13"
             android:inputType="textCapSentences"/>
     </LinearLayout>
+    <LinearLayout
+        android:id="@+id/LL8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/LL7">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="Supervisor Code" />
+
+        <EditText
+            android:id="@+id/tvNewSrSupervisorCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="13"
+            android:inputType="textCapCharacters"/>
+    </LinearLayout>
 
     <Button
         android:id="@+id/btnContinueNewSr"
@@ -201,6 +227,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:textAllCaps="false"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/LL7"
+        app:layout_constraintTop_toBottomOf="@+id/LL8"
         app:layout_constraintVertical_bias="1.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

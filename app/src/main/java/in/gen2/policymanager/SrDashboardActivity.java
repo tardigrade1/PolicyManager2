@@ -3,6 +3,7 @@ package in.gen2.policymanager;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -18,6 +19,8 @@ import android.widget.TextView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.google.firebase.firestore.Query;
@@ -50,9 +53,15 @@ public class SrDashboardActivity extends AppCompatActivity {
     TextView srDoj;
     @BindView(R.id.tvResidence)
     TextView srResidence;
+    @BindView(R.id.srActiveScreen)
+    ConstraintLayout srActiveScreen;
+    @BindView(R.id.srSuspendScreen)
+    ConstraintLayout srSuspendScreen;
     private FirebaseFirestore fireRef;
     private String srNoText;
     private PolicyListSqliteData policySQLiteDb;
+    private SharedPreferences.Editor editor;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +69,8 @@ public class SrDashboardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sr_dashboard);
         unbinder = ButterKnife.bind(this);
         prefs = getSharedPreferences("UserData", MODE_PRIVATE);
+        editor = prefs.edit();
+
         String nameText = prefs.getString("name", "");
         srNoText = prefs.getString("srNo", "");
         String branchText = prefs.getString("branch", "");
@@ -75,11 +86,20 @@ public class SrDashboardActivity extends AppCompatActivity {
         srDoj.setText(dojText);
         srContact.setText("+91-" + contactText);
         policySQLiteDb = new PolicyListSqliteData(this);
+//        if(active){
+//            srSuspendScreen.setVisibility(View.GONE);
+//            srActiveScreen.setVisibility(View.VISIBLE);
+//        }
+//        else{
+//            srActiveScreen.setVisibility(View.GONE);
+//            srSuspendScreen.setVisibility(View.VISIBLE);
+//        }
         FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
                 .setPersistenceEnabled(true)
                 .build();
         fireRef = FirebaseFirestore.getInstance();
         fireRef.setFirestoreSettings(settings);
+//        activeStatus();
         totalPolicyCount();
     }
 
@@ -171,5 +191,36 @@ public class SrDashboardActivity extends AppCompatActivity {
         Intent i = new Intent(SrDashboardActivity.this, MoreActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
+    }
+    private void activeStatus(){
+
+        DocumentReference docRef = fireRef.collection("SalesRepresentatives")
+                .document(srNoText);
+
+        docRef.collection("SalesRepresentatives").document(srNoText).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document != null && document.exists()) {
+                        Boolean activeStatus = document.getBoolean("active");
+                        if (activeStatus) {
+                            editor.putBoolean("active", true);
+                            editor.commit();
+                            srActiveScreen.setVisibility(View.VISIBLE);
+                            srSuspendScreen.setVisibility(View.GONE);
+                        }
+                        else{
+                            editor.putBoolean("active", false);
+                            editor.commit();
+                            srActiveScreen.setVisibility(View.GONE);
+                            srSuspendScreen.setVisibility(View.VISIBLE);
+                        }
+                    }
+                } else {
+                    Log.d("TAG", "get failed with ", task.getException());
+                }
+            }
+        });
     }
 }

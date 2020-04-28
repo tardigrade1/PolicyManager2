@@ -10,6 +10,7 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,19 +33,21 @@ import in.gen2.policymanager.Helpers.SRSqliteData;
 public class AddNewSrActivity extends AppCompatActivity {
     Unbinder unbinder;
     @BindView(R.id.tvNewSrName)
-    TextView tvName;
+    EditText tvName;
     @BindView(R.id.tvNewSrSrNo)
-    TextView tvSrNo;
+    EditText tvSrNo;
     @BindView(R.id.tvNewSrDoj)
-    TextView tvDoj;
+    EditText tvDoj;
     @BindView(R.id.tvNewSrBranch)
-    TextView tvBranch;
+    EditText tvBranch;
     @BindView(R.id.tvNewSrEmail)
-    TextView tvEmail;
+    EditText tvEmail;
     @BindView(R.id.tvNewSrMobile)
-    TextView tvMobile;
+    EditText tvMobile;
     @BindView(R.id.tvNewSrResidence)
-    TextView tvResidence;
+    EditText tvResidence;
+    @BindView(R.id.tvNewSrSupervisorCode)
+    EditText tvNewSrSupervisorCode;
     private FirebaseFirestore firestore;
     private String name;
     private String srNo;
@@ -55,6 +58,8 @@ public class AddNewSrActivity extends AppCompatActivity {
     private String residence;
     private NetworkInfo activeNetwork;
     SRSqliteData srSqliteDb;
+    private String supervisorCode;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +79,7 @@ public class AddNewSrActivity extends AppCompatActivity {
         email = tvEmail.getText().toString().trim();
         mobile = tvMobile.getText().toString().trim();
         residence = tvResidence.getText().toString().trim();
+        supervisorCode = tvNewSrSupervisorCode.getText().toString().trim();
 
         if (name.isEmpty()) {
             tvName.requestFocus();
@@ -90,6 +96,10 @@ public class AddNewSrActivity extends AppCompatActivity {
         } else if (mobile.isEmpty()) {
             tvMobile.requestFocus();
             tvMobile.setError("Mobile no is mandatory");
+            return false;
+        }else if (supervisorCode.isEmpty()) {
+            tvNewSrSupervisorCode.requestFocus();
+            tvNewSrSupervisorCode.setError("code no. is mandatory");
             return false;
         }
         return true;
@@ -137,6 +147,8 @@ public class AddNewSrActivity extends AppCompatActivity {
             hm.put("residence", residence);
             hm.put("mobileNo", mobile);
             hm.put("email", email);
+            hm.put("active", true);
+            hm.put("supervisorCode", supervisorCode);
             DocumentReference docRef = firestore
                     .collection("SalesRepresentatives")
                     .document(srNo);
@@ -152,7 +164,6 @@ public class AddNewSrActivity extends AppCompatActivity {
                         } else {
                             srSqliteDb.insertSr(name, srNo);
                             docRef
-
                                     .set(hm,SetOptions.merge())
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override

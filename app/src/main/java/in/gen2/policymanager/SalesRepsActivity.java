@@ -76,6 +76,8 @@ public class SalesRepsActivity extends AppCompatActivity {
     private FirebaseFirestore fireRef;
     private SalesRepresentativesAdapter adapter;
     private ArrayList<SalesRepsDatamodel> srList;
+    private Boolean supervisor;
+    private String userID;
 
     @SuppressLint("RestrictedApi")
     @Override
@@ -85,25 +87,35 @@ public class SalesRepsActivity extends AppCompatActivity {
         mShimmerViewContainer = findViewById(R.id.shimmer_view_container);
         unbinder = ButterKnife.bind(this);
         SharedPreferences prefs = getSharedPreferences("UserData", MODE_PRIVATE);
-        Boolean supervisor = prefs.getBoolean("supervisor", false);
-        if(supervisor){
-            addNewSr.setVisibility(View.GONE);
-        }
+        userID = prefs.getString("srNo", "");
+        Log.d("TAG", "onCreate: "+userID);
+        supervisor = prefs.getBoolean("supervisor", false);
+
         FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
                 .setPersistenceEnabled(true)
                 .build();
-        srSqliteDb = new SRSqliteData(this);
-
         fireRef = FirebaseFirestore.getInstance();
         fireRef.setFirestoreSettings(settings);
-//        new LoadFireStoreData().execute();
-        if (!srSqliteDb.doesDatabaseExist(this)) {
-            new LoadFireStoreData().execute();
-        }else if(!srSqliteDb.isTableExists()){
-            new LoadFireStoreData().execute();
-        } else {
-            searchUsers();
-    }
+        srSqliteDb = new SRSqliteData(this);
+        if (supervisor) {
+            addNewSr.setVisibility(View.GONE);
+            if (!srSqliteDb.doesDatabaseExist(this)) {
+                new LoadFireStoreLimitedData().execute();
+            } else if (!srSqliteDb.isTableExists()) {
+                new LoadFireStoreLimitedData().execute();
+            } else {
+                searchUsers();
+            }
+        }
+        else {
+            if (!srSqliteDb.doesDatabaseExist(this)) {
+                new LoadFireStoreFullData().execute();
+            } else if (!srSqliteDb.isTableExists()) {
+                new LoadFireStoreFullData().execute();
+            } else {
+                searchUsers();
+            }
+        }
         edtFilter.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -135,28 +147,35 @@ public class SalesRepsActivity extends AppCompatActivity {
         inflater.inflate(R.menu.srlist_menu, menu);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.action_refresh:
                 srSqliteDb.deleteAll();
-                new LoadFireStoreData().execute();
+                if (supervisor) {
+                    new LoadFireStoreLimitedData().execute();
+                }
+                else {
+                    new LoadFireStoreFullData().execute();
+                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
+
     private void searchUsers() {
 
         srList = new ArrayList<>(srSqliteDb.getSrNames());
-        adapter = new SalesRepresentativesAdapter(srList,getApplicationContext());
+        adapter = new SalesRepresentativesAdapter(srList, getApplicationContext());
         rvRepresentativesList.setAdapter(adapter);
         rvRepresentativesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                SalesRepsDatamodel dataModel= srList.get(position);
+                SalesRepsDatamodel dataModel = srList.get(position);
                 Intent intentPolicyDetail = new Intent(SalesRepsActivity.this, ViewSrDetailsActivity.class);
                 intentPolicyDetail.putExtra("srNo", dataModel.getSrNo());
                 intentPolicyDetail.putExtra("srName", dataModel.getName());
@@ -197,7 +216,7 @@ public class SalesRepsActivity extends AppCompatActivity {
     }
 
 
-    class LoadFireStoreData extends AsyncTask<Void, Void, Integer> {
+    class LoadFireStoreFullData extends AsyncTask<Void, Void, Integer> {
         ProgressDialog Dialog = new ProgressDialog(SalesRepsActivity.this);
 
         @Override
@@ -232,25 +251,83 @@ public class SalesRepsActivity extends AppCompatActivity {
 
         @Override
         protected Integer doInBackground(Void... voids) {
-            Query query=fireRef.collection("SalesRepresentatives")
+            Query query = fireRef.collection("SalesRepresentatives")
                     .orderBy("name");
 
-                    query.get()
+            query.get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             if (task.isSuccessful()) {
                                 for (QueryDocumentSnapshot document : task.getResult()) {
 
-                                        String nameText = (String) document.get("name");
-                                        String srNoText = (String) document.get("srNo");
-                                        Log.d("TAG", document.getId() + " => " + nameText + " => " + srNoText);
-                                        srSqliteDb.insertSr(nameText, srNoText);
+                                    String nameText = (String) document.get("name");
+                                    String srNoText = (String) document.get("srNo");
+                                    Log.d("TAG", document.getId() + " => " + nameText + " => " + srNoText);
+                                    srSqliteDb.insertSr(nameText, srNoText);
 
 
+                                }
+                                Dialog.dismiss();
+                                searchUsers();
+                            } else {
+                                Log.d("TAG", "Error getting documents: ", task.getException());
+                                Dialog.dismiss();
+                            }
+                        }
+                    });
+            return 0;
+        }
+    }
+
+    class LoadFireStoreLimitedData extends AsyncTask<Void, Void, Integer> {
+        ProgressDialog Dialog = new ProgressDialog(SalesRepsActivity.this);
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            mShimmerViewContainer.startShimmer();
+            mShimmerViewContainer.setVisibility(View.VISIBLE);
+            rvRepresentativesList.setVisibility(View.GONE);
+            Dialog.setTitle("Please Wait");
+            Dialog.setMessage("loading...");
+            Dialog.setIndeterminate(false);
+            Dialog.setCancelable(false);
+            Dialog.show();
+            isInternetOn();
+        }
+        protected void isInternetOn() {
+            ConnectivityManager conn = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo activeNetwork = conn.getActiveNetworkInfo();
+            if (activeNetwork != null && activeNetwork.isConnected() == true) {
+            } else {
+                Dialog.setMessage("please check your internet connection...");
+            }
+        }
+        @Override
+        protected void onPostExecute(Integer result) {
+            super.onPostExecute(result);
+
+        }
+        @Override
+        protected Integer doInBackground(Void... voids) {
+            Query query = fireRef
+                    .collection("SalesRepresentatives")
+                    .whereEqualTo("supervisorCode",userID);
+//                    .orderBy("name");
+            Log.d("TAG", "doInBackground: "+query.toString());
+            query.get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                for (QueryDocumentSnapshot document : task.getResult()) {
 
 
-
+                                    String nameText = (String) document.get("name");
+                                    String srNoText = (String) document.get("srNo");
+                                    Log.d("TAG", document.getId() + " => " + nameText + " => " + srNoText);
+                                    srSqliteDb.insertSr(nameText, srNoText);
 
                                 }
                                 Dialog.dismiss();

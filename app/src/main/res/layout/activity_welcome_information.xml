@@ -73,21 +73,6 @@
             </androidx.cardview.widget.CardView>
         </ViewFlipper>
 
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/vfWelcomeBanner"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="0dp"
-            android:layout_marginBottom="8dp"
-            android:onClick="clickToLogin"
-            android:background="@drawable/ask_for_login_background"
-            android:text="Already LIC Cards agent? Login here"
-            android:textColor="#fff"
-            android:textSize="16dp"
-            android:textStyle="bold"
-            android:typeface="sans" />
     </RelativeLayout>
 
         <TextView
@@ -96,7 +81,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:fontFamily="@font/carme"
-            android:text="Join LIC Cards"
+            android:text="Join LIC Credit Cards"
             android:textColor="#006796"
             android:textSize="25dp"
             android:textStyle="bold"
@@ -106,27 +91,50 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
 
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(Mumbai &amp; Thane only)"
+            android:textColor="#680000"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/textView7"
+            app:layout_constraintStart_toStartOf="@+id/textView7"
+            app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
         <LinearLayout
             android:id="@+id/linearLayout7"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout8"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
-            app:layout_constraintVertical_bias="1.0">
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:background="@drawable/file_upload_background"
+                android:background="@drawable/ask_for_login_background"
                 android:gravity="center"
-                android:onClick="getBenefits"
+                android:onClick="clickToLogin"
                 android:orientation="horizontal">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:fontFamily="@font/carme"
+                    android:gravity="center"
+                    android:text="Already LIC cards Agent? Login here"
+                    android:textColor="#fff"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
 
                 <ImageView
 
@@ -134,16 +142,7 @@
                     android:layout_height="@dimen/welcome_icon_size"
                     android:layout_weight="1"
                     android:padding="10dp"
-                    app:srcCompat="@drawable/banifits" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="5"
-                    android:text="Benefits"
-                    android:fontFamily="@font/carme"
-android:textStyle="bold"
-                    android:textColor="#000" />
+                    app:srcCompat="@drawable/login" />
             </LinearLayout>
 
             <LinearLayout
@@ -151,7 +150,7 @@ android:textStyle="bold"
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:background="@drawable/file_upload_background"
+                android:background="@drawable/ask_for_login_background"
                 android:gravity="center"
                 android:onClick="clickToJoin"
                 android:orientation="horizontal">
@@ -168,80 +167,14 @@ android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="5"
-                    android:text="Join Us"
                     android:fontFamily="@font/carme"
-                    android:textStyle="bold"
-                    android:textColor="#000" />
+                    android:gravity="center"
+                    android:text="New Entrant ? Click to Join Us"
+                    android:textColor="#fff"
+                    android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/linearLayout8"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
-            app:layout_constraintVertical_bias="0.8">
 
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/file_upload_background"
-                android:gravity="center"
-                android:onClick="contactUsClick"
-                android:orientation="horizontal">
-
-                <ImageView
-
-                    android:layout_width="@dimen/welcome_icon_size"
-                    android:layout_height="@dimen/welcome_icon_size"
-                    android:layout_weight="1"
-                    android:padding="10dp"
-                    app:srcCompat="@drawable/contact_us" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="5"
-                    android:text="Contact Us"
-                    android:fontFamily="@font/carme"
-                    android:textStyle="bold"
-                    android:textColor="#000" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/file_upload_background"
-                android:gravity="center"
-                android:onClick="knowMoreClick"
-                android:orientation="horizontal">
-
-                <ImageView
-
-                    android:layout_width="@dimen/welcome_icon_size"
-                    android:layout_height="@dimen/welcome_icon_size"
-                    android:layout_weight="1"
-                    android:padding="10dp"
-                    app:srcCompat="@drawable/more" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="5"
-                    android:text="Know more"
-                    android:fontFamily="@font/carme"
-                    android:textStyle="bold"
-                    android:textColor="#000" />
-            </LinearLayout>
-        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

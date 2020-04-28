@@ -1,7 +1,9 @@
 package in.gen2.policymanager;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -10,6 +12,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -18,7 +21,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreSettings;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -58,7 +67,11 @@ public class MainActivity extends AppCompatActivity {
     View viewCommission;
     @BindView(R.id.viewManageData)
     View viewManageData;
-
+    @BindView(R.id.constActive)
+    ConstraintLayout activeScreen;
+    @BindView(R.id.constSuspend)
+    ConstraintLayout suspendScreen;
+    private FirebaseFirestore fireRef;
 
 
 //    @BindView(R.id.policyCount)
@@ -70,7 +83,8 @@ public class MainActivity extends AppCompatActivity {
     private String srNoText;
 PolicyListSqliteData policySQLiteDb;
 SRSqliteData salesSQLdb;
-    private Boolean supervisor;
+
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +92,8 @@ SRSqliteData salesSQLdb;
         setContentView(R.layout.activity_main);
         unbinder = ButterKnife.bind(this);
         prefs = getSharedPreferences("UserData", MODE_PRIVATE);
+        editor = prefs.edit();
+
         String nameText = prefs.getString("name", "");
         srNoText = prefs.getString("srNo", "");
         String branchText = prefs.getString("branch", "");
@@ -86,6 +102,14 @@ SRSqliteData salesSQLdb;
         String dojText = prefs.getString("doj", "");
         String residenceText = prefs.getString("residence", "");
         Boolean supervisor = prefs.getBoolean("supervisor", false);
+//        if(active){
+//            suspendScreen.setVisibility(View.GONE);
+//            activeScreen.setVisibility(View.VISIBLE);
+//        }
+//        else{
+//            activeScreen.setVisibility(View.GONE);
+//            suspendScreen.setVisibility(View.VISIBLE);
+//        }
         if(supervisor){
             viewApplication.setVisibility(View.GONE);
             viewCommission.setVisibility(View.GONE);
@@ -94,7 +118,12 @@ SRSqliteData salesSQLdb;
             linearLayout2.setVisibility(View.GONE);
             linearLayout4.setVisibility(View.GONE);
         }
-
+        FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
+                .setPersistenceEnabled(true)
+                .build();
+        fireRef = FirebaseFirestore.getInstance();
+        fireRef.setFirestoreSettings(settings);
+//        activeStatus();
         tvAdminName.setText(nameText);
         tvAdminId.setText(srNoText);
         tvAdminBranch.setText(branchText);
@@ -107,7 +136,6 @@ SRSqliteData salesSQLdb;
         if (!CheckingPermissionIsEnabledOrNot()) {
             RequestMultiplePermission();
         }
-
     }
     private void logoutUser() {
         policySQLiteDb.deleteTable();
@@ -226,5 +254,42 @@ SRSqliteData salesSQLdb;
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
 
+    }
+
+    public void knowMore(View view) {
+        Intent i = new Intent(MainActivity.this, MoreActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(i);
+    }
+    private void activeStatus(){
+
+        DocumentReference docRef = fireRef.collection("SalesRepresentatives")
+                .document(srNoText);
+
+        docRef.collection("SalesRepresentatives").document(srNoText).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document != null && document.exists()) {
+                        Boolean activeStatus = document.getBoolean("active");
+                        if (activeStatus) {
+                            editor.putBoolean("active", true);
+                            editor.commit();
+                            activeScreen.setVisibility(View.VISIBLE);
+                            suspendScreen.setVisibility(View.GONE);
+                        }
+                        else{
+                            editor.putBoolean("active", false);
+                            editor.commit();
+                            activeScreen.setVisibility(View.GONE);
+                            suspendScreen.setVisibility(View.VISIBLE);
+                        }
+                    }
+                } else {
+                    Log.d("TAG", "get failed with ", task.getException());
+                }
+            }
+        });
     }
 }

@@ -18,11 +18,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:padding="@dimen/activity_horizontal_margin_single"
+            android:paddingTop="@dimen/activity_horizontal_margin_single"
             android:text="Benefits"
             android:textColor="@color/grey"
             android:fontFamily="@font/nunito_extrabold"
             android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_gravity="center"
+            android:text="(Terms &amp; conditions apply)"
+            android:textColor="#710606"
+            android:textStyle="italic" />
 
         <View
             android:layout_width="match_parent"
@@ -36,6 +46,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#000"
+            android:textSize="17dp"
             android:text="" />
 
         <TextView
@@ -49,16 +60,6 @@
             android:text="after all it gives Golden chance to create new leads for LIC policies."
             android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/font_size_of_content" />
-
-        <TextView
-            android:id="@+id/textView12"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#710606"
-            android:layout_marginTop="5dp"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:text="Terms &amp; conditions apply" />
 
     </LinearLayout>
 </ScrollView>

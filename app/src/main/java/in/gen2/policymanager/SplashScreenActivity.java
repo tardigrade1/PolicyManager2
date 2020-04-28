@@ -25,8 +25,7 @@ public class SplashScreenActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private SharedPreferences prefs = null;
     private Boolean admin;
-    private SharedPreferences.Editor editor;
-    private Intent intent=null;
+    private Intent intent = null;
     private Boolean supervisor;
 
     @Override
@@ -38,24 +37,24 @@ public class SplashScreenActivity extends AppCompatActivity {
         splashImg.startAnimation(myanim);
         mAuth = FirebaseAuth.getInstance();
         prefs = getSharedPreferences("UserData", MODE_PRIVATE);
-        editor = prefs.edit();
         admin = prefs.getBoolean("admin", false);
         supervisor = prefs.getBoolean("supervisor", false);
         FirebaseUser firebaseUser = mAuth.getCurrentUser();
-        if (firebaseUser != null) {
-            //verification successful we will start the profile activity
-            if (admin) {
-                intent = new Intent(this, MainActivity.class);
-            }
-            else if (supervisor) {
-                intent = new Intent(this, MainActivity.class);
-            } else {
-              intent = new Intent(this, SrDashboardActivity.class);
 
+            if (firebaseUser != null) {
+                //verification successful we will start the profile activity
+
+                if (admin) {
+                    intent = new Intent(this, MainActivity.class);
+                } else if (supervisor) {
+                    intent = new Intent(this, MainActivity.class);
+                } else {
+                    intent = new Intent(this, SrDashboardActivity.class);
+
+                }
             }
-        }
-        else{
-           intent = new Intent(this, WelcomeInformationActivity.class);
+            else {
+            intent = new Intent(this, WelcomeInformationActivity.class);
         }
 
         Thread timer = new Thread() {

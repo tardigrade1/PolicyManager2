@@ -115,231 +115,400 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/policyDetailText"
+    <LinearLayout
+        android:id="@+id/applicationInfoLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="Application Form Information"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView" />
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:elevation="5dp"
-        app:cardCornerRadius="10dp"
+        android:orientation="vertical"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/policyDetailText"
+        app:layout_constraintTop_toBottomOf="@+id/cardView"
         app:layout_constraintVertical_bias="0.0">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/policyDetailText"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="5dp">
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="Application Form Information"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="18dp"
+            android:textStyle="bold" />
 
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
-                    android:text="Application Number" />
-
-                <TextView
-                    android:id="@+id/tvApplicationId"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="end"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
-                    android:text=""
-                    android:textColor="#101010" />
-            </LinearLayout>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:elevation="5dp"
+            app:cardCornerRadius="10dp">
 
             <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:orientation="horizontal">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="5dp">
 
-                <TextView
-                    android:layout_width="match_parent"
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
-                    android:text="Bank" />
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal">
 
-                <TextView
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="Application Number" />
 
-                    android:layout_width="match_parent"
+                    <TextView
+                        android:id="@+id/tvApplicationId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:text=""
+                        android:textColor="#101010" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="end"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
-                    android:text="Axis"
-                    android:textColor="#101010" />
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal">
 
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="Bank" />
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="Axis"
+                        android:textColor="#101010" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="Date" />
+
+                    <TextView
+                        android:id="@+id/tvPolicyPurchase"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:text=""
+                        android:textColor="#101010" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="Current Status" />
+
+                    <TextView
+                        android:id="@+id/tvPolicyStatus"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:text=""
+                        android:textColor="#101010" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="Date" />
+
+                    <TextView
+
+                        android:id="@+id/tvApproveDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="NA"
+                        android:textColor="#101010" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="Comment" />
+
+                    <TextView
+
+                        android:id="@+id/tvRejectComments"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="NA"
+                        android:textColor="#101010" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="Requirement" />
+
+                    <TextView
+                        android:id="@+id/tvRejectRequirement"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="NA"
+                        android:textColor="#101010" />
+
+                </LinearLayout>
             </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/updateInfoLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView"
+        app:layout_constraintVertical_bias="0.0">
+
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="Update Form Information"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:elevation="5dp"
+            app:cardCornerRadius="10dp">
 
             <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:orientation="horizontal">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="5dp">
 
-                <TextView
+
+
+
+
+
+
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="Current Status" />
+
+                    <TextView
+                        android:id="@+id/etCurrentStatus"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:text=""
+                        android:textColor="#101010" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="Date" />
+
+                    <EditText
+                        android:id="@+id/etUpdateDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:textColor="#101010" />
+
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="Comment" />
+
+                    <EditText
+                        android:id="@+id/etUpdateComment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:inputType="textMultiLine"
+                        android:textColor="#101010" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="Requirement" />
+
+                    <EditText
+                        android:id="@+id/etUpdateRequirement"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:inputType="textMultiLine"
+                        android:textColor="#101010" />
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btnUpdate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
-                    android:text="Date" />
-
-                <TextView
-                    android:id="@+id/tvPolicyPurchase"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="end"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
-                    android:text=""
-                    android:textColor="#101010" />
-
+                    android:background="@color/colorPrimaryDark"
+                    android:textColor="@color/colorWhite"
+                    android:layout_marginTop="20dp"
+                    android:onClick="updateFormData"
+                    android:text="Update" />
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
-                    android:text="Current Status" />
-
-                <TextView
-                    android:id="@+id/tvPolicyStatus"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="end"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
-                    android:text=""
-                    android:textColor="#101010" />
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
-                    android:text="Approval Date" />
-
-                <TextView
-
-                    android:id="@+id/tvApproveDate"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="end"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
-                    android:text="NA"
-                    android:textColor="#101010" />
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
-                    android:text="Comment" />
-
-                <TextView
-
-                    android:id="@+id/tvRejectComments"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="end"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
-                    android:text="NA"
-                    android:textColor="#101010" />
-
-            </LinearLayout>
-
-
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
-                    android:text="Requirement" />
-
-                <TextView
-                    android:id="@+id/tvRejectRequirement"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="end"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
-                    android:text="NA"
-                    android:textColor="#101010" />
-
-            </LinearLayout>
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

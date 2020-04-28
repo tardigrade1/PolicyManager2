@@ -126,7 +126,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
                 TaskExecutors.MAIN_THREAD,
                 mCallbacks);
         Toast.makeText(VerifyPhoneActivity.this, "OTP sent", Toast.LENGTH_SHORT).show();
-//        timeCount();
+        timeCount();
     }
     // [START resend_verification]
 
@@ -139,7 +139,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
                 this,               // Activity (for callback binding)
                 mCallbacks,         // OnVerificationStateChangedCallbacks
                 mVerificationToken);             // ForceResendingToken from callbacks
-        Toast.makeText(VerifyPhoneActivity.this, "OTP sent", Toast.LENGTH_SHORT).show();
+        Toast.makeText(VerifyPhoneActivity.this, "OTP re-sent", Toast.LENGTH_SHORT).show();
         timeCount();
     }
 
@@ -213,10 +213,10 @@ public class VerifyPhoneActivity extends AppCompatActivity {
             signInWithPhoneAuthCredential(credential);
         } catch (Exception e) {
             //verification unsuccessful.. display an error message
-            lvSignInBtn.setEnabled(true);
-            pbStatus.setVisibility(View.GONE);
-            tvVerifyStatus.setVisibility(View.VISIBLE);
-            tvVerifyStatus.setText("mobile verification failed!\nre-enter your OTP");
+//            lvSignInBtn.setEnabled(true);
+//            pbStatus.setVisibility(View.GONE);
+//            tvVerifyStatus.setVisibility(View.VISIBLE);
+//            tvVerifyStatus.setText("mobile verification failed!\nre-enter your OTP");
         }
     }
 

@@ -37,8 +37,8 @@ import in.gen2.policymanager.R;
 import in.gen2.policymanager.SrDashboardActivity;
 
 public class PhoneAuthActivity extends AppCompatActivity {
-    private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
+//    private FirebaseAuth mAuth;
+//    private FirebaseAuth.AuthStateListener mAuthListener;
     //    firestore
     FirebaseFirestore docRef;
     private EditText etSrNo;
@@ -51,33 +51,13 @@ public class PhoneAuthActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phone_auth);
-        mAuth = FirebaseAuth.getInstance();
+//        mAuth = FirebaseAuth.getInstance();
         prefs = getSharedPreferences("UserData", MODE_PRIVATE);
         editor = prefs.edit();
         admin = prefs.getBoolean("admin", false);
         supervisor = prefs.getBoolean("supervisor", false);
         String name=prefs.getString("name","");
         String srNumber=prefs.getString("srNo","");
-        FirebaseUser firebaseUser = mAuth.getCurrentUser();
-        if (firebaseUser != null) {
-            //verification successful we will start the profile activity
-            if (admin) {
-                Intent intent = new Intent(PhoneAuthActivity.this, MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-                finish();
-            } else if(supervisor){
-                Intent intent = new Intent(PhoneAuthActivity.this, MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-                finish();
-            } else {
-                Intent intent = new Intent(PhoneAuthActivity.this, SrDashboardActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-                finish();
-            }
-        }
         etSrNo = findViewById(R.id.etSrNo);
         tvWelcomeText=findViewById(R.id.welcomeText);
         tvWelcomeName=findViewById(R.id.welcomeName);
@@ -111,33 +91,6 @@ public class PhoneAuthActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
             }
         });
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null) {
-                    //verification successful we will start the profile activity
-                        if (admin) {
-                            Intent intent = new Intent(PhoneAuthActivity.this, MainActivity.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            startActivity(intent);
-                            finish();
-                        } else if(supervisor){
-                            Intent intent = new Intent(PhoneAuthActivity.this, MainActivity.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            startActivity(intent);
-                            finish();
-                        } else {
-                            Intent intent = new Intent(PhoneAuthActivity.this, SrDashboardActivity.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            startActivity(intent);
-                            finish();
-                        }
-
-                }
-            }
-        };
-
     }
 
     public void BtnToContinue(View view) {
@@ -192,6 +145,8 @@ public class PhoneAuthActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         DocumentSnapshot document = task.getResult();
                         if (document != null && document.exists()) {
+                            Boolean activeStatus=document.getBoolean("active");
+                            if(activeStatus){
                             String ContactNo = document.getString("mobileNo");
                             String name = document.getString("name");
                             String email = document.getString("email");
@@ -208,6 +163,7 @@ public class PhoneAuthActivity extends AppCompatActivity {
                                 editor.putString("residence", residence);
                                 editor.putBoolean("admin", true);
                                 editor.putBoolean("supervisor", false);
+                                editor.putBoolean("active", true);
                                 editor.commit();
                                 Toast.makeText(PhoneAuthActivity.this, "User set as Admin", Toast.LENGTH_SHORT).show();
                             }
@@ -221,6 +177,7 @@ public class PhoneAuthActivity extends AppCompatActivity {
                                 editor.putString("residence", residence);
                                 editor.putBoolean("supervisor", true);
                                 editor.putBoolean("admin", false);
+                                editor.putBoolean("active", true);
                                 editor.commit();
                                 Toast.makeText(PhoneAuthActivity.this, "User set as supervisor", Toast.LENGTH_SHORT).show();
                             }
@@ -234,17 +191,21 @@ public class PhoneAuthActivity extends AppCompatActivity {
                                 editor.putString("residence", residence);
                                 editor.putBoolean("supervisor", false);
                                 editor.putBoolean("admin", false);
+                                editor.putBoolean("active", true);
                                 editor.commit();
                                 Toast.makeText(PhoneAuthActivity.this, "User set as SR", Toast.LENGTH_SHORT).show();
                             }
-
                             Intent intentSignUp = new Intent(PhoneAuthActivity.this, VerifyPhoneActivity.class);
                             intentSignUp.putExtra("mobile", ContactNo);
                             intentSignUp.putExtra("srNo", srNo);
                             intentSignUp.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intentSignUp);
-
                             Log.d("TAG", ContactNo); //Print the name
+                            }
+                            else{
+                                etSrNo.setError("This account is suspended!");
+                                etSrNo.requestFocus();
+                            }
                             Dialog.dismiss();
                         } else {
                             Log.d("TAG", "No such Employee Exist");
@@ -264,14 +225,14 @@ public class PhoneAuthActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        mAuth.addAuthStateListener(mAuthListener);
+//        mAuth.addAuthStateListener(mAuthListener);
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        if (mAuthListener != null) {
-            mAuth.removeAuthStateListener(mAuthListener);
-        }
+//        if (mAuthListener != null) {
+//            mAuth.removeAuthStateListener(mAuthListener);
+//        }
     }
 }

@@ -16,6 +16,7 @@ import butterknife.Unbinder;
 import in.gen2.policymanager.Fragments.AxisBankAppFragment;
 import in.gen2.policymanager.Fragments.BenefitsOfLicCardFragment;
 import in.gen2.policymanager.Fragments.CommsionStructureFragment;
+import in.gen2.policymanager.Fragments.ContactUsFragment;
 import in.gen2.policymanager.Fragments.DocumentsRequiredFragment;
 import in.gen2.policymanager.Fragments.EligibilityConditionFragment;
 import in.gen2.policymanager.Fragments.HowToFragment;
@@ -41,6 +42,7 @@ public class MoreActivity extends AppCompatActivity {
     ProcessofLicCardFragment licCardFragment=new ProcessofLicCardFragment();
     LicPremiumOnlinePaymentFragment licPremiumOnlinePaymentFragment=new LicPremiumOnlinePaymentFragment();
     HowToFragment howToFragment=new HowToFragment();
+    ContactUsFragment contactUsFragment=new ContactUsFragment();
     final FragmentManager fm = getSupportFragmentManager();
     private ActionBar actionBar;
 
@@ -148,6 +150,24 @@ public class MoreActivity extends AppCompatActivity {
         fm.beginTransaction()
                 .setCustomAnimations(R.animator.slide_left, 0, 0, 0)
                 .replace(R.id.frame_container, howToFragment)
+                .addToBackStack(null)
+                .commit();
+    }
+    @OnClick(R.id.tvContactUsFrag)
+    public void onContactUsClick(){
+        lvQueries.setVisibility(View.GONE);
+        fm.beginTransaction()
+                .setCustomAnimations(R.animator.slide_left, 0, 0, 0)
+                .replace(R.id.frame_container, contactUsFragment)
+                .addToBackStack(null)
+                .commit();
+    }
+    @OnClick(R.id.tvBenefitsOfLicCards)
+    public void onBenefitsClick(){
+        lvQueries.setVisibility(View.GONE);
+        fm.beginTransaction()
+                .setCustomAnimations(R.animator.slide_left, 0, 0, 0)
+                .replace(R.id.frame_container, BenefitsLic)
                 .addToBackStack(null)
                 .commit();
     }

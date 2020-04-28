@@ -9,11 +9,28 @@ public class EmpData {
     private String residence=null;
     private String mobileNo=null;
     private String email=null;
+    private String supervisorCode=null;
+    private boolean active=false;
 
     public EmpData(){
 
     }
 
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public String getSupervisorCode() {
+        return supervisorCode;
+    }
+
+    public void setSupervisorCode(String supervisorCode) {
+        this.supervisorCode = supervisorCode;
+    }
 
     public String getDoj() {
         return doj;
