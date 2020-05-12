@@ -12,6 +12,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Debug;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -30,6 +31,10 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 import in.gen2.policymanager.MainActivity;
 import in.gen2.policymanager.MyCreatedPolicyActivity;
@@ -120,15 +125,67 @@ public class PhoneAuthActivity extends AppCompatActivity {
             Dialog.show();
             isInternetOn();
 
+//            isInternetAvailable(PhoneAuthActivity.this);
         }
+
+
+//        boolean isInternetAvailable(Context context) {
+//            ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+//            NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+//            if (activeNetwork == null) return false;
+//
+//            switch (activeNetwork.getType()) {
+//                case ConnectivityManager.TYPE_WIFI:
+//                    if ((activeNetwork.getState() == NetworkInfo.State.CONNECTED ||
+//                            activeNetwork.getState() == NetworkInfo.State.CONNECTING) &&
+//                            isInternetWorking()){
+//                        return true;
+//                    }
+//
+//                    break;
+//                case ConnectivityManager.TYPE_MOBILE:
+//                    if ((activeNetwork.getState() == NetworkInfo.State.CONNECTED ||
+//                            activeNetwork.getState() == NetworkInfo.State.CONNECTING) &&
+//                            isInternetWorking()){
+//                        return true;
+//                    }
+//
+//                    break;
+//                default:
+//                    return false;
+//            }
+//            return false;
+//        }
+
+
+
 
         protected void isInternetOn() {
             ConnectivityManager conn = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+            assert conn != null;
             NetworkInfo activeNetwork = conn.getActiveNetworkInfo();
-            if (activeNetwork != null && activeNetwork.isConnected() == true) {
+            if (activeNetwork != null && activeNetwork.isConnected()) {
+//                if(!isInternetWorking()){
+//                    Dialog.setMessage("your internet connection is slow");
+//                }
             } else {
                 Dialog.setMessage("please check your internet connection...");
             }
+        }
+
+        // ping the google server to check if internet is really working or not
+        boolean isInternetWorking() {
+            boolean success = false;
+            try {
+                URL url = new URL("https://google.com");
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setConnectTimeout(10000);
+                connection.connect();
+                success = connection.getResponseCode() == 200;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return success;
         }
 
         @Override
@@ -234,5 +291,44 @@ public class PhoneAuthActivity extends AppCompatActivity {
 //        if (mAuthListener != null) {
 //            mAuth.removeAuthStateListener(mAuthListener);
 //        }
+    }
+
+    public static boolean isInternetAvailable(Context context) {
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        if (activeNetwork == null) return false;
+
+        switch (activeNetwork.getType()) {
+            case ConnectivityManager.TYPE_WIFI:
+                if ((activeNetwork.getState() == NetworkInfo.State.CONNECTED ||
+                        activeNetwork.getState() == NetworkInfo.State.CONNECTING) &&
+                        isInternet())
+                    return true;
+                break;
+            case ConnectivityManager.TYPE_MOBILE:
+                if ((activeNetwork.getState() == NetworkInfo.State.CONNECTED ||
+                        activeNetwork.getState() == NetworkInfo.State.CONNECTING) &&
+                        isInternet())
+                    return true;
+                break;
+            default:
+                return false;
+        }
+        return false;
+    }
+
+    private static boolean isInternet() {
+
+        Runtime runtime = Runtime.getRuntime();
+        try {
+            Process ipProcess = runtime.exec("/system/bin/ping -c 1 8.8.8.8");
+            int exitValue = ipProcess.waitFor();
+//            Debug.i(exitValue + "");
+            return (exitValue == 0);
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return false;
     }
 }

@@ -150,6 +150,7 @@ public class SrDashboardActivity extends AppCompatActivity {
     public void manageCommission(View view) {
 
         Intent i = new Intent(SrDashboardActivity.this, commissionMonthActivity.class);
+        i.putExtra("srNo",srNoText);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
 

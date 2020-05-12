@@ -34,6 +34,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import in.gen2.policymanager.Helpers.PolicyListSqliteData;
 import in.gen2.policymanager.Helpers.SRSqliteData;
+import in.gen2.policymanager.adminActivities.SrsCommissionActivity;
 import in.gen2.policymanager.authActivities.PhoneAuthActivity;
 
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
@@ -250,7 +251,7 @@ SRSqliteData salesSQLdb;
     }
 
     public void MyCommission(View view) {
-        Intent i = new Intent(MainActivity.this, commissionMonthActivity.class);
+        Intent i = new Intent(MainActivity.this, SrsCommissionActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
 

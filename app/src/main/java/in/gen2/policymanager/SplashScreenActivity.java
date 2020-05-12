@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.view.animation.Animation;
 import android.widget.ImageView;
@@ -72,5 +74,12 @@ public class SplashScreenActivity extends AppCompatActivity {
             }
         };
         timer.start();
+    }
+
+    public void onGen2Click(View view) {
+        String url = "https://www.gen2.in/";
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(url));
+        startActivity(i);
     }
 }

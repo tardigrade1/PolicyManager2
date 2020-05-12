@@ -35,6 +35,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 import in.gen2.policymanager.Helpers.OtpEditText;
@@ -97,8 +98,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.length() > 5) {
-                    InputMethodManager inm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                    inm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                   closeKeyboard();
                     lvSignInBtn.setEnabled(true);
                     Log.d(TAG, "onCreate: You can verify Now" + s.length());
                 } else {
@@ -114,7 +114,14 @@ public class VerifyPhoneActivity extends AppCompatActivity {
             }
         });
     }
-
+    private void closeKeyboard() {
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            assert imm != null;
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
     //the method is sending verification code
     //the country id is concatenated
     //you can take the country id as user input as well

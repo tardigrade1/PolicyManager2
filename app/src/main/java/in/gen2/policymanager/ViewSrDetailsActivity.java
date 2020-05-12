@@ -284,11 +284,12 @@ public class ViewSrDetailsActivity extends AppCompatActivity {
             super.onPostExecute(result);
         }
 
+        @SuppressLint("WrongThread")
         @Override
         protected Integer doInBackground(Void... params) {
             final HashMap<String, Object> hm = new HashMap<>();
 
-            hm.put("name", updatedContact);
+            hm.put("name", updatedName);
             hm.put("doj", updatedDoj);
             hm.put("residence", updatedResidence);
             hm.put("mobileNo", updatedContact);

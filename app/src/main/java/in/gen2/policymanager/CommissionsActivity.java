@@ -50,13 +50,12 @@ public class CommissionsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_commissions);
         unbinder = ButterKnife.bind(this);
         monthId = getIntent().getStringExtra("monthId");
+        srNo = getIntent().getStringExtra("srNo");
         FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
                 .setPersistenceEnabled(true)
                 .build();
         fireRef = FirebaseFirestore.getInstance();
         fireRef.setFirestoreSettings(settings);
-        prefs = getSharedPreferences("UserData", MODE_PRIVATE);
-        srNo = prefs.getString("srNo", "");
         rupeeIcon = getResources().getString(R.string.rupee_icon);
         if (srNo != null) {
             listenForUsers();

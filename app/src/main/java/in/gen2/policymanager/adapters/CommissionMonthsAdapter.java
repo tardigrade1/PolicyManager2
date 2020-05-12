@@ -19,9 +19,11 @@ import in.gen2.policymanager.models.CommissionMonthData;
 
 public class CommissionMonthsAdapter extends FirestoreRecyclerAdapter<CommissionMonthData, CommissionMonthsAdapter.ViewHolder> {
     private Context mContext;
+    private String srNo;
 
-    public CommissionMonthsAdapter(@NonNull FirestoreRecyclerOptions<CommissionMonthData> options) {
+    public CommissionMonthsAdapter(@NonNull FirestoreRecyclerOptions<CommissionMonthData> options,String srNo) {
         super(options);
+        this.srNo=srNo;
     }
 
     @Override
@@ -33,6 +35,8 @@ public class CommissionMonthsAdapter extends FirestoreRecyclerAdapter<Commission
             public void onClick(View v) {
                 Intent intentPolicyDetail = new Intent(mContext, CommissionsActivity.class);
                 intentPolicyDetail.putExtra("monthId", commissionData.getMonthId());
+                intentPolicyDetail.putExtra("srNo",srNo);
+
                 intentPolicyDetail.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 mContext.startActivity(intentPolicyDetail);
             }

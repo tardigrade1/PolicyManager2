@@ -45,21 +45,18 @@ public class commissionMonthActivity extends AppCompatActivity {
     private FirebaseFirestore fireRef;
     private CommissionMonthsAdapter adapter;
     private String srNo;
-    private SharedPreferences prefs = null;
     private FirestoreRecyclerOptions<CommissionMonthData> options;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_commission_month);
         unbinder = ButterKnife.bind(this);
+        srNo=getIntent().getStringExtra("srNo");
         FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
                 .setPersistenceEnabled(true)
                 .build();
         fireRef = FirebaseFirestore.getInstance();
         fireRef.setFirestoreSettings(settings);
-        prefs = getSharedPreferences("UserData", MODE_PRIVATE);
-        srNo = prefs.getString("srNo", "");
-
         if (srNo != null) {
             listenForUsers();
 
@@ -78,7 +75,7 @@ public class commissionMonthActivity extends AppCompatActivity {
                 .collection("months").orderBy("monthId", Query.Direction.DESCENDING);
 
         options = new FirestoreRecyclerOptions.Builder<CommissionMonthData>().setQuery(query, CommissionMonthData.class).build();
-        adapter = new CommissionMonthsAdapter(options)
+        adapter = new CommissionMonthsAdapter(options,srNo)
         {
             @Override
             public void onDataChanged() {

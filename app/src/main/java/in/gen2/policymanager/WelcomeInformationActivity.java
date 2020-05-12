@@ -26,11 +26,6 @@ public class WelcomeInformationActivity extends AppCompatActivity {
         }
     }
 
-    public void getBenefits(View view) {
-        Intent i = new Intent(WelcomeInformationActivity.this, BenifitsActivity.class);
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(i);
-    }
 
     public void clickToLogin(View view) {
         Intent i = new Intent(WelcomeInformationActivity.this, PhoneAuthActivity.class);
