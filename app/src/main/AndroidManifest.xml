@@ -19,7 +19,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".adminActivities.SrsCommissionActivity"></activity>
+        <activity android:name=".Gen2DetailActivity"
+            android:label="Developer's contact"/>
+        <activity android:name=".adminActivities.SrsCommissionActivity" />
         <activity android:name=".AddNewSrActivity" />
         <activity
             android:name=".ContactUsActivity"

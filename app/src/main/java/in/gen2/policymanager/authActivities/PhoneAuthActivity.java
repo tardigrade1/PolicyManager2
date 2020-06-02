@@ -42,14 +42,14 @@ import in.gen2.policymanager.R;
 import in.gen2.policymanager.SrDashboardActivity;
 
 public class PhoneAuthActivity extends AppCompatActivity {
-//    private FirebaseAuth mAuth;
+    //    private FirebaseAuth mAuth;
 //    private FirebaseAuth.AuthStateListener mAuthListener;
     //    firestore
     FirebaseFirestore docRef;
     private EditText etSrNo;
-    private TextView tvWelcomeText,tvWelcomeName;
+    private TextView tvWelcomeText, tvWelcomeName;
     private SharedPreferences prefs = null;
-    private Boolean admin,supervisor;
+    private Boolean admin, supervisor;
     private SharedPreferences.Editor editor;
 
     @Override
@@ -61,20 +61,20 @@ public class PhoneAuthActivity extends AppCompatActivity {
         editor = prefs.edit();
         admin = prefs.getBoolean("admin", false);
         supervisor = prefs.getBoolean("supervisor", false);
-        String name=prefs.getString("name","");
-        String srNumber=prefs.getString("srNo","");
+        String name = prefs.getString("name", "");
+        String srNumber = prefs.getString("srNo", "");
         etSrNo = findViewById(R.id.etSrNo);
-        tvWelcomeText=findViewById(R.id.welcomeText);
-        tvWelcomeName=findViewById(R.id.welcomeName);
+        tvWelcomeText = findViewById(R.id.welcomeText);
+        tvWelcomeName = findViewById(R.id.welcomeName);
 
-        if(!name.equals("")){
+        if (!name.equals("")) {
             tvWelcomeText.setText("Welcome back,");
             tvWelcomeName.setText(name);
         }
-        if(srNumber!=null){
+        if (srNumber != null) {
             etSrNo.setText(srNumber);
         }
-      LinearLayout linearProcessBtn=findViewById(R.id.linearProcessBtn);
+        LinearLayout linearProcessBtn = findViewById(R.id.linearProcessBtn);
         docRef = FirebaseFirestore.getInstance();
         etSrNo.addTextChangedListener(new TextWatcher() {
             @Override
@@ -87,7 +87,7 @@ public class PhoneAuthActivity extends AppCompatActivity {
                 if (s.length() > 1) {
                     linearProcessBtn.setEnabled(true);
                 } else {
-                    Toast.makeText(getApplicationContext(),"Please enter Sr Number",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Please enter Sr Number", Toast.LENGTH_SHORT).show();
                     linearProcessBtn.setEnabled(false);
                 }
             }
@@ -158,8 +158,6 @@ public class PhoneAuthActivity extends AppCompatActivity {
 //        }
 
 
-
-
         protected void isInternetOn() {
             ConnectivityManager conn = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
             assert conn != null;
@@ -202,75 +200,68 @@ public class PhoneAuthActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         DocumentSnapshot document = task.getResult();
                         if (document != null && document.exists()) {
-                            Boolean activeStatus=document.getBoolean("active");
-                            if(activeStatus){
-                            String ContactNo = document.getString("mobileNo");
-                            String name = document.getString("name");
-                            String email = document.getString("email");
-                            String branch = document.getString("branch");
-                            String doj = document.getString("doj");
-                            String residence = document.getString("residence");
-                            if (document.get("admin") != null) {
-                                editor.putString("srNo", srNo);
-                                editor.putString("contactNo", ContactNo);
-                                editor.putString("branch", branch);
-                                editor.putString("email", email);
-                                editor.putString("name", name);
-                                editor.putString("doj", doj);
-                                editor.putString("residence", residence);
-                                editor.putBoolean("admin", true);
-                                editor.putBoolean("supervisor", false);
-                                editor.putBoolean("active", true);
-                                editor.commit();
-                                Toast.makeText(PhoneAuthActivity.this, "User set as Admin", Toast.LENGTH_SHORT).show();
-                            }
-                            else if (document.get("supervisor") != null){
-                                editor.putString("srNo", srNo);
-                                editor.putString("contactNo", ContactNo);
-                                editor.putString("branch", branch);
-                                editor.putString("email", email);
-                                editor.putString("name", name);
-                                editor.putString("doj", doj);
-                                editor.putString("residence", residence);
-                                editor.putBoolean("supervisor", true);
-                                editor.putBoolean("admin", false);
-                                editor.putBoolean("active", true);
-                                editor.commit();
-                                Toast.makeText(PhoneAuthActivity.this, "User set as supervisor", Toast.LENGTH_SHORT).show();
-                            }
-                            else {
-                                editor.putString("srNo", srNo);
-                                editor.putString("contactNo", ContactNo);
-                                editor.putString("branch", branch);
-                                editor.putString("email", email);
-                                editor.putString("name", name);
-                                editor.putString("doj", doj);
-                                editor.putString("residence", residence);
-                                editor.putBoolean("supervisor", false);
-                                editor.putBoolean("admin", false);
-                                editor.putBoolean("active", true);
-                                editor.commit();
-                                Toast.makeText(PhoneAuthActivity.this, "User set as SR", Toast.LENGTH_SHORT).show();
-                            }
-                            Intent intentSignUp = new Intent(PhoneAuthActivity.this, VerifyPhoneActivity.class);
-                            intentSignUp.putExtra("mobile", ContactNo);
-                            intentSignUp.putExtra("srNo", srNo);
-                            intentSignUp.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            startActivity(intentSignUp);
-                            Log.d("TAG", ContactNo); //Print the name
-                            }
-                            else{
+                            Boolean activeStatus = document.getBoolean("active");
+                            if (activeStatus) {
+                                String ContactNo = document.getString("mobileNo");
+                                String name = document.getString("name");
+                                String email = document.getString("email");
+                                String branch = document.getString("branch");
+                                String doj = document.getString("doj");
+                                String residence = document.getString("residence");
+                                if (document.get("admin") != null) {
+                                    editor.putString("srNo", srNo);
+                                    editor.putString("contactNo", ContactNo);
+                                    editor.putString("branch", branch);
+                                    editor.putString("email", email);
+                                    editor.putString("name", name);
+                                    editor.putString("doj", doj);
+                                    editor.putString("residence", residence);
+                                    editor.putBoolean("admin", true);
+                                    editor.putBoolean("supervisor", false);
+                                    editor.putBoolean("active", true);
+                                    editor.commit();
+                                } else if (document.get("supervisor") != null) {
+                                    editor.putString("srNo", srNo);
+                                    editor.putString("contactNo", ContactNo);
+                                    editor.putString("branch", branch);
+                                    editor.putString("email", email);
+                                    editor.putString("name", name);
+                                    editor.putString("doj", doj);
+                                    editor.putString("residence", residence);
+                                    editor.putBoolean("supervisor", true);
+                                    editor.putBoolean("admin", false);
+                                    editor.putBoolean("active", true);
+                                    editor.commit();
+                                } else {
+                                    editor.putString("srNo", srNo);
+                                    editor.putString("contactNo", ContactNo);
+                                    editor.putString("branch", branch);
+                                    editor.putString("email", email);
+                                    editor.putString("name", name);
+                                    editor.putString("doj", doj);
+                                    editor.putString("residence", residence);
+                                    editor.putBoolean("supervisor", false);
+                                    editor.putBoolean("admin", false);
+                                    editor.putBoolean("active", true);
+                                    editor.commit();
+                                }
+                                Intent intentSignUp = new Intent(PhoneAuthActivity.this, VerifyPhoneActivity.class);
+                                intentSignUp.putExtra("mobile", ContactNo);
+                                intentSignUp.putExtra("srNo", srNo);
+                                intentSignUp.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(intentSignUp);
+                            } else {
                                 etSrNo.setError("This account is suspended!");
                                 etSrNo.requestFocus();
                             }
                             Dialog.dismiss();
                         } else {
-                            Log.d("TAG", "No such Employee Exist");
-                            etSrNo.setError("Please enter valid Sr No");
-                            etSrNo.requestFocus();
+                            superAdmin(srNo);
                             Dialog.dismiss();
                         }
                     } else {
+                        superAdmin(srNo);
+                        Dialog.dismiss();
                         Log.d("TAG", "get failed with ", task.getException());
                     }
                 }
@@ -293,30 +284,6 @@ public class PhoneAuthActivity extends AppCompatActivity {
 //        }
     }
 
-    public static boolean isInternetAvailable(Context context) {
-        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        if (activeNetwork == null) return false;
-
-        switch (activeNetwork.getType()) {
-            case ConnectivityManager.TYPE_WIFI:
-                if ((activeNetwork.getState() == NetworkInfo.State.CONNECTED ||
-                        activeNetwork.getState() == NetworkInfo.State.CONNECTING) &&
-                        isInternet())
-                    return true;
-                break;
-            case ConnectivityManager.TYPE_MOBILE:
-                if ((activeNetwork.getState() == NetworkInfo.State.CONNECTED ||
-                        activeNetwork.getState() == NetworkInfo.State.CONNECTING) &&
-                        isInternet())
-                    return true;
-                break;
-            default:
-                return false;
-        }
-        return false;
-    }
-
     private static boolean isInternet() {
 
         Runtime runtime = Runtime.getRuntime();
@@ -330,5 +297,45 @@ public class PhoneAuthActivity extends AppCompatActivity {
         }
 
         return false;
+    }
+
+    private void superAdmin(String srNo) {
+        docRef.collection("SuperAdmin").document(srNo).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document != null && document.exists()) {
+                        String ContactNo = document.getString("mobileNo");
+                        String name = document.getString("name");
+                        String email = document.getString("email");
+                        String branch = document.getString("branch");
+                        String doj = document.getString("doj");
+                        String residence = document.getString("residence");
+                        editor.putString("srNo", srNo);
+                        editor.putString("contactNo", ContactNo);
+                        editor.putString("branch", branch);
+                        editor.putString("email", email);
+                        editor.putString("name", name);
+                        editor.putString("doj", doj);
+                        editor.putString("residence", residence);
+                        editor.putBoolean("admin", true);
+                        editor.putBoolean("supervisor", false);
+                        editor.putBoolean("active", true);
+                        editor.commit();
+                        Intent intentSignUp = new Intent(PhoneAuthActivity.this, VerifyPhoneActivity.class);
+                        intentSignUp.putExtra("mobile", ContactNo);
+                        intentSignUp.putExtra("srNo", srNo);
+                        intentSignUp.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intentSignUp);
+                    } else {
+                        etSrNo.setError("Please enter valid Sr No");
+                        etSrNo.requestFocus();
+                    }
+                } else {
+                    Log.d("TAG", "get failed with ", task.getException());
+                }
+            }
+        });
     }
 }

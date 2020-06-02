@@ -7,6 +7,9 @@ import androidx.core.content.ContextCompat;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -86,15 +89,33 @@ public class WelcomeInformationActivity extends AppCompatActivity {
     }
 
     public void knowMoreClick(View view) {
-        Intent i = new Intent(WelcomeInformationActivity.this, MoreActivity.class);
+        Intent i = new Intent(this, MoreActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
     }
 
     public void contactUsClick(View view) {
-        Intent i = new Intent(WelcomeInformationActivity.this, ContactUsActivity
-                .class);
+        Intent i = new Intent(this, ContactUsActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.welcome_side_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        if (item.getItemId() == R.id.action_devsupport) {
+            Intent i = new Intent(this, Gen2DetailActivity.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(i);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

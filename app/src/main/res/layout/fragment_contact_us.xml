@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-tools:context=".Fragments.ContactUsFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.ContactUsFragment">
 
 
     <ScrollView
@@ -15,16 +16,16 @@ tools:context=".Fragments.ContactUsFragment">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="10dp">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorPrimaryDark"
                 android:fontFamily="@font/nunito_extrabold"
-                android:textSize="20dp"
-                android:text="Contact LIC Cards" />
+                android:text="Contact LIC Cards"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="20dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -42,8 +43,8 @@ tools:context=".Fragments.ContactUsFragment">
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="#000"
-                    android:text="Rakesh Mittal" />
+                    android:text="Rakesh Mittal"
+                    android:textColor="#000" />
             </LinearLayout>
 
             <LinearLayout
@@ -62,8 +63,8 @@ tools:context=".Fragments.ContactUsFragment">
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="#000"
-                    android:text="lic.ccmum@gmail.com" />
+                    android:text="lic.ccmum@gmail.com"
+                    android:textColor="#000" />
             </LinearLayout>
 
             <LinearLayout
@@ -82,19 +83,19 @@ tools:context=".Fragments.ContactUsFragment">
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="#000"
                     android:text="LIC Credit Card,\n2nd floor,Jeevan Shikha Bldg.,\nNear Karuna Hospital,
 Borivali West,
-MUMBAI-400103" />
+MUMBAI-400103"
+                    android:textColor="#000" />
             </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorPrimaryDark"
-                android:textStyle="bold"
                 android:layout_marginTop="10dp"
-                android:text="Contact Numbers" />
+                android:text="Contact Numbers"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -112,8 +113,8 @@ MUMBAI-400103" />
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="#000"
-                    android:text="9819521877, 8850720125" />
+                    android:text="9819521877, 8850720125"
+                    android:textColor="#000" />
             </LinearLayout>
 
             <LinearLayout
@@ -132,8 +133,8 @@ MUMBAI-400103" />
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="#000"
-                    android:text="8928642292" />
+                    android:text="8928642292"
+                    android:textColor="#000" />
             </LinearLayout>
 
             <View
@@ -147,11 +148,12 @@ MUMBAI-400103" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorPrimaryDark"
                 android:fontFamily="@font/nunito_extrabold"
+                android:text="Contacts of Axis Bank"
 
-                android:textSize="20dp"
-                android:text="Contacts of Axis Bank" />
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="20dp" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -168,9 +170,10 @@ MUMBAI-400103" />
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="#000"
-                    android:text="18004190064" />
+                    android:text="18004190064"
+                    android:textColor="#000" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -187,65 +190,169 @@ MUMBAI-400103" />
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="#000"
-                    android:text="18605005555 &amp; 18604195555" />
-            </LinearLayout><LinearLayout
+                    android:text="18605005555 &amp; 18604195555"
+                    android:textColor="#000" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="Customer Care email" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="liccards@axisbank.com"
+                    android:textColor="#000" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="Website" />
+
+                <TextView
+                    android:id="@+id/tvWebsiteLink"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="www.liccards.co.in"
+                    android:textColor="#AA0000" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="Verification Call to Applicant from Axis Bank" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="022-71312314/15/16/17 &amp; 022-62172314/15/16/17"
+                    android:textColor="#000" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/grey" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_extrabold"
+                android:text="Developer's Contact"
+
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="20dp" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+
             android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:text="Customer Care email" />
 
-            <TextView
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:textColor="#000"
-                android:text="liccards@axisbank.com" />
-        </LinearLayout><LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:orientation="horizontal">
-
-            <TextView
+                android:orientation="vertical">
+                <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="Company" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Gen 2"
+                    android:textColor="#000" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="Email" />
+
+                <TextView
+                    android:id="@+id/devContact"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="developer@gen2.in"
+                    android:textColor="#000" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="Website" />
+
+                <TextView
+                    android:id="@+id/gen2Weblink"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="www.gen2.in"
+                    android:textColor="#AA0000" />
+            </LinearLayout>
+            </LinearLayout>
+            <ImageView
+                android:id="@+id/imageView12"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
                 android:layout_weight="2"
-                android:text="Website" />
-
-            <TextView
-                android:id="@+id/tvWebsiteLink"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textColor="#AA0000"
-                android:text="www.liccards.co.in" />
-        </LinearLayout><LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:text="Verification Call to Applicant from Axis Bank" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textColor="#000"
-                android:text="022-71312314/15/16/17 &amp; 022-62172314/15/16/17" />
+                android:src="@drawable/gen2logo_main" />
         </LinearLayout>
-
         </LinearLayout>
     </ScrollView>
 

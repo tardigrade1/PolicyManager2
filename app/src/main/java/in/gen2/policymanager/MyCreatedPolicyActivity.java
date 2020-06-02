@@ -74,6 +74,7 @@ public class MyCreatedPolicyActivity extends AppCompatActivity {
     private SQLiteDatabase database = null;
     PolicyListSqliteData policySQLiteDb;
     private ArrayList<PoliciesFormData> policyList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,11 +90,9 @@ public class MyCreatedPolicyActivity extends AppCompatActivity {
         srNo = prefs.getString("srNo", "");
         if (!policySQLiteDb.doesDatabaseExist(this)) {
             new LoadFireStoreData().execute();
-        }
-        else if(!policySQLiteDb.isTableExists()) {
+        } else if (!policySQLiteDb.isTableExists()) {
             new LoadFireStoreData().execute();
-        }
-        else {
+        } else {
             showPolicyList();
         }
         searchPolicies.addTextChangedListener(new TextWatcher() {
@@ -119,12 +118,14 @@ public class MyCreatedPolicyActivity extends AppCompatActivity {
         super.onDestroy();
         unbinder.unbind();
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.srlist_menu, menu);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
@@ -137,7 +138,6 @@ public class MyCreatedPolicyActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
 
 
     class LoadFireStoreData extends AsyncTask<Void, Void, Integer> {
@@ -172,7 +172,7 @@ public class MyCreatedPolicyActivity extends AppCompatActivity {
 
         @Override
         protected Integer doInBackground(Void... voids) {
-            Query query=fireRef.collection("SalesRepresentatives").document(srNo).collection("ApplicationForms")
+            Query query = fireRef.collection("SalesRepresentatives").document(srNo).collection("ApplicationForms")
                     .orderBy("applicantName");
 
             query.get()
@@ -187,8 +187,8 @@ public class MyCreatedPolicyActivity extends AppCompatActivity {
                                     String policyStatusText = (String) document.get("PolicyStatus");
 
                                     assert applicationNoText != null;
-                                    if(applicationNoText.length()>0){
-                                        policySQLiteDb.insertPolicies(nameText,srNo,applicationNoText,policyStatusText);
+                                    if (applicationNoText.length() > 0) {
+                                        policySQLiteDb.insertPolicies(nameText, srNo, applicationNoText, policyStatusText);
                                     }
 
 
@@ -203,41 +203,52 @@ public class MyCreatedPolicyActivity extends AppCompatActivity {
                                 Dialog.dismiss();
                             }
                         }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            rvPolicies.setVisibility(View.GONE);
+                            lvMyEmptyPolicyList.setVisibility(View.VISIBLE);
+                            Dialog.dismiss();
+                        }
                     });
             return 0;
         }
     }
+
     private void showPolicyList() {
+        if (policySQLiteDb.numberOfRows() > 0) {
 
-        policyList = new ArrayList<>(policySQLiteDb.getApplicantNames());
 
-        for (int i = 0; i < policyList.size(); i++) {
+            policyList = new ArrayList<>(policySQLiteDb.getApplicantNames());
 
-            try {
+            for (int i = 0; i < policyList.size(); i++) {
 
-                PoliciesFormData loc = policyList.get(i);
-                Log.d("TAG", "searchUsers: " + loc.getId());
+                try {
 
-            } catch (Exception e) {
-                e.printStackTrace();
+                    PoliciesFormData loc = policyList.get(i);
+                    Log.d("TAG", "searchUsers: " + loc.getId());
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
+
+            adapter = new MyCreatedPolicyAdapter(policyList, getApplicationContext());
+            rvPolicies.setAdapter(adapter);
+            rvPolicies.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                    PoliciesFormData dataModel = policyList.get(position);
+                    Intent intentPolicyDetail = new Intent(MyCreatedPolicyActivity.this, PolicyDetailsActivity.class);
+                    intentPolicyDetail.putExtra("srNo", dataModel.getSrNo());
+                    intentPolicyDetail.putExtra("applicationId", dataModel.getApplicationNo());
+                    intentPolicyDetail.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intentPolicyDetail);
+                }
+
+            });
         }
-
-        adapter = new MyCreatedPolicyAdapter(policyList,getApplicationContext());
-        rvPolicies.setAdapter(adapter);
-        rvPolicies.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                PoliciesFormData dataModel= policyList.get(position);
-                Intent intentPolicyDetail = new Intent(MyCreatedPolicyActivity.this, PolicyDetailsActivity.class);
-                intentPolicyDetail.putExtra("srNo", dataModel.getSrNo());
-                intentPolicyDetail.putExtra("applicationId", dataModel.getApplicationNo());
-                intentPolicyDetail.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intentPolicyDetail);
-            }
-
-        });
-
     }
 }

@@ -12,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.Objects;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -54,5 +56,21 @@ public class ContactUsFragment extends Fragment {
         super.onDestroyView();
         // unbind the view to free some memory
         unbinder.unbind();
+    }
+    @OnClick({R.id.devContact})
+    public void onContactDeveloper(){
+
+        final Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("plain/text");
+        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"developer@gen2.in"});
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Regarding LIC cards app support");
+        getActivity().startActivity(intent);
+    }
+    @OnClick(R.id.gen2Weblink)
+    public void onGen2WelinkClick(){
+        String url = "https://www.gen2.in/";
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(url));
+        startActivity(i);
     }
 }
