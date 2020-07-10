@@ -53,7 +53,7 @@ public class DocumentsRequiredFragment extends Fragment {
         String colorPhotoColor="<span style=color:#961301>Color photo</span>";
         String panColor="<span style=color:#961301>PAN</span>";
         String addressProofColor="<span style=color:#961301>Address proof</span>";
-        String eAdarNotAcceptableColor="<span style=color:#961301> E-AADHAR IS NOT ACCEPTABLE.</span>";
+        String aadarNotAcceptableColor="<span style=color:#961301> AADHAR CARD IS NOT ACCEPTABLE.</span>";
         String licPremColor="<span style=color:#961301>LIC premium</span>";
         String employeeIdColor="<span style=color:#961301>Employee ID</span>";
         String incomeProofColor="<span style=color:#961301>Income proof- </span>";
@@ -62,7 +62,7 @@ public class DocumentsRequiredFragment extends Fragment {
         docRequired.setText(Html.fromHtml("<ul>" +
                 "<li>"+colorPhotoColor+" ( Passport size with plane background, Ticket Size, Stylish photo not acceptable)</li>" +
                 "<li>"+panColor+" ( Clear Copy of Sign, Photo, Name, Number etc.</li>" +
-                "<li>"+addressProofColor+" (Clear copy of any one Aadhar Card/ DL / Passport/Voter ID  showing clear address & Photo)"+eAdarNotAcceptableColor+"</li>" +
+                "<li>"+addressProofColor+" (Any one from Driving licence / Passport / Voter ID  showing clear address & Photo)"+aadarNotAcceptableColor+"</li>" +
                 "<li>"+licPremColor+" Copy of Latest Prem receipt/Premium Paid Certificate /Policy Status from Branch or Premium Point</li>" +
                 "<li>"+employeeIdColor+" in case of Salaried persons</li>" +
                 "<li>"+incomeProofColor+"If Own life Yly Premium (Non Single)  is more than 30000 for last 3 Years or 5 lacs Single Prem"+noIncomeProofColor+"required otherwise Income Proof required.</li>" +

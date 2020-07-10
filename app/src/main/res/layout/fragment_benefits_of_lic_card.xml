@@ -22,6 +22,13 @@
             android:textSize="20dp"/>
 
         <TextView
+            android:id="@+id/textView9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorAccentDark"
+            android:text="(Terms &amp; Conditions applied)" />
+
+        <TextView
             android:layout_marginTop="@dimen/activity_horizontal_margin_single"
             android:id="@+id/tvBenefitsListText"
             android:layout_width="match_parent"

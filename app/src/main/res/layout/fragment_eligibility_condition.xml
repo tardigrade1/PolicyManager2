@@ -145,7 +145,7 @@
                 android:layout_marginTop="@dimen/activity_horizontal_margin_single"
                 android:textColor="@color/colorPrimaryDark"
                 android:textStyle="bold"
-                android:text="If above condition of LIC premium is NOT fulfilled, the following condition must be fulfilled
+                android:text="If above condition of LIC premium is NOT fulfilled (Policy not required), the following condition must be fulfilled
 " />
             <LinearLayout
                 android:layout_marginTop="@dimen/activity_horizontal_margin"
