@@ -1,0 +1,1152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".NewByodFormActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constCustomerDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:background="@drawable/byod_label_background"
+                android:text="@string/basic_details"
+                android:textColor="@color/colorWhite"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <LinearLayout
+                android:id="@+id/layoutRequirements"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                android:orientation="vertical"
+              android:padding="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView12">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Name"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/etContactPersonName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:backgroundTint="@color/grey"
+                    android:ems="10"
+                    android:hint="Enter person name"
+                    android:inputType="textPersonName|textCapSentences"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="8dp"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Mobile Number"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/etMobileNo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:ems="10"
+                    android:hint="Enter contact number"
+                    android:inputType="phone"
+                    android:maxLength="10"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="8dp"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Landline No (if any)"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/etLandlineNo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter landline no (if any)"
+                    android:background="@android:color/transparent"
+                    android:ems="10"
+                    android:inputType="phone"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="8dp"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Mother's name"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/etMotherName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:ems="10"
+                    android:hint="Enter mother's name"
+                    android:inputType="textPersonName|textCapSentences"
+                    android:maxLength="10"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="8dp"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/textView15"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Relationship Status"
+                    android:textColor="@color/black"
+                    android:textSize="17dp"
+                    android:textStyle="bold" />
+
+                <RadioGroup
+                    android:id="@+id/rgSiteLocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                    <RadioButton
+                        android:id="@+id/rbMarried"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Married" />
+
+                    <RadioButton
+                        android:id="@+id/rbSingle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Single" />
+                </RadioGroup>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Email"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/etEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:ems="10"
+                    android:hint="Enter email id"
+                    android:inputType="textEmailAddress"
+                    android:maxLength="10"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="8dp"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="PAN No."
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/etPANNo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:ems="10"
+                    android:hint="Enter PAN number"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="8dp"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Axis Bank A/C No."
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/etAxisBankAccNo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:ems="10"
+                    android:hint="Enter account number"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="8dp"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Nominee's name"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/etNomineeName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:ems="10"
+                    android:hint="Enter nominee's name"
+                    android:inputType="textPersonName|textCapSentences"
+                    android:maxLength="10"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="8dp"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Relation with nominee"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/etNomineeRelation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:ems="10"
+                    android:hint="Enter nominee's relation"
+                    android:inputType="textPersonName|textCapSentences"
+                    android:maxLength="10"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="8dp"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+
+            android:id="@+id/constraintLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constCustomerDetail">
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/byod_label_background"
+                android:text="@string/residential_details"
+                android:textColor="@color/colorWhite"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                android:orientation="vertical"
+                android:padding="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView13">
+
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Residance type"
+                    android:textColor="@color/black"
+                    android:textSize="17dp"
+                    android:textStyle="bold" />
+
+                <RadioGroup
+                    android:id="@+id/rgResidenceType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                    <RadioButton
+                        android:id="@+id/rbOwn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Own" />
+
+                    <RadioButton
+                        android:id="@+id/rbRented"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Rented" />
+
+                    <RadioButton
+                        android:id="@+id/rbParent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Parent" />
+
+                    <RadioButton
+                        android:id="@+id/rbCompany"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Company" />
+                </RadioGroup>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Years of living"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/etYrsOfLiving"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:ems="10"
+                    android:hint="Enter years"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="8dp"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Residancial Address"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/etResidanceAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:ems="10"
+                    android:hint="Enter address"
+                    android:inputType="textMultiLine|textCapSentences"
+                    android:maxLength="10"
+                    android:maxLines="3"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="8dp"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Landmark"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/etResidanceLandmark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:ems="10"
+                    android:hint="Enter landmark(if any)"
+                    android:inputType="textCapSentences|textMultiLine"
+                    android:maxLength="10"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="8dp"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Pin no."
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/etResidancePin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:ems="10"
+                    android:hint="Enter pin"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="8dp"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+android:id="@+id/constraintLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/byod_label_background"
+                android:text="@string/employment_details"
+                android:textColor="@color/colorWhite"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                android:orientation="vertical"
+              android:padding="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView14">
+
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Employment type"
+                    android:textColor="@color/black"
+                    android:textSize="17dp"
+                    android:textStyle="bold" />
+
+                <RadioGroup
+                    android:id="@+id/rgEmploymentType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                    <RadioButton
+                        android:id="@+id/rbSelfEmployed"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Self-employed" />
+
+                    <RadioButton
+                        android:id="@+id/rbSalaried"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Salaried" />
+
+
+                </RadioGroup>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Company name"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etSelfEmployedCompanyName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:backgroundTint="@color/grey"
+                        android:ems="10"
+                        android:hint="Enter Company name"
+                        android:inputType="textPersonName|textCapSentences"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="8dp"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="No of Employees"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etEmployeeesNo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:ems="10"
+                        android:hint="Enter number of employees"
+                        android:inputType="number"
+                        android:maxLength="10"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="8dp"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Yrs of Business"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etYrsOfBusiness"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:ems="10"
+                        android:hint="Enter yrs"
+                        android:inputType="number"
+                        android:maxLength="10"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="8dp"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Total Exps"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etTotalExp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:ems="10"
+                        android:hint="Enter Exps"
+                        android:inputType="number"
+                        android:maxLength="10"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="8dp"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Ownership type"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <RadioGroup
+                        android:id="@+id/rgOwnerShipType"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+
+                        <RadioButton
+                            android:id="@+id/rbBusinessProprietor"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Proprietor" />
+
+                        <RadioButton
+                            android:id="@+id/rbPartner"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Partner" />
+
+                        <RadioButton
+                            android:id="@+id/rbPvtLtd"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Private Ltd." />
+
+                    </RadioGroup>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="8dp"
+                        android:text="Nature of business"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <RadioGroup
+                        android:id="@+id/rgBusinessNature"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <RadioButton
+                            android:id="@+id/rbTrading"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Trading" />
+
+                        <RadioButton
+                            android:id="@+id/rbMnfgng"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="manufacturing" />
+
+                        <RadioButton
+                            android:id="@+id/rbExport"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Export" />
+
+                        <RadioButton
+                            android:id="@+id/rbImport"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Import" />
+
+                        <RadioButton
+                            android:id="@+id/rbService"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Service" />
+
+                        <RadioButton
+                            android:id="@+id/rbProfessional"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Professional" />
+
+                    </RadioGroup>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Company name"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etSalariedCompanyName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:backgroundTint="@color/grey"
+                        android:ems="10"
+                        android:hint="Enter Company name"
+                        android:inputType="textPersonName|textCapSentences"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="8dp"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Designation"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etDesignation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:ems="10"
+                        android:hint="Enter designation"
+                        android:inputType="text|textCapSentences"
+                        android:maxLength="10"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="8dp"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Yrs of Service"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etYrsOfService"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:ems="10"
+                        android:hint="Enter yrs"
+                        android:inputType="number"
+                        android:maxLength="10"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="8dp"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Department"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etDepartment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:ems="10"
+                        android:hint="Enter department"
+                        android:inputType="text|textCapSentences"
+                        android:maxLength="10"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="8dp"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Total Exps"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etSalariedTotalExp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:ems="10"
+                        android:hint="Enter Exps"
+                        android:inputType="number"
+                        android:maxLength="10"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="8dp"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Level"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <RadioGroup
+                        android:id="@+id/rgSalariedLevelType"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rbSrManagement"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="Sr Mgmt" />
+
+                        <RadioButton
+                            android:id="@+id/rbMiddleMgmt"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="Middle Mgmt" />
+
+                        <RadioButton
+                            android:id="@+id/rbJrMgmt"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="Jr Mgmt" />
+
+                    </RadioGroup>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Employee ID"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etEmploymentID"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:ems="10"
+                        android:hint="Enter id"
+                        android:inputType="text|textCapSentences"
+                        android:maxLength="10"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="8dp"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Salary PM"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etSalaryPM"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:ems="10"
+                        android:hint="Enter salary"
+                        android:inputType="number"
+                        android:maxLength="10"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="8dp"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="8dp"
+                        android:text="Sector"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <RadioGroup
+                        android:id="@+id/rgSector"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:orientation="vertical">
+
+                        <RadioButton
+                            android:id="@+id/rbPublicLtd"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Public Ltd" />
+
+                        <RadioButton
+                            android:id="@+id/rbSectorPvtLtd"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Pvt Ltd" />
+
+                        <RadioButton
+                            android:id="@+id/rbMNC"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="MNC" />
+
+                        <RadioButton
+                            android:id="@+id/rbPublicSector"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Public Sector" />
+
+                        <RadioButton
+                            android:id="@+id/rbStateGovt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="State Govt" />
+
+                        <RadioButton
+                            android:id="@+id/rbGovtBodies"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Govt Bodies" />
+
+                        <RadioButton
+                            android:id="@+id/rbCentralGovt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Central Govt" />
+
+                        <RadioButton
+                            android:id="@+id/rbPartnership"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Partnership" />
+
+                        <RadioButton
+                            android:id="@+id/rbSalariedProprietor"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Proprietor" />
+
+                    </RadioGroup>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="8dp"
+                        android:text="Industry"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <RadioGroup
+                        android:id="@+id/rgIndustry"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:orientation="vertical">
+
+                        <RadioButton
+                            android:id="@+id/rbBanking"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Banking" />
+
+                        <RadioButton
+                            android:id="@+id/rbTelecom"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Telecom" />
+
+                        <RadioButton
+                            android:id="@+id/rbInsurance"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Insurance" />
+
+                        <RadioButton
+                            android:id="@+id/rbRealEstate"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Real Estate" />
+
+                        <RadioButton
+                            android:id="@+id/rbIT"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="IT" />
+
+                        <RadioButton
+                            android:id="@+id/rbEngg"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Engg" />
+
+                        <RadioButton
+                            android:id="@+id/rbTravel"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Travel" />
+
+                        <RadioButton
+                            android:id="@+id/rbEntertainment"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Entertainment" />
+
+                        <RadioButton
+                            android:id="@+id/rbHotel"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Hotel" />
+                        <RadioButton
+                            android:id="@+id/rbMutualFund"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Mutual Fund" />
+                        <RadioButton
+                            android:id="@+id/rbAdvertisement"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Advertisement" />
+                        <RadioButton
+                            android:id="@+id/rbMedia"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Media" />
+
+                    </RadioGroup>
+                </LinearLayout>
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+
+            android:id="@+id/constraintLayout4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
+
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/byod_label_background"
+                android:text="@string/residential_details"
+                android:textColor="@color/colorWhite"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                android:orientation="vertical"
+                android:padding="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView16">
+
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Residance type"
+                    android:textColor="@color/black"
+                    android:textSize="17dp"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Office Address"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/etOfficeAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:ems="10"
+                    android:hint="Enter address"
+                    android:inputType="textMultiLine|textCapSentences"
+                    android:maxLength="10"
+                    android:maxLines="5"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="8dp"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Office email"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/etOfficeEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:ems="10"
+                    android:hint="Enter email"
+                    android:inputType="textEmailAddress"
+                    android:maxLength="10"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="8dp"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Phone no."
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/etOfficePhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:ems="10"
+                    android:hint="Enter phone number"
+                    android:inputType="phone"
+                    android:maxLength="10"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="8dp"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

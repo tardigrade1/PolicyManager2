@@ -13,4 +13,5 @@
     <color name="DownloadColor">#157520</color>
     <color name="pleaseWaitColor">#5E6D0101</color>
     <color name="grey">#363636</color>
+    <color name="background">#F3F3F3</color>
 </resources>

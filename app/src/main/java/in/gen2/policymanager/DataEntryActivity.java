@@ -755,6 +755,7 @@ public class DataEntryActivity extends AppCompatActivity {
         ProgressDialog Dialog = new ProgressDialog(DataEntryActivity.this);
         int dataSize = list_queries.size();
 
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
