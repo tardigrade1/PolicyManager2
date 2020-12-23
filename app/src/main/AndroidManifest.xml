@@ -19,7 +19,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".NewByodFormActivity"></activity>
+        <activity android:name=".NewByodFormActivity"
+            android:label="BYOD Form"/>
         <activity
             android:name=".Gen2DetailActivity"
             android:label="Developer&apos;s contact" />

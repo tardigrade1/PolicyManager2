@@ -12,11 +12,10 @@
         android:layout_height="match_parent"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp">
-
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp">
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constCustomerDetail"
+            android:id="@+id/constCustomerBasicDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
@@ -39,12 +38,13 @@
 
 
             <LinearLayout
-                android:id="@+id/layoutRequirements"
+                android:id="@+id/lvBasicDetails"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorWhite"
                 android:orientation="vertical"
-              android:padding="8dp"
+                android:padding="8dp"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -58,7 +58,7 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/etContactPersonName"
+                    android:id="@+id/etName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
@@ -101,9 +101,9 @@
                     android:id="@+id/etLandlineNo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Enter landline no (if any)"
                     android:background="@android:color/transparent"
                     android:ems="10"
+                    android:hint="Enter landline no (if any)"
                     android:inputType="phone"
                     android:paddingTop="5dp"
                     android:paddingBottom="8dp"
@@ -139,7 +139,7 @@
                     android:textStyle="bold" />
 
                 <RadioGroup
-                    android:id="@+id/rgSiteLocation"
+                    android:id="@+id/rgRelationshipStatus"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -262,16 +262,15 @@
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
         <androidx.constraintlayout.widget.ConstraintLayout
 
-            android:id="@+id/constraintLayout2"
+            android:id="@+id/constResidentialDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constCustomerDetail">
+            app:layout_constraintTop_toBottomOf="@+id/constCustomerBasicDetail">
 
             <TextView
                 android:id="@+id/textView13"
@@ -288,12 +287,13 @@
 
 
             <LinearLayout
-
+                android:id="@+id/lvResidetialDetails"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorWhite"
                 android:orientation="vertical"
                 android:padding="8dp"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -427,15 +427,14 @@
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
         <androidx.constraintlayout.widget.ConstraintLayout
-android:id="@+id/constraintLayout3"
+            android:id="@+id/constEmploymentDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+            app:layout_constraintTop_toBottomOf="@+id/constResidentialDetail">
 
             <TextView
                 android:id="@+id/textView14"
@@ -452,12 +451,13 @@ android:id="@+id/constraintLayout3"
 
 
             <LinearLayout
-
+                android:id="@+id/lvEmploymentDetails"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorWhite"
                 android:orientation="vertical"
-              android:padding="8dp"
+                android:padding="8dp"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -497,9 +497,11 @@ android:id="@+id/constraintLayout3"
                 </RadioGroup>
 
                 <LinearLayout
+                    android:id="@+id/lvSelfEmployed"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -529,7 +531,7 @@ android:id="@+id/constraintLayout3"
                         android:textStyle="bold" />
 
                     <EditText
-                        android:id="@+id/etEmployeeesNo"
+                        android:id="@+id/etEmployeesNo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@android:color/transparent"
@@ -678,9 +680,11 @@ android:id="@+id/constraintLayout3"
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/lvSalaried"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -937,6 +941,7 @@ android:id="@+id/constraintLayout3"
                             android:text="Proprietor" />
 
                     </RadioGroup>
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -1014,18 +1019,21 @@ android:id="@+id/constraintLayout3"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="Hotel" />
+
                         <RadioButton
                             android:id="@+id/rbMutualFund"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="Mutual Fund" />
+
                         <RadioButton
                             android:id="@+id/rbAdvertisement"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="Advertisement" />
+
                         <RadioButton
                             android:id="@+id/rbMedia"
                             android:layout_width="match_parent"
@@ -1039,21 +1047,20 @@ android:id="@+id/constraintLayout3"
 
         </androidx.constraintlayout.widget.ConstraintLayout>
         <androidx.constraintlayout.widget.ConstraintLayout
-
-            android:id="@+id/constraintLayout4"
+            android:id="@+id/constOfficeDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
+            app:layout_constraintTop_toBottomOf="@+id/constEmploymentDetail">
 
             <TextView
                 android:id="@+id/textView16"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/byod_label_background"
-                android:text="@string/residential_details"
+                android:text="@string/office_details"
                 android:textColor="@color/colorWhite"
                 android:textSize="17sp"
                 android:textStyle="bold"
@@ -1063,26 +1070,17 @@ android:id="@+id/constraintLayout3"
 
 
             <LinearLayout
-
+                android:id="@+id/lvOfficeDetails"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorWhite"
                 android:orientation="vertical"
                 android:padding="8dp"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView16">
-
-                <TextView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Residance type"
-                    android:textColor="@color/black"
-                    android:textSize="17dp"
-                    android:textStyle="bold" />
-
 
                 <TextView
                     android:layout_width="match_parent"

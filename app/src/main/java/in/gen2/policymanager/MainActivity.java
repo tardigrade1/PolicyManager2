@@ -201,7 +201,7 @@ SRSqliteData salesSQLdb;
     }
 
     public void manageData(View view) {
-        Intent i = new Intent(MainActivity.this, DataEntryActivity.class);
+        Intent i = new Intent(MainActivity.this, NewByodFormActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
     }

@@ -11,4 +11,5 @@
     <string name="basic_details">Basic details</string>
     <string name="residential_details">Residential Details</string>
     <string name="employment_details">Employment details</string>
+    <string name="office_details">Office details</string>
 </resources>

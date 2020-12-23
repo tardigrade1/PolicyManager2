@@ -224,4 +224,10 @@ public class SrDashboardActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void openByodForm(View view) {
+        Intent i = new Intent(SrDashboardActivity.this, NewByodFormActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(i);
+    }
 }
