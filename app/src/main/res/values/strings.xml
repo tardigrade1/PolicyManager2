@@ -12,4 +12,7 @@
     <string name="residential_details">Residential Details</string>
     <string name="employment_details">Employment details</string>
     <string name="office_details">Office details</string>
+    <string name="delivery_details">Delivery details</string>
+    <string name="upload">Upload</string>
+    <string name="documents">Documents</string>
 </resources>

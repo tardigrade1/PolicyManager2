@@ -4,16 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     android:background="@color/background"
     tools:context=".NewByodFormActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constCustomerBasicDetail"
             android:layout_width="match_parent"
@@ -124,7 +126,7 @@
                     android:ems="10"
                     android:hint="Enter mother's name"
                     android:inputType="textPersonName|textCapSentences"
-                    android:maxLength="10"
+
                     android:paddingTop="5dp"
                     android:paddingBottom="8dp"
                     android:textSize="15sp" />
@@ -175,7 +177,7 @@
                     android:ems="10"
                     android:hint="Enter email id"
                     android:inputType="textEmailAddress"
-                    android:maxLength="10"
+
                     android:paddingTop="5dp"
                     android:paddingBottom="8dp"
                     android:textSize="15sp" />
@@ -195,7 +197,7 @@
                     android:ems="10"
                     android:hint="Enter PAN number"
                     android:inputType="number"
-                    android:maxLength="10"
+
                     android:paddingTop="5dp"
                     android:paddingBottom="8dp"
                     android:textSize="15sp" />
@@ -215,7 +217,7 @@
                     android:ems="10"
                     android:hint="Enter account number"
                     android:inputType="number"
-                    android:maxLength="10"
+
                     android:paddingTop="5dp"
                     android:paddingBottom="8dp"
                     android:textSize="15sp" />
@@ -235,7 +237,7 @@
                     android:ems="10"
                     android:hint="Enter nominee's name"
                     android:inputType="textPersonName|textCapSentences"
-                    android:maxLength="10"
+
                     android:paddingTop="5dp"
                     android:paddingBottom="8dp"
                     android:textSize="15sp" />
@@ -255,13 +257,14 @@
                     android:ems="10"
                     android:hint="Enter nominee's relation"
                     android:inputType="textPersonName|textCapSentences"
-                    android:maxLength="10"
+
                     android:paddingTop="5dp"
                     android:paddingBottom="8dp"
                     android:textSize="15sp" />
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
         <androidx.constraintlayout.widget.ConstraintLayout
 
             android:id="@+id/constResidentialDetail"
@@ -359,7 +362,7 @@
                     android:ems="10"
                     android:hint="Enter years"
                     android:inputType="number"
-                    android:maxLength="10"
+
                     android:paddingTop="5dp"
                     android:paddingBottom="8dp"
                     android:textSize="15sp" />
@@ -379,7 +382,7 @@
                     android:ems="10"
                     android:hint="Enter address"
                     android:inputType="textMultiLine|textCapSentences"
-                    android:maxLength="10"
+
                     android:maxLines="3"
                     android:paddingTop="5dp"
                     android:paddingBottom="8dp"
@@ -400,7 +403,7 @@
                     android:ems="10"
                     android:hint="Enter landmark(if any)"
                     android:inputType="textCapSentences|textMultiLine"
-                    android:maxLength="10"
+
                     android:paddingTop="5dp"
                     android:paddingBottom="8dp"
                     android:textSize="15sp" />
@@ -420,13 +423,14 @@
                     android:ems="10"
                     android:hint="Enter pin"
                     android:inputType="number"
-                    android:maxLength="10"
+
                     android:paddingTop="5dp"
                     android:paddingBottom="8dp"
                     android:textSize="15sp" />
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constEmploymentDetail"
             android:layout_width="match_parent"
@@ -538,7 +542,7 @@
                         android:ems="10"
                         android:hint="Enter number of employees"
                         android:inputType="number"
-                        android:maxLength="10"
+
                         android:paddingTop="5dp"
                         android:paddingBottom="8dp"
                         android:textSize="15sp" />
@@ -558,7 +562,7 @@
                         android:ems="10"
                         android:hint="Enter yrs"
                         android:inputType="number"
-                        android:maxLength="10"
+
                         android:paddingTop="5dp"
                         android:paddingBottom="8dp"
                         android:textSize="15sp" />
@@ -578,7 +582,7 @@
                         android:ems="10"
                         android:hint="Enter Exps"
                         android:inputType="number"
-                        android:maxLength="10"
+
                         android:paddingTop="5dp"
                         android:paddingBottom="8dp"
                         android:textSize="15sp" />
@@ -721,7 +725,7 @@
                         android:ems="10"
                         android:hint="Enter designation"
                         android:inputType="text|textCapSentences"
-                        android:maxLength="10"
+
                         android:paddingTop="5dp"
                         android:paddingBottom="8dp"
                         android:textSize="15sp" />
@@ -741,7 +745,7 @@
                         android:ems="10"
                         android:hint="Enter yrs"
                         android:inputType="number"
-                        android:maxLength="10"
+
                         android:paddingTop="5dp"
                         android:paddingBottom="8dp"
                         android:textSize="15sp" />
@@ -761,7 +765,7 @@
                         android:ems="10"
                         android:hint="Enter department"
                         android:inputType="text|textCapSentences"
-                        android:maxLength="10"
+
                         android:paddingTop="5dp"
                         android:paddingBottom="8dp"
                         android:textSize="15sp" />
@@ -781,7 +785,7 @@
                         android:ems="10"
                         android:hint="Enter Exps"
                         android:inputType="number"
-                        android:maxLength="10"
+
                         android:paddingTop="5dp"
                         android:paddingBottom="8dp"
                         android:textSize="15sp" />
@@ -837,7 +841,7 @@
                         android:ems="10"
                         android:hint="Enter id"
                         android:inputType="text|textCapSentences"
-                        android:maxLength="10"
+
                         android:paddingTop="5dp"
                         android:paddingBottom="8dp"
                         android:textSize="15sp" />
@@ -857,7 +861,7 @@
                         android:ems="10"
                         android:hint="Enter salary"
                         android:inputType="number"
-                        android:maxLength="10"
+
                         android:paddingTop="5dp"
                         android:paddingBottom="8dp"
                         android:textSize="15sp" />
@@ -1046,6 +1050,7 @@
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constOfficeDetail"
             android:layout_width="match_parent"
@@ -1097,7 +1102,7 @@
                     android:ems="10"
                     android:hint="Enter address"
                     android:inputType="textMultiLine|textCapSentences"
-                    android:maxLength="10"
+
                     android:maxLines="5"
                     android:paddingTop="5dp"
                     android:paddingBottom="8dp"
@@ -1118,7 +1123,7 @@
                     android:ems="10"
                     android:hint="Enter email"
                     android:inputType="textEmailAddress"
-                    android:maxLength="10"
+
                     android:paddingTop="5dp"
                     android:paddingBottom="8dp"
                     android:textSize="15sp" />
@@ -1145,6 +1150,208 @@
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constDeliveryDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constOfficeDetail">
+
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/byod_label_background"
+                android:text="@string/delivery_details"
+                android:textColor="@color/colorWhite"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <LinearLayout
+                android:id="@+id/lvDeliveryDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                android:orientation="vertical"
+                android:padding="8dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView18">
+
+
+                <RadioGroup
+                    android:id="@+id/rgDeliveryPlace"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                    <RadioButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="At Residence" />
+
+                    <RadioButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="At Office Address" />
+
+
+                </RadioGroup>
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constDocumentsDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constDeliveryDetail">
+
+            <TextView
+                android:id="@+id/textView19"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/byod_label_background"
+                android:text="@string/documents"
+                android:textColor="@color/colorWhite"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <LinearLayout
+                android:id="@+id/lvDocumentsList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                android:orientation="vertical"
+                android:padding="8dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView19">
+
+
+                <CheckBox
+                    android:id="@+id/cbPANCArd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Original PAN card" />
+                <CheckBox
+                    android:id="@+id/cbAadharCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Aadhar Card" />
+                <CheckBox
+                    android:id="@+id/cbEmpCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Employee ID card" />
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Address proof"
+                    android:textColor="@color/black"
+                    android:textSize="17dp"
+                    android:textStyle="bold" />
+                <RadioGroup
+                    android:id="@+id/rgAddressProof"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                    <RadioButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Passport" />
+
+                    <RadioButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="DL" />
+
+                    <RadioButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Voter ID" />
+
+
+                </RadioGroup>
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Income proof"
+                    android:textColor="@color/black"
+                    android:textSize="17dp"
+                    android:textStyle="bold" />
+                <RadioGroup
+                    android:id="@+id/rgIncomeProof"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                    <RadioButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Pols" />
+
+                    <RadioButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="ITR" />
+
+                    <RadioButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Salary Slip" />
+
+
+                </RadioGroup>
+
+
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:id="@+id/btnContinueForm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:background="@color/colorAccent"
+            android:text="Continue"
+            android:textAllCaps="false"
+            android:textColor="#fff"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constDocumentsDetail"
+            app:layout_constraintVertical_bias="1.0" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>
