@@ -1,12 +1,5 @@
 package in.gen2.policymanager;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -21,6 +14,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,13 +32,12 @@ import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import in.gen2.policymanager.Helpers.DetectConnection;
 import in.gen2.policymanager.Helpers.PolicyListSqliteData;
 import in.gen2.policymanager.Helpers.SRSqliteData;
 import in.gen2.policymanager.adminActivities.SrsCommissionActivity;
-import in.gen2.policymanager.authActivities.PhoneAuthActivity;
 
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
-import static android.Manifest.permission.SEND_SMS;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 public class MainActivity extends AppCompatActivity {
@@ -86,6 +85,7 @@ PolicyListSqliteData policySQLiteDb;
 SRSqliteData salesSQLdb;
 
     private SharedPreferences.Editor editor;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,6 +137,9 @@ SRSqliteData salesSQLdb;
         if (!CheckingPermissionIsEnabledOrNot()) {
             RequestMultiplePermission();
         }
+
+
+
     }
     private void logoutUser() {
         policySQLiteDb.deleteTable();
@@ -204,6 +207,9 @@ SRSqliteData salesSQLdb;
         Intent i = new Intent(MainActivity.this, DataEntryActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
+
+
+
     }
 
     public void salesRepsData(View view) {
@@ -292,5 +298,16 @@ SRSqliteData salesSQLdb;
                 }
             }
         });
+    }
+
+    public void openByodForm(View view) {
+        if (!DetectConnection.checkInternetConnection(this)) {
+            Toast.makeText(getApplicationContext(), "No Internet!", Toast.LENGTH_SHORT).show();
+        } else {
+            Intent i = new Intent(MainActivity.this, WebActivity.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            i.putExtra("url", "https://docs.google.com/forms/d/e/1FAIpQLSdeR9hVT_6591HAeJxdUrRrTJKkDHdrq0PE8NPIl3nfBxHEcg/viewform");
+            startActivity(i);
+        }
     }
 }

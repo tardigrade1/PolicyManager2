@@ -19,7 +19,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".AddDocumentActivity"></activity>
+        <activity android:name=".WebActivity"
+            android:parentActivityName=".SrDashboardActivity"/>
+        <activity android:name=".AddDocumentActivity" />
         <activity android:name=".UploadDocumentsActivity" />
         <activity
             android:name=".NewByodFormActivity"

@@ -15,6 +15,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -30,6 +31,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import in.gen2.policymanager.Helpers.DetectConnection;
 import in.gen2.policymanager.Helpers.PolicyListSqliteData;
 import in.gen2.policymanager.authActivities.PhoneAuthActivity;
 
@@ -226,8 +228,14 @@ public class SrDashboardActivity extends AppCompatActivity {
     }
 
     public void openByodForm(View view) {
-        Intent i = new Intent(SrDashboardActivity.this, NewByodFormActivity.class);
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(i);
+
+        if (!DetectConnection.checkInternetConnection(this)) {
+            Toast.makeText(getApplicationContext(), "No Internet!", Toast.LENGTH_SHORT).show();
+        } else {
+            Intent i = new Intent(SrDashboardActivity.this, WebActivity.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            i.putExtra("url", "https://docs.google.com/forms/d/e/1FAIpQLSdeR9hVT_6591HAeJxdUrRrTJKkDHdrq0PE8NPIl3nfBxHEcg/viewform");
+            startActivity(i);
+        }
     }
 }
