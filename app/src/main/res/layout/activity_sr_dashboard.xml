@@ -173,49 +173,59 @@
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
-
-            <LinearLayout
-                android:id="@+id/linearLayout3"
-                android:layout_width="fill_parent"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/lvGoogleForm"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="14dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="12dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
                 android:background="@drawable/google_form_button_background"
                 android:onClick="openByodForm"
-                android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/profileCard"
-                app:layout_constraintVertical_bias="0.0">
+                app:layout_constraintVertical_bias="0.0"
+                >
 
                 <ImageView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2"
-                    android:padding="10dp"
+                    android:id="@+id/imageView13"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/form" />
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:id="@+id/textView20"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
                     android:text="Google form for LIC cards"
                     android:textColor="#fff"
                     android:textSize="18dp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/imageView14"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/imageView13"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2"
-                    android:padding="10dp"
+                    android:id="@+id/imageView14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/ic_arrow_forward" />
-            </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
 
             <LinearLayout
                 android:id="@+id/linearLayout"
@@ -229,7 +239,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
+                app:layout_constraintTop_toBottomOf="@+id/lvGoogleForm"
                 app:layout_constraintVertical_bias="0.0">
 
                 <ImageView
@@ -265,7 +275,7 @@
 
             <View
                 android:id="@+id/view2"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="1sp"
                 android:layout_margin="10dp"
                 android:background="#AFACAC"
@@ -309,7 +319,7 @@
 
             <View
                 android:id="@+id/view"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="1sp"
                 android:layout_margin="10dp"
                 android:background="#AFACAC"

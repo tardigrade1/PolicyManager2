@@ -1,5 +1,8 @@
 package in.gen2.policymanager.models;
 
+import androidx.annotation.Keep;
+
+@Keep
 public class ApplicationFormData {
 
 

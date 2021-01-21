@@ -1,8 +1,11 @@
 package in.gen2.policymanager.models;
 
 
+import androidx.annotation.Keep;
+
 import com.google.firebase.firestore.Exclude;
 
+@Keep
 public class CommissionData {
     private String applicationNo = null;
     private String srNo = null;
@@ -16,55 +19,39 @@ public class CommissionData {
 
     }
 
-    @Exclude
     public String getApplicantName() {
         return ApplicantName;
     }
     public String getDecisionMonth() {
         return decisionMonth;
     }
-    @Exclude
     public String getCommission() {
         return Commission;
     }
-
-    @Exclude
     public void setCommission(String commission) {
         Commission = commission;
     }
-
-    @Exclude
     public String getApplicationId() {
         return ApplicationId;
     }
-
     public String getApplicationNo() {
         return applicationNo;
     }
-
-
     public String getSrNo() {
         return srNo;
     }
-
     public void setSrNo(String srNo) {
         this.srNo = srNo;
     }
-
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
-
-
-
     public String getDecisionDate() {
         return decisionDate;
     }
-
     public CommissionData(String srNo, String applicationNo, String name, String decisionDate, String commission, String decisionMonth) {
         this.applicationNo = applicationNo;
         this.srNo = srNo;

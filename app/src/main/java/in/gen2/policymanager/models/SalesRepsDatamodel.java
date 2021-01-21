@@ -1,5 +1,8 @@
 package in.gen2.policymanager.models;
 
+import androidx.annotation.Keep;
+
+@Keep
 public class SalesRepsDatamodel {
     private String id=null;
     private String srNo=null;

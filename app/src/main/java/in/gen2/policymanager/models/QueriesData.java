@@ -1,5 +1,7 @@
 package in.gen2.policymanager.models;
+import androidx.annotation.Keep;
 
+@Keep
 public class QueriesData {
     private  String applicationNo= null;
     private  String name= null;

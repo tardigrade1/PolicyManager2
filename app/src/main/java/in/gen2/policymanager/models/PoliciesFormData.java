@@ -1,7 +1,10 @@
 package in.gen2.policymanager.models;
 
-import com.google.firebase.firestore.Exclude;
 
+
+import androidx.annotation.Keep;
+
+@Keep
 public class PoliciesFormData {
 
     private String id = null;
@@ -15,7 +18,7 @@ public class PoliciesFormData {
     public PoliciesFormData() {
 
     }
-    @Exclude
+
     public String getPolicyStatus() {
         return PolicyStatus;
     }

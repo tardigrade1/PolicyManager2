@@ -1,5 +1,8 @@
 package in.gen2.policymanager.models;
 
+import androidx.annotation.Keep;
+
+@Keep
 public class FaqsDataModel {
     private String ques=null;
     private String ans=null;

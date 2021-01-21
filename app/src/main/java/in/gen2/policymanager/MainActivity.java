@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.viewManageData)
     View viewManageData;
     @BindView(R.id.constActive)
-    ConstraintLayout activeScreen;
+    LinearLayout activeScreen;
     @BindView(R.id.constSuspend)
     ConstraintLayout suspendScreen;
     private FirebaseFirestore fireRef;
